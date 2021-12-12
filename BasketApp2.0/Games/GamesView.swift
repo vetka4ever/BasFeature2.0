@@ -24,7 +24,7 @@ class GamesView: UIViewController, UITableViewDelegate, UITableViewDataSource
         setTableOfGames()
         self.view.addSubview(tableOfGames)
     }
-    
+   
     func setView()
     {
         self.title = "Games"

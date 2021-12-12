@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
-    private var teams = Array(repeating: "TEAM A", count: 5)
-    
+    private let presenter = TeamsPresenter()
     private var idCell = "teamCell"
     private var tableOfTeams = UITableView()
     
@@ -23,11 +22,19 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        tableOfTeams.reloadData()
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func setView()
     {
         self.title = "Teams"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "plus"), style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "plus"), style: .done, target: self, action: #selector(openViewOfCreatingTeams(_:)))
+        
     }
     
     func setTableOfTeams()
@@ -39,6 +46,12 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableOfTeams.register(UITableViewCell.self, forCellReuseIdentifier: idCell)
     }
     
+    @objc func openViewOfCreatingTeams(_ sender:UIBarButtonItem )
+    {
+        let view = CreateTeamsView()
+        self.navigationController?.pushViewController(view, animated: true)
+    }
+    
     //MARK: SET TABLE OF TEAMS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -47,7 +60,7 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        return teams.count
+        return presenter.getCountOfTeams()
         
     }
     
@@ -55,7 +68,7 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath)
         cell.backgroundColor = UIColor(red: 243/255, green: 51/255, blue: 155/255, alpha: 1)
-        cell.textLabel?.attributedText = NSAttributedString(string: teams[indexPath.section], attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
+        cell.textLabel?.attributedText = NSAttributedString(string: presenter.getNameOfTeamWithSpecialId(id: indexPath.section), attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
         return cell
     }
     

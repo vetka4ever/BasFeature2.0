@@ -6,19 +6,23 @@
 //
 
 import UIKit
+import RealmSwift
 import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+private var realm = try! Realm()
 
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        //
+        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
+//        try! realm.write
+//        {
+//            realm.deleteAll()
+//        }
         
         let view = SignView()
         let root = UINavigationController(rootViewController: view)

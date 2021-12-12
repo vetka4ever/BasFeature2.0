@@ -8,5 +8,14 @@
 import UIKit
 class TeamsPresenter
 {
+    private let model = TeamsModel()
+    func getNameOfTeamWithSpecialId(id: Int) -> String
+    {
+        return model.getNameOfTeamWithSpecialId(id: id)
+    }
     
+    func getCountOfTeams() -> Int
+    {
+        return model.getCountOfTeams()
+    }
 }
