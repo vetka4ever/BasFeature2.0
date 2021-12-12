@@ -7,23 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61DCC94A2EEB8065921223FE /* Pods_BasketApp2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FB95DF8692521FB2B6E6B9 /* Pods_BasketApp2_0.framework */; };
+		F30027B5275904010084CE0E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30027B4275904010084CE0E /* RegisterView.swift */; };
+		F30027B72759040B0084CE0E /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30027B62759040B0084CE0E /* RegisterPresenter.swift */; };
+		F30027B9275904150084CE0E /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30027B8275904150084CE0E /* RegisterModel.swift */; };
 		F30AF5732757B859008B84C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5722757B859008B84C9 /* AppDelegate.swift */; };
 		F30AF5752757B859008B84C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5742757B859008B84C9 /* SceneDelegate.swift */; };
-		F30AF5772757B859008B84C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5762757B859008B84C9 /* ViewController.swift */; };
-		F30AF57A2757B859008B84C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F30AF5782757B859008B84C9 /* Main.storyboard */; };
+		F30AF5772757B859008B84C9 /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5762757B859008B84C9 /* SignView.swift */; };
 		F30AF57C2757B85B008B84C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F30AF57B2757B85B008B84C9 /* Assets.xcassets */; };
 		F30AF57F2757B85B008B84C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F30AF57D2757B85B008B84C9 /* LaunchScreen.storyboard */; };
+		F356748D275A5F6D001E6DB4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356748C275A5F6D001E6DB4 /* ProfileView.swift */; };
+		F356748F275A5F80001E6DB4 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356748E275A5F80001E6DB4 /* ProfilePresenter.swift */; };
+		F3567491275A5F89001E6DB4 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3567490275A5F89001E6DB4 /* ProfileModel.swift */; };
+		F3567494275A63AE001E6DB4 /* TeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3567493275A63AE001E6DB4 /* TeamsView.swift */; };
+		F3567499275A6FAF001E6DB4 /* TeamsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3567498275A6FAF001E6DB4 /* TeamsPresenter.swift */; };
+		F356749B275A6FC8001E6DB4 /* TeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356749A275A6FC8001E6DB4 /* TeamsModel.swift */; };
+		F356749E275A7050001E6DB4 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356749D275A7050001E6DB4 /* GamesView.swift */; };
+		F35674A0275A705C001E6DB4 /* GamesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356749F275A705C001E6DB4 /* GamesPresenter.swift */; };
+		F35674A2275A7065001E6DB4 /* GamesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35674A1275A7065001E6DB4 /* GamesModel.swift */; };
+		F35674A4275A70C1001E6DB4 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35674A3275A70C1001E6DB4 /* GameCell.swift */; };
+		F3EAB39C2757BFA000CCCB4E /* SignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB39B2757BFA000CCCB4E /* SignPresenter.swift */; };
+		F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB39D2757BFAA00CCCB4E /* SignModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		64784AB948AF70A544A87F40 /* Pods-BasketApp2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasketApp2.0.release.xcconfig"; path = "Target Support Files/Pods-BasketApp2.0/Pods-BasketApp2.0.release.xcconfig"; sourceTree = "<group>"; };
+		C5FB95DF8692521FB2B6E6B9 /* Pods_BasketApp2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasketApp2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F30027B4275904010084CE0E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F30027B62759040B0084CE0E /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		F30027B8275904150084CE0E /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		F30AF56F2757B859008B84C9 /* BasketApp2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasketApp2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30AF5722757B859008B84C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F30AF5742757B859008B84C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F30AF5762757B859008B84C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F30AF5792757B859008B84C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F30AF5762757B859008B84C9 /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
 		F30AF57B2757B85B008B84C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F30AF57E2757B85B008B84C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F30AF5802757B85B008B84C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F356748C275A5F6D001E6DB4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F356748E275A5F80001E6DB4 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		F3567490275A5F89001E6DB4 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		F3567493275A63AE001E6DB4 /* TeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsView.swift; sourceTree = "<group>"; };
+		F3567498275A6FAF001E6DB4 /* TeamsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsPresenter.swift; sourceTree = "<group>"; };
+		F356749A275A6FC8001E6DB4 /* TeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsModel.swift; sourceTree = "<group>"; };
+		F356749D275A7050001E6DB4 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
+		F356749F275A705C001E6DB4 /* GamesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesPresenter.swift; sourceTree = "<group>"; };
+		F35674A1275A7065001E6DB4 /* GamesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModel.swift; sourceTree = "<group>"; };
+		F35674A3275A70C1001E6DB4 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		F3EAB39B2757BFA000CCCB4E /* SignPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignPresenter.swift; sourceTree = "<group>"; };
+		F3EAB39D2757BFAA00CCCB4E /* SignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignModel.swift; sourceTree = "<group>"; };
+		F45FC65AAFD4F29A7DD70ED6 /* Pods-BasketApp2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasketApp2.0.debug.xcconfig"; path = "Target Support Files/Pods-BasketApp2.0/Pods-BasketApp2.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +63,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61DCC94A2EEB8065921223FE /* Pods_BasketApp2_0.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21976FF5F98DDA5DDA207216 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5FB95DF8692521FB2B6E6B9 /* Pods_BasketApp2_0.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		426B730DF484F33E7FB6A966 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F45FC65AAFD4F29A7DD70ED6 /* Pods-BasketApp2.0.debug.xcconfig */,
+				64784AB948AF70A544A87F40 /* Pods-BasketApp2.0.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F30AF5662757B859008B84C9 = {
 			isa = PBXGroup;
 			children = (
 				F30AF5712757B859008B84C9 /* BasketApp2.0 */,
 				F30AF5702757B859008B84C9 /* Products */,
+				426B730DF484F33E7FB6A966 /* Pods */,
+				21976FF5F98DDA5DDA207216 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +108,77 @@
 		F30AF5712757B859008B84C9 /* BasketApp2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				F3567497275A6552001E6DB4 /* Data types */,
 				F30AF5722757B859008B84C9 /* AppDelegate.swift */,
 				F30AF5742757B859008B84C9 /* SceneDelegate.swift */,
-				F30AF5762757B859008B84C9 /* ViewController.swift */,
-				F30AF5782757B859008B84C9 /* Main.storyboard */,
+				F36748032757B9980039D356 /* SignIn */,
+				F36748042757B9A50039D356 /* Register */,
+				F356748B275A5F5C001E6DB4 /* Profile */,
+				F3567492275A6398001E6DB4 /* Teams */,
+				F356749C275A7006001E6DB4 /* Games */,
 				F30AF57B2757B85B008B84C9 /* Assets.xcassets */,
 				F30AF57D2757B85B008B84C9 /* LaunchScreen.storyboard */,
 				F30AF5802757B85B008B84C9 /* Info.plist */,
 			);
 			path = BasketApp2.0;
+			sourceTree = "<group>";
+		};
+		F356748B275A5F5C001E6DB4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F356748C275A5F6D001E6DB4 /* ProfileView.swift */,
+				F356748E275A5F80001E6DB4 /* ProfilePresenter.swift */,
+				F3567490275A5F89001E6DB4 /* ProfileModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		F3567492275A6398001E6DB4 /* Teams */ = {
+			isa = PBXGroup;
+			children = (
+				F3567493275A63AE001E6DB4 /* TeamsView.swift */,
+				F3567498275A6FAF001E6DB4 /* TeamsPresenter.swift */,
+				F356749A275A6FC8001E6DB4 /* TeamsModel.swift */,
+			);
+			path = Teams;
+			sourceTree = "<group>";
+		};
+		F3567497275A6552001E6DB4 /* Data types */ = {
+			isa = PBXGroup;
+			children = (
+				F35674A3275A70C1001E6DB4 /* GameCell.swift */,
+			);
+			path = "Data types";
+			sourceTree = "<group>";
+		};
+		F356749C275A7006001E6DB4 /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				F356749D275A7050001E6DB4 /* GamesView.swift */,
+				F356749F275A705C001E6DB4 /* GamesPresenter.swift */,
+				F35674A1275A7065001E6DB4 /* GamesModel.swift */,
+			);
+			path = Games;
+			sourceTree = "<group>";
+		};
+		F36748032757B9980039D356 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				F30AF5762757B859008B84C9 /* SignView.swift */,
+				F3EAB39B2757BFA000CCCB4E /* SignPresenter.swift */,
+				F3EAB39D2757BFAA00CCCB4E /* SignModel.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		F36748042757B9A50039D356 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				F30027B4275904010084CE0E /* RegisterView.swift */,
+				F30027B62759040B0084CE0E /* RegisterPresenter.swift */,
+				F30027B8275904150084CE0E /* RegisterModel.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +188,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F30AF5832757B85B008B84C9 /* Build configuration list for PBXNativeTarget "BasketApp2.0" */;
 			buildPhases = (
+				D94122640C8C21446301914F /* [CP] Check Pods Manifest.lock */,
 				F30AF56B2757B859008B84C9 /* Sources */,
 				F30AF56C2757B859008B84C9 /* Frameworks */,
 				F30AF56D2757B859008B84C9 /* Resources */,
+				0CC1AEB2D9C583E306D6B995 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,34 +243,82 @@
 			files = (
 				F30AF57F2757B85B008B84C9 /* LaunchScreen.storyboard in Resources */,
 				F30AF57C2757B85B008B84C9 /* Assets.xcassets in Resources */,
-				F30AF57A2757B859008B84C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CC1AEB2D9C583E306D6B995 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasketApp2.0/Pods-BasketApp2.0-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasketApp2.0/Pods-BasketApp2.0-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BasketApp2.0/Pods-BasketApp2.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D94122640C8C21446301914F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BasketApp2.0-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F30AF56B2757B859008B84C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F30AF5772757B859008B84C9 /* ViewController.swift in Sources */,
+				F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */,
+				F30AF5772757B859008B84C9 /* SignView.swift in Sources */,
+				F356749E275A7050001E6DB4 /* GamesView.swift in Sources */,
+				F30027B72759040B0084CE0E /* RegisterPresenter.swift in Sources */,
+				F3567494275A63AE001E6DB4 /* TeamsView.swift in Sources */,
+				F3567491275A5F89001E6DB4 /* ProfileModel.swift in Sources */,
+				F356748D275A5F6D001E6DB4 /* ProfileView.swift in Sources */,
 				F30AF5732757B859008B84C9 /* AppDelegate.swift in Sources */,
+				F35674A0275A705C001E6DB4 /* GamesPresenter.swift in Sources */,
+				F30027B9275904150084CE0E /* RegisterModel.swift in Sources */,
+				F30027B5275904010084CE0E /* RegisterView.swift in Sources */,
 				F30AF5752757B859008B84C9 /* SceneDelegate.swift in Sources */,
+				F356749B275A6FC8001E6DB4 /* TeamsModel.swift in Sources */,
+				F3567499275A6FAF001E6DB4 /* TeamsPresenter.swift in Sources */,
+				F356748F275A5F80001E6DB4 /* ProfilePresenter.swift in Sources */,
+				F35674A4275A70C1001E6DB4 /* GameCell.swift in Sources */,
+				F3EAB39C2757BFA000CCCB4E /* SignPresenter.swift in Sources */,
+				F35674A2275A7065001E6DB4 /* GamesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F30AF5782757B859008B84C9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F30AF5792757B859008B84C9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F30AF57D2757B85B008B84C9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -284,6 +448,7 @@
 		};
 		F30AF5842757B85B008B84C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F45FC65AAFD4F29A7DD70ED6 /* Pods-BasketApp2.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,9 +459,9 @@
 				INFOPLIST_FILE = BasketApp2.0/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +477,7 @@
 		};
 		F30AF5852757B85B008B84C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64784AB948AF70A544A87F40 /* Pods-BasketApp2.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -322,9 +488,9 @@
 				INFOPLIST_FILE = BasketApp2.0/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
