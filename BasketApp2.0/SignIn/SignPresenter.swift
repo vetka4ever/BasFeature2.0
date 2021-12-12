@@ -24,14 +24,14 @@ class SignPresenter
     func getTabBarController() -> UITabBarController
     {
         let tabBar = UITabBarController()
-        let profile = ProfileView()
         
-        let dictionaryOfController = ["Profile": UINavigationController(rootViewController: ProfileView()), "Teams": UINavigationController(rootViewController: TeamsView()), "Games":UINavigationController(rootViewController: GamesView())]
-        
-        tabBar.setViewControllers(Array(dictionaryOfController.values), animated: true)
+        let controllers = [UINavigationController(rootViewController: ProfileView()), UINavigationController(rootViewController: TeamsView()), UINavigationController(rootViewController: GamesView())]
+        let namesOfControllers = ["Profile", "Teams", "Games"]
+       
+        tabBar.setViewControllers(controllers, animated: true)
         for i in 0..<tabBar.tabBar.items!.count
         {
-            tabBar.tabBar.items![i].title = Array(dictionaryOfController.keys)[i]
+            tabBar.tabBar.items![i].title = namesOfControllers[i]
         }
         
         tabBar.tabBar.backgroundColor = .white
