@@ -27,24 +27,24 @@ class SignView: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setSizeVariables()
         setView()
+        setSizeVariables()
         
         for item in [emailField, passwordField, forgotPasswordButton, logInButton, dontHaveAccountButton]
         {
             self.view.addSubview(item)
         }
 
-        setPositionOfViews(ratioAndView: [3:emailField, 4.3:passwordField, 6:logInButton, 6.7: forgotPasswordButton, 8.3: dontHaveAccountButton])
+        setPositionOfViews(ratioAndView: [5:emailField, 6.3:passwordField, 8:logInButton, 8.7: forgotPasswordButton, 11.5: dontHaveAccountButton])
         setTextFields(fields: [emailField, passwordField])
         setLoginButton()
         setForgottenPasswordButton()
         setDontHaveAccountdButton()
     }
-    
+    // All field on this screen have same sizes. Here counting these sizes
     func setSizeVariables()
     {
-        heightForFields = self.view.frame.height / 10
+        heightForFields = self.view.frame.height / 14
         widthForFields = self.view.frame.width * 0.9
     }
     
@@ -79,12 +79,9 @@ class SignView: UIViewController {
         for item in fields
         {
             item.layer.borderWidth = 1
-            
             item.layer.borderColor = UIColor.black.cgColor
-            item.attributedPlaceholder = ((item == emailField) ?  (NSAttributedString(string: "E-mail", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])):  (NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])))
-//            item.bounds.size = CGSize(width: item.frame.width * 0.9, height: item.frame.height)
-            
-            
+//            item.attributedPlaceholder = ((item == emailField) ?  (NSAttributedString(string: "E-mail", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])):  (NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])))
+            (item == emailField) ? (item.placeholder = "E-mail") : (item.placeholder = "Password")
         }
     }
     
@@ -100,7 +97,6 @@ class SignView: UIViewController {
     {
         
         let controller = presenter.getTabBarController()
-//        let controller = ProfileView()
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true, completion: nil)
         
@@ -124,7 +120,6 @@ class SignView: UIViewController {
     @objc func goToRegisterView(_ sender: UIButton)
     {
         let view = presenter.getRegisterView()
-//        self.present(view, animated: true, completion: nil)
         self.navigationController?.pushViewController(view, animated: true)
     }
     

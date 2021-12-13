@@ -9,7 +9,7 @@ import SnapKit
 class SignPresenter
 {
     private var model = SignModel()
-//    private var
+
     func forgetPassword()
     {
         

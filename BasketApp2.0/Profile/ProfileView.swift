@@ -32,7 +32,7 @@ class ProfileView: UIViewController
     
     func setSizeVariables()
     {
-        heightForFields = self.view.frame.height / 10
+        heightForFields = self.view.frame.height / 14
         widthForFields = self.view.frame.width * 0.9
     }
     
@@ -53,7 +53,7 @@ class ProfileView: UIViewController
             maker.centerX.equalToSuperview()
             maker.topMargin.equalTo(10)
         }
-        for (key, value)  in [3.9: surnameLabel, 5.2: nameLabel]
+        for (key, value)  in [4.9: surnameLabel, 6.2: nameLabel]
         {
             
             value.snp.makeConstraints

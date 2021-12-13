@@ -7,10 +7,12 @@
 
 import UIKit
 import SnapKit
-class GameCell: UITableViewCell
+class CellWithTwoTitles: UITableViewCell
 {
-    private var titleOfGame = UILabel()
-    private var dateOfGame = UILabel()
+    // Title for name of game or player
+    private var leftTitle = UILabel()
+    // Title for date of game or num of player
+    private var rightTitle = UILabel()
     
     override func layoutSubviews()
     {
@@ -19,10 +21,10 @@ class GameCell: UITableViewCell
     }
     private func setLabels()
     {
-        self.contentView.addSubview(titleOfGame)
-        self.contentView.addSubview(dateOfGame)
+        self.contentView.addSubview(leftTitle)
+        self.contentView.addSubview(rightTitle)
         
-        for item in [titleOfGame, dateOfGame]
+        for item in [leftTitle, rightTitle]
         {
            
             item.snp.makeConstraints
@@ -30,7 +32,7 @@ class GameCell: UITableViewCell
                 maker.height.equalTo(self.contentView.frame.height * 0.9)
                 maker.centerY.equalTo(self.contentView)
                 
-                if item == titleOfGame
+                if item == leftTitle
                 {
                     maker.width.equalTo(self.contentView.frame.width * 0.5)
                     maker.left.equalTo(10)
@@ -44,28 +46,27 @@ class GameCell: UITableViewCell
         }
     }
     
-    var accessToTitleOfGame: String
+    var accessToLeftTitle: String
     {
         get
         {
-            return self.titleOfGame.text!
+            return self.leftTitle.text!
         }
         set
         {
-//            self.titleOfGame.text = newValue
-            self.titleOfGame.attributedText = NSAttributedString(string: newValue, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
+            self.leftTitle.attributedText = NSAttributedString(string: newValue, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
         }
     }
     
-    var accessToDateOfGame: String
+    var accessToRightTitle: String
     {
         get
         {
-            return self.dateOfGame.text!
+            return self.rightTitle.text!
         }
         set
         {
-            self.dateOfGame.attributedText = NSAttributedString(string: newValue, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
+            self.rightTitle.attributedText = NSAttributedString(string: newValue, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
         }
     }
     

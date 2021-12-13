@@ -28,7 +28,6 @@ class CreateTeamsView: UIViewController
         setView()
         presenter.setView(view: self)
         
-//        presenter = CreateTeamsPresenter(view: self)
         
         setTeamNameLabel()
         setSaveButton()
@@ -46,11 +45,12 @@ class CreateTeamsView: UIViewController
         self.title = "Create Team"
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.largeTitleDisplayMode = .never
         self.tabBarController?.tabBar.isHidden = true
     }
     private func setSizeVariables()
     {
-        heightForFields = self.view.frame.height / 10
+        heightForFields = self.view.frame.height / 14
         widthForFields = self.view.frame.width * 0.9
     }
     

@@ -9,6 +9,12 @@ import UIKit
 class TeamsPresenter
 {
     private let model = TeamsModel()
+    
+    func updateReversedArrayOfTeams()
+    {
+        model.updateReversedArrayOfTeams()
+    }
+    
     func getNameOfTeamWithSpecialId(id: Int) -> String
     {
         return model.getNameOfTeamWithSpecialId(id: id)
@@ -17,5 +23,10 @@ class TeamsPresenter
     func getCountOfTeams() -> Int
     {
         return model.getCountOfTeams()
+    }
+    
+    func saveTeamForAddingPLayer(id: Int)
+    {
+        model.saveTeamForAddingPLayer(id: id)
     }
 }

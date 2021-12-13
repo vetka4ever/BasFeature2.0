@@ -16,7 +16,7 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setView()
+        
         setTableOfTeams()
         self.view.addSubview(tableOfTeams)
         
@@ -25,6 +25,12 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        setView()
+        presenter.updateReversedArrayOfTeams()
+        
+        
+        
+        
         tableOfTeams.reloadData()
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -33,7 +39,8 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         self.title = "Teams"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "plus"), style: .done, target: self, action: #selector(openViewOfCreatingTeams(_:)))
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "plus"), style: .plain, target: self, action: #selector(openViewOfCreatingTeams(_:)))
         
     }
     
@@ -55,11 +62,12 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     //MARK: SET TABLE OF TEAMS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        1
+        return 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
+        
         return presenter.getCountOfTeams()
         
     }
@@ -74,11 +82,14 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return self.view.frame.height / 11
+        return self.view.frame.height / 14
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.saveTeamForAddingPLayer(id: indexPath.section)
+        let view = WatchOneTeamView()
+        self.navigationController?.pushViewController(view, animated: true)
     }
 }

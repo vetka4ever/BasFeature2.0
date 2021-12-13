@@ -34,6 +34,7 @@ class CreateTeamsPresenter
             else
             {
                 model.createTeam(nameOfTeam: nameOfTeam)
+                
                 newView.hideView()
             }
         }

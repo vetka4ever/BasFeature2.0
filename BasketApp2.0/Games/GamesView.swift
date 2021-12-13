@@ -39,7 +39,7 @@ class GamesView: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableOfGames.dataSource = self
         tableOfGames.delegate = self
         tableOfGames.backgroundColor = .white
-        tableOfGames.register(GameCell.self, forCellReuseIdentifier: idCell)
+        tableOfGames.register(CellWithTwoTitles.self, forCellReuseIdentifier: idCell)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -54,16 +54,16 @@ class GamesView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as! GameCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as! CellWithTwoTitles
         cell.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-        cell.accessToTitleOfGame = games[indexPath.section]
-        cell.accessToDateOfGame = dateOfGames[indexPath.section]
+        cell.accessToLeftTitle = games[indexPath.section]
+        cell.accessToRightTitle = dateOfGames[indexPath.section]
         return cell
     }
    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return self.view.frame.height / 11
+        return self.view.frame.height / 14
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)

@@ -25,7 +25,7 @@
 		F356749E275A7050001E6DB4 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356749D275A7050001E6DB4 /* GamesView.swift */; };
 		F35674A0275A705C001E6DB4 /* GamesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356749F275A705C001E6DB4 /* GamesPresenter.swift */; };
 		F35674A2275A7065001E6DB4 /* GamesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35674A1275A7065001E6DB4 /* GamesModel.swift */; };
-		F35674A4275A70C1001E6DB4 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35674A3275A70C1001E6DB4 /* GameCell.swift */; };
+		F35674A4275A70C1001E6DB4 /* CellWithTwoTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */; };
 		F37AC5502766434D00022F82 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37AC54F2766434D00022F82 /* Team.swift */; };
 		F37AC5522766437500022F82 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37AC5512766437500022F82 /* Player.swift */; };
 		F3C2BBF227663D2E00243833 /* CreateTeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2BBF127663D2E00243833 /* CreateTeamsView.swift */; };
@@ -33,6 +33,10 @@
 		F3C2BBF627663D6900243833 /* CreateTeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */; };
 		F3EAB39C2757BFA000CCCB4E /* SignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB39B2757BFA000CCCB4E /* SignPresenter.swift */; };
 		F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB39D2757BFAA00CCCB4E /* SignModel.swift */; };
+		F3FBAE6C276729DA00133484 /* WatchOneTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FBAE6B276729DA00133484 /* WatchOneTeamView.swift */; };
+		F3FBAE6E276729E900133484 /* WatchOneTeamPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FBAE6D276729E900133484 /* WatchOneTeamPresenter.swift */; };
+		F3FBAE70276729F800133484 /* WatchOneTeamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FBAE6F276729F800133484 /* WatchOneTeamModel.swift */; };
+		F3FBAE7327673DD900133484 /* AddPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FBAE7227673DD900133484 /* AddPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +61,7 @@
 		F356749D275A7050001E6DB4 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 		F356749F275A705C001E6DB4 /* GamesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesPresenter.swift; sourceTree = "<group>"; };
 		F35674A1275A7065001E6DB4 /* GamesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModel.swift; sourceTree = "<group>"; };
-		F35674A3275A70C1001E6DB4 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWithTwoTitles.swift; sourceTree = "<group>"; };
 		F37AC54F2766434D00022F82 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		F37AC5512766437500022F82 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F3C2BBF127663D2E00243833 /* CreateTeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamsView.swift; sourceTree = "<group>"; };
@@ -65,6 +69,10 @@
 		F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamsModel.swift; sourceTree = "<group>"; };
 		F3EAB39B2757BFA000CCCB4E /* SignPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignPresenter.swift; sourceTree = "<group>"; };
 		F3EAB39D2757BFAA00CCCB4E /* SignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignModel.swift; sourceTree = "<group>"; };
+		F3FBAE6B276729DA00133484 /* WatchOneTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOneTeamView.swift; sourceTree = "<group>"; };
+		F3FBAE6D276729E900133484 /* WatchOneTeamPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOneTeamPresenter.swift; sourceTree = "<group>"; };
+		F3FBAE6F276729F800133484 /* WatchOneTeamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOneTeamModel.swift; sourceTree = "<group>"; };
+		F3FBAE7227673DD900133484 /* AddPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerView.swift; sourceTree = "<group>"; };
 		F45FC65AAFD4F29A7DD70ED6 /* Pods-BasketApp2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasketApp2.0.debug.xcconfig"; path = "Target Support Files/Pods-BasketApp2.0/Pods-BasketApp2.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +134,6 @@
 				F356748B275A5F5C001E6DB4 /* Profile */,
 				F3567492275A6398001E6DB4 /* Teams */,
 				F356749C275A7006001E6DB4 /* Games */,
-				F3C2BBF027663D0600243833 /* Create Teams */,
 				F30AF57B2757B85B008B84C9 /* Assets.xcassets */,
 				F30AF57D2757B85B008B84C9 /* LaunchScreen.storyboard */,
 				F30AF5802757B85B008B84C9 /* Info.plist */,
@@ -150,6 +157,8 @@
 				F3567493275A63AE001E6DB4 /* TeamsView.swift */,
 				F3567498275A6FAF001E6DB4 /* TeamsPresenter.swift */,
 				F356749A275A6FC8001E6DB4 /* TeamsModel.swift */,
+				F3C2BBF027663D0600243833 /* Create Teams */,
+				F3FBAE6A276729B100133484 /* WatchOneTeam */,
 			);
 			path = Teams;
 			sourceTree = "<group>";
@@ -157,7 +166,7 @@
 		F3567497275A6552001E6DB4 /* Data types */ = {
 			isa = PBXGroup;
 			children = (
-				F35674A3275A70C1001E6DB4 /* GameCell.swift */,
+				F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */,
 				F37AC54F2766434D00022F82 /* Team.swift */,
 				F37AC5512766437500022F82 /* Player.swift */,
 			);
@@ -202,6 +211,25 @@
 				F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */,
 			);
 			path = "Create Teams";
+			sourceTree = "<group>";
+		};
+		F3FBAE6A276729B100133484 /* WatchOneTeam */ = {
+			isa = PBXGroup;
+			children = (
+				F3FBAE6B276729DA00133484 /* WatchOneTeamView.swift */,
+				F3FBAE6D276729E900133484 /* WatchOneTeamPresenter.swift */,
+				F3FBAE6F276729F800133484 /* WatchOneTeamModel.swift */,
+				F3FBAE7127672DB700133484 /* AddPlayer */,
+			);
+			path = WatchOneTeam;
+			sourceTree = "<group>";
+		};
+		F3FBAE7127672DB700133484 /* AddPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				F3FBAE7227673DD900133484 /* AddPlayerView.swift */,
+			);
+			path = AddPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,11 +352,14 @@
 				F30027B72759040B0084CE0E /* RegisterPresenter.swift in Sources */,
 				F3567494275A63AE001E6DB4 /* TeamsView.swift in Sources */,
 				F3C2BBF227663D2E00243833 /* CreateTeamsView.swift in Sources */,
+				F3FBAE6E276729E900133484 /* WatchOneTeamPresenter.swift in Sources */,
 				F37AC5522766437500022F82 /* Player.swift in Sources */,
 				F3567491275A5F89001E6DB4 /* ProfileModel.swift in Sources */,
+				F3FBAE70276729F800133484 /* WatchOneTeamModel.swift in Sources */,
 				F356748D275A5F6D001E6DB4 /* ProfileView.swift in Sources */,
 				F30AF5732757B859008B84C9 /* AppDelegate.swift in Sources */,
 				F35674A0275A705C001E6DB4 /* GamesPresenter.swift in Sources */,
+				F3FBAE7327673DD900133484 /* AddPlayerView.swift in Sources */,
 				F30027B9275904150084CE0E /* RegisterModel.swift in Sources */,
 				F3C2BBF427663D4B00243833 /* CreateTeamsPresenter.swift in Sources */,
 				F30027B5275904010084CE0E /* RegisterView.swift in Sources */,
@@ -338,7 +369,8 @@
 				F37AC5502766434D00022F82 /* Team.swift in Sources */,
 				F3567499275A6FAF001E6DB4 /* TeamsPresenter.swift in Sources */,
 				F356748F275A5F80001E6DB4 /* ProfilePresenter.swift in Sources */,
-				F35674A4275A70C1001E6DB4 /* GameCell.swift in Sources */,
+				F3FBAE6C276729DA00133484 /* WatchOneTeamView.swift in Sources */,
+				F35674A4275A70C1001E6DB4 /* CellWithTwoTitles.swift in Sources */,
 				F3EAB39C2757BFA000CCCB4E /* SignPresenter.swift in Sources */,
 				F35674A2275A7065001E6DB4 /* GamesModel.swift in Sources */,
 			);
@@ -488,7 +520,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,7 +549,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

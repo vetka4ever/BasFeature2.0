@@ -22,13 +22,8 @@ class RegisterView: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        setView()
         setSizeVariables()
-        
-        
-        self.title = "Registration"
-        self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.isHidden = false
-        
         
         for item in [surnameTextField, nameTextField, emailTextField, passwordTextField, registerButton]
         {
@@ -38,6 +33,14 @@ class RegisterView: UIViewController
         setPositionOfViews(ratioAndView: [1:surnameTextField, 2.3:nameTextField, 3.6:emailTextField, 4.9:passwordTextField, 7: registerButton])
         setTextFields(textFields: [surnameTextField, nameTextField, emailTextField, passwordTextField])
         setRegisterButton()
+    }
+    
+    
+    func setView()
+    {
+        self.title = "Registration"
+        self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     func setPositionOfViews(ratioAndView: [Double:UIView])
@@ -64,7 +67,8 @@ class RegisterView: UIViewController
             textFields[i].layer.borderWidth = 1
             textFields[i].layer.borderColor = UIColor.black.cgColor
 //            textFields[i].attributedText = (NSAttributedString(string: titles[i], attributes: [NSAttributedString.Key.foregroundColor : UIColor.black]))
-            textFields[i].attributedPlaceholder = (NSAttributedString(string: titles[i], attributes: [NSAttributedString.Key.foregroundColor : UIColor.black]))
+//            textFields[i].attributedPlaceholder = (NSAttributedString(string: titles[i], attributes: [NSAttributedString.Key.foregroundColor : UIColor.black]))
+            textFields[i].placeholder = titles[i]
         }
     }
     
@@ -79,7 +83,7 @@ class RegisterView: UIViewController
     
     func setSizeVariables()
     {
-        heightForFields = self.view.frame.height / 10
+        heightForFields = self.view.frame.height / 14
         widthForFields = self.view.frame.width * 0.9
     }
     
