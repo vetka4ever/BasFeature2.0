@@ -26,11 +26,6 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         super.viewWillAppear(animated)
         setView()
-        presenter.updateReversedArrayOfTeams()
-        
-        
-        
-        
         tableOfTeams.reloadData()
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -92,4 +87,5 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let view = WatchOneTeamView()
         self.navigationController?.pushViewController(view, animated: true)
     }
+    
 }

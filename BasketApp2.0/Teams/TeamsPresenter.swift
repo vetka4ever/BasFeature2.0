@@ -10,10 +10,6 @@ class TeamsPresenter
 {
     private let model = TeamsModel()
     
-    func updateReversedArrayOfTeams()
-    {
-        model.updateReversedArrayOfTeams()
-    }
     
     func getNameOfTeamWithSpecialId(id: Int) -> String
     {

@@ -8,34 +8,44 @@
 import Foundation
 class Player: Codable
 {
-    private var name = ""
-    private var number = ""
-    private var dateOfBirth = ""
-    private var height = ""
-    private var weight = ""
+    var name: String,
+        number: String,
+        dateOfBirth: String,
+        height: String,
+        weight: String
     
-    var accessToName: String
+    init(player: dataOfPlayer)
     {
-        get
-        {
-            return name
-        }
-        set
-        {
-            self.name = newValue
-        }
+        self.name = player.name
+        self.number = player.number
+        self.dateOfBirth = player.dateOfBirth
+        self.height = player.height
+        self.weight = player.weight
     }
-    
-    var accessToNumber: String
-    {
-        get
-        {
-            return number
-        }
-        set
-        {
-            self.number = newValue
-        }
-    }
-    
 }
+
+//    var accessToName: String
+//    {
+//        get
+//        {
+//            return name
+//        }
+//        set
+//        {
+//            self.name = newValue
+//        }
+//    }
+//
+//    var accessToNumber: String
+//    {
+//        get
+//        {
+//            return number
+//        }
+//        set
+//        {
+//            self.number = newValue
+//        }
+//    }
+
+

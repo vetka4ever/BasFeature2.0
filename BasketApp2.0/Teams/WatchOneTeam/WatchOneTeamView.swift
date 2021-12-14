@@ -17,11 +17,16 @@ class WatchOneTeamView: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         setView()
         setTableView()
+        self.view.addSubview(tableOfPlayers)
         setRightBarButtonItem()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        tableOfPlayers.reloadData()
     }
     
     private func setView()
@@ -33,6 +38,7 @@ class WatchOneTeamView: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.navigationController?.navigationBar.barTintColor = .white
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        
     }
 
     private func setTableView()
@@ -42,6 +48,7 @@ class WatchOneTeamView: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableOfPlayers.dataSource = self
         tableOfPlayers.backgroundColor = .white
         tableOfPlayers.register(CellWithTwoTitles.self, forCellReuseIdentifier: idOfCell)
+        
     }
     
     private func setRightBarButtonItem()
@@ -63,7 +70,8 @@ class WatchOneTeamView: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        presenter.getNumOfPlayers()
+        let num = presenter.getNumOfPlayers()
+        return num
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell

@@ -11,6 +11,9 @@
 		F30027B5275904010084CE0E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30027B4275904010084CE0E /* RegisterView.swift */; };
 		F30027B72759040B0084CE0E /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30027B62759040B0084CE0E /* RegisterPresenter.swift */; };
 		F30027B9275904150084CE0E /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30027B8275904150084CE0E /* RegisterModel.swift */; };
+		F306F9EB27685EC30043FFD0 /* AddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F306F9EA27685EC30043FFD0 /* AddPlayerPresenter.swift */; };
+		F306F9ED27685ECB0043FFD0 /* AddPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F306F9EC27685ECB0043FFD0 /* AddPlayerModel.swift */; };
+		F306F9EF27686A160043FFD0 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F306F9EE27686A160043FFD0 /* Typealiases.swift */; };
 		F30AF5732757B859008B84C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5722757B859008B84C9 /* AppDelegate.swift */; };
 		F30AF5752757B859008B84C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5742757B859008B84C9 /* SceneDelegate.swift */; };
 		F30AF5772757B859008B84C9 /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5762757B859008B84C9 /* SignView.swift */; };
@@ -45,6 +48,9 @@
 		F30027B4275904010084CE0E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		F30027B62759040B0084CE0E /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
 		F30027B8275904150084CE0E /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		F306F9EA27685EC30043FFD0 /* AddPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerPresenter.swift; sourceTree = "<group>"; };
+		F306F9EC27685ECB0043FFD0 /* AddPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerModel.swift; sourceTree = "<group>"; };
+		F306F9EE27686A160043FFD0 /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		F30AF56F2757B859008B84C9 /* BasketApp2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasketApp2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30AF5722757B859008B84C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F30AF5742757B859008B84C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */,
 				F37AC54F2766434D00022F82 /* Team.swift */,
 				F37AC5512766437500022F82 /* Player.swift */,
+				F306F9EE27686A160043FFD0 /* Typealiases.swift */,
 			);
 			path = "Data types";
 			sourceTree = "<group>";
@@ -228,6 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				F3FBAE7227673DD900133484 /* AddPlayerView.swift */,
+				F306F9EA27685EC30043FFD0 /* AddPlayerPresenter.swift */,
+				F306F9EC27685ECB0043FFD0 /* AddPlayerModel.swift */,
 			);
 			path = AddPlayer;
 			sourceTree = "<group>";
@@ -348,6 +357,7 @@
 			files = (
 				F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */,
 				F30AF5772757B859008B84C9 /* SignView.swift in Sources */,
+				F306F9EF27686A160043FFD0 /* Typealiases.swift in Sources */,
 				F356749E275A7050001E6DB4 /* GamesView.swift in Sources */,
 				F30027B72759040B0084CE0E /* RegisterPresenter.swift in Sources */,
 				F3567494275A63AE001E6DB4 /* TeamsView.swift in Sources */,
@@ -355,7 +365,9 @@
 				F3FBAE6E276729E900133484 /* WatchOneTeamPresenter.swift in Sources */,
 				F37AC5522766437500022F82 /* Player.swift in Sources */,
 				F3567491275A5F89001E6DB4 /* ProfileModel.swift in Sources */,
+				F306F9EB27685EC30043FFD0 /* AddPlayerPresenter.swift in Sources */,
 				F3FBAE70276729F800133484 /* WatchOneTeamModel.swift in Sources */,
+				F306F9ED27685ECB0043FFD0 /* AddPlayerModel.swift in Sources */,
 				F356748D275A5F6D001E6DB4 /* ProfileView.swift in Sources */,
 				F30AF5732757B859008B84C9 /* AppDelegate.swift in Sources */,
 				F35674A0275A705C001E6DB4 /* GamesPresenter.swift in Sources */,

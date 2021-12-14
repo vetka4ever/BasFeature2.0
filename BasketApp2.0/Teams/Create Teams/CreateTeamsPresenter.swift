@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 class CreateTeamsPresenter
 {
-    enum StateOfName
+    private enum StateOfName
     {
         case okay
         case empty

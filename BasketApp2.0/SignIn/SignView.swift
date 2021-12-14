@@ -21,9 +21,6 @@ class SignView: UIViewController {
     private var forgotPasswordButton = UIButton(type: .system)
     private var dontHaveAccountButton = UIButton(type: .system)
     
-    
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()

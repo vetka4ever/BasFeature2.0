@@ -12,14 +12,17 @@ class Team: Codable
 {
     private var name = ""
     
-    private var allPlayers = [Player]()
+    private var players = [Player]()
     
     enum typeOfInfoOfPlayer
     {
-        
         case name
         case number
+        case dateOfBirth
+        case height
+        case weight
     }
+    
     var accessToName: String
     {
         get
@@ -36,20 +39,30 @@ class Team: Codable
     {
         get
         {
-            return allPlayers.count
+            return players.count
         }
     }
     
-    func getInfoOfPlayer(id: Int, typeOfInfo: typeOfInfoOfPlayer ) -> String
+    func getInfoAboutPlayers(id: Int, typeOfInfo: typeOfInfoOfPlayer ) -> String
     {
-        switch typeOfInfo {
+        switch typeOfInfo
+        {
         case .name:
-            return allPlayers.reversed()[id].accessToName
+            return players.reversed()[id].name
         case .number:
-            return allPlayers.reversed()[id].accessToNumber
+            return players.reversed()[id].number
+        case .dateOfBirth:
+            return players.reversed()[id].dateOfBirth
+        case .height:
+            return players.reversed()[id].height
+        case .weight:
+            return players.reversed()[id].weight
         }
-        
-        
+    }
+    
+    func addPlayerToTeam(newPlayer: Player)
+    {
+        self.players.append(newPlayer)
     }
     
 }
