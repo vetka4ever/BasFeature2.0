@@ -5,7 +5,7 @@
 //  Created by Daniil on 12.12.2021.
 //
 
-import Foundation
+
 import RealmSwift
 
 class Team: Codable
@@ -48,21 +48,22 @@ class Team: Codable
         switch typeOfInfo
         {
         case .name:
-            return players.reversed()[id].name
+            return players[id].name
         case .number:
-            return players.reversed()[id].number
+            return players[id].number
         case .dateOfBirth:
-            return players.reversed()[id].dateOfBirth
+            return players[id].dateOfBirth
         case .height:
-            return players.reversed()[id].height
+            return players[id].height
         case .weight:
-            return players.reversed()[id].weight
+            return players[id].weight
         }
     }
     
     func addPlayerToTeam(newPlayer: Player)
     {
-        self.players.append(newPlayer)
+//        self.players.append(newPlayer)
+        self.players.insert(newPlayer, at: 0)
     }
     
 }

@@ -48,11 +48,9 @@ class SignView: UIViewController {
     func setView()
     {
         self.title = "Login"
-        self.navigationItem.titleView?.isHidden = true
+//        self.navigationItem.titleView?.isHidden = true
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.barTintColor = .white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
     }
     
     func setPositionOfViews(ratioAndView: [Double:UIView])

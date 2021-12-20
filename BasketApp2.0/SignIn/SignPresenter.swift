@@ -25,7 +25,7 @@ class SignPresenter
     {
         let tabBar = UITabBarController()
         
-        let controllers = [UINavigationController(rootViewController: ProfileView()), UINavigationController(rootViewController: TeamsView()), UINavigationController(rootViewController: GamesView())]
+        let controllers = [UINavigationController(rootViewController: ProfileView()), UINavigationController(rootViewController: TeamsView()), UINavigationController(rootViewController: ListGameView())]
         let namesOfControllers = ["Profile", "Teams", "Games"]
        
         tabBar.setViewControllers(controllers, animated: true)
