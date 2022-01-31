@@ -24,6 +24,7 @@ class SignView: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+//        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         setView()
         setSizeVariables()
         
@@ -38,6 +39,7 @@ class SignView: UIViewController {
         setForgottenPasswordButton()
         setDontHaveAccountdButton()
     }
+        
     // All field on this screen have same sizes. Here counting these sizes
     func setSizeVariables()
     {

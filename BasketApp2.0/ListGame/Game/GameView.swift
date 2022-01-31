@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    
     private var presenter = GamePresenter()
     
     var height: CGFloat = 0
@@ -23,9 +24,27 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     private var idCell = "idForCellInGame"
     
+    override var shouldAutorotate: Bool
+    {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask
+    {
+
+        return .landscape
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation
+    {
+
+        return .landscapeRight
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         for item in [tableTeamA, tableTeamB, field, labelTeamA, labelTeamB]
@@ -37,13 +56,14 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         setField()
     }
     
+    
     @objc func paintZone(_ sender: UITapGestureRecognizer)
     {
         field.paintZoneByTap(point: sender.location(in: field))
     }
     func setSizeVariables()
     {
-         height = self.view.frame.height
+        height = self.view.frame.height
         width = self.view.frame.width
         
         if height > width

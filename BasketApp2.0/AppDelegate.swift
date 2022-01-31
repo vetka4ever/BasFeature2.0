@@ -25,14 +25,14 @@ private var realm = try! Realm()
 //        }
         
         let view = SignView()
-        let root = UINavigationController(rootViewController: view)
+        let root = RotationNavigationController(rootViewController: view)
         window?.rootViewController = root
         window?.makeKeyAndVisible()
         return true
     }
 
-   
-
+    
 
 }
+
 
