@@ -22,8 +22,9 @@ extension CGFloat
 class Field: UIView
 {
     private var zones: [Zone] = [Zone]()
+    private var textLabels = [UILabel]()
     private var mode =  Doing.drawField
-    private var numOfPaintingZone = 0
+    private var numOfPaintedZone = 0
     private var pointOfTapped = CGPoint()
     
     enum Doing
@@ -34,7 +35,7 @@ class Field: UIView
     
     override func draw(_ rect: CGRect)
     {
-        //self.clearsContextBeforeDrawing = true
+        
         guard let context = UIGraphicsGetCurrentContext() else {return}
         switch (mode)
         {
@@ -51,12 +52,25 @@ class Field: UIView
         }
     }
     
-    func paintZoneByTap(point: CGPoint)
+    func paintZoneByTap(point: CGPoint) -> Int
     {
         self.pointOfTapped = point
+        var numOfSelectedZone = 0
+        for i in 0...zones.count-1
+        {
+            if zones[i].path.contains(point) && i+1 != numOfPaintedZone
+            {
+                numOfSelectedZone = i+1
+            }
+        }
         setNeedsDisplay()
+        return numOfSelectedZone
     }
     
+    func getNumOfPaintedZone() -> Int
+    {
+        return self.numOfPaintedZone
+    }
     private func paintZone(context:  CGContext)
     {
         for i in 0...zones.count-1
@@ -66,17 +80,17 @@ class Field: UIView
             if zones[i].path.contains(pointOfTapped)
             {
                 
-                if numOfPaintingZone != i+1
+                if numOfPaintedZone != i+1
                 {
                     print("WAS SELECTED \(i+1)-TH ZONE")
-                    numOfPaintingZone = i+1
+                    numOfPaintedZone = i+1
                     zones[i].tapped = true
                     
                 }
                 else
                 {
                     print("WAS DESELECTED \(i+1)-TH ZONE")
-                    numOfPaintingZone = 0
+                    numOfPaintedZone = 0
                 }
             }
             zones[i].tapped ? (context.setFillColor(UIColor.red.cgColor)) : (context.setFillColor(zones[i].color))
@@ -207,38 +221,18 @@ class Field: UIView
     {
         let xInset: CGFloat = 25
         let yInset: CGFloat = 10
-        // need change 1, 3, 5
+        var point = CGPoint()
         for i in 0...zones.count-1
         {
-            var point = CGPoint()
-//            switch i {
-//            case 0:
-//                point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX - zones[i].path.boundingBoxOfPath.width / 3, y: zones[i].path.boundingBoxOfPath.midY - yInset)
-//                break
-//            case 2:
-//                point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX - xInset, y: zones[i].path.boundingBoxOfPath.midY - zones[i].path.boundingBoxOfPath.height / 3)
-//                break
-//            case 4:
-//                point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX - xInset / 2, y: zones[i].path.boundingBoxOfPath.midY - yInset)
-//                break
-//            default:
-//                point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX - xInset, y: zones[i].path.boundingBoxOfPath.midY - yInset)
-//            }
-//            if i == 0 || i == 2 || i == 4
-//            {
-//                point =
-//            }
-//            else
-                
-//            point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX - 25, y: zones[i].path.boundingBoxOfPath.midY - 10)
-            
             point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: zones[i].path.boundingBoxOfPath.midY)
             let labelView = UILabel()
             labelView.center = point
             labelView.frame.size = CGSize(width: self.frame.width / 10, height: self.frame.height / 10)
-//            labelView.numberOfLines = 2
+            
             labelView.text = "10/45\n100%"
             labelView.textAlignment = .center
+            textLabels.append(labelView)
+            labelView.isHidden = true
             self.addSubview(labelView)
         }
     }

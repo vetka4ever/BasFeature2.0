@@ -12,13 +12,20 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     private var presenter = GamePresenter()
     
-    var height: CGFloat = 0
-    var width: CGFloat = 0
+    private var height: CGFloat = 0
+    private var width: CGFloat = 0
     
+    //    private let valuesForTime = ["1", "2", "3", "4", "+"]
+    //    private let valuesForModeOfPresenting = ["all", "scored", "will", "end"]
+    
+    private var time = UISegmentedControl.init(items: ["1", "2", "3", "4", "+"])
+    private let controlOfModeOfPresenting = UISegmentedControl.init(items: ["input", "all", "scored", "shot", "end"])
     private var labelTeamA = UILabel()
     private var labelTeamB = UILabel()
     private var tableTeamA = UITableView(frame: CGRect(), style: .insetGrouped)
     private var tableTeamB = UITableView(frame: CGRect(), style: .insetGrouped)
+    
+    
     
     private var field = Field()
     
@@ -31,13 +38,13 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask
     {
-
+        
         return .landscape
     }
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation
     {
-
+        
         return .landscapeRight
     }
     
@@ -45,38 +52,31 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         super.viewDidLoad()
         UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+        self.height = min(self.view.frame.height, self.view.frame.width)
+        self.width = max(self.view.frame.height, self.view.frame.width)
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
-        for item in [tableTeamA, tableTeamB, field, labelTeamA, labelTeamB]
+        for item in [tableTeamA, tableTeamB, field, labelTeamA, labelTeamB, time, controlOfModeOfPresenting]
         {
             self.view.addSubview(item)
         }
-        setSizeVariables()
+        presenter.setView(view: self)
         setTableViews()
         setField()
+        setSegmentedControlls()
     }
     
     
     @objc func paintZone(_ sender: UITapGestureRecognizer)
     {
-        field.paintZoneByTap(point: sender.location(in: field))
+        var selectedZone = field.paintZoneByTap(point: sender.location(in: field))
+        //        var selectedZone = field.getNumOfPaintedZone()
+        presenter.setNumOfZone(zone: selectedZone)
     }
-    func setSizeVariables()
+    
+    private func setTableViews()
     {
-        height = self.view.frame.height
-        width = self.view.frame.width
         
-        if height > width
-        {
-            let a = height
-            height = width
-            width = a
-        }
-        
-    }
-    func setTableViews()
-    {
-       
         for item in [tableTeamA, tableTeamB]
         {
             item.register(UITableViewCell.self, forCellReuseIdentifier: idCell)
@@ -109,14 +109,39 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func setField()
+    private func setField()
     {
         let tap = UITapGestureRecognizer(target: self, action: #selector(paintZone(_:)))
         field.addGestureRecognizer(tap)
         field.frame.size = CGSize(width: width * 6 / 8, height: width * 6 / 16)
-        print(field.frame.width / field.frame.height) 
+        print(field.frame.width / field.frame.height)
         field.center = CGPoint(x: width / 2, y: height / 2)
         
+    }
+    
+    private func setSegmentedControlls()
+    {
+        time.frame.size = CGSize(width: field.frame.width / 1.8, height: field.frame.minY)
+        time.center = CGPoint(x: self.width/2, y: time.frame.height / 2)
+        time.selectedSegmentIndex = 0
+        time.addTarget(self, action: #selector(changeTime(_:)), for: .valueChanged)
+        
+        controlOfModeOfPresenting.frame.size = time.frame.size
+        controlOfModeOfPresenting.center = CGPoint(x: self.width/2, y: self.height - time.frame.height / 2 )
+        
+        controlOfModeOfPresenting.selectedSegmentIndex = 0
+        controlOfModeOfPresenting.addTarget(self, action: #selector(changeMode(_:)), for: .valueChanged)
+        
+    }
+    
+    @objc func changeTime(_ sender: UISegmentedControl)
+    {
+        presenter.setTime(time: sender.selectedSegmentIndex)
+    }
+    
+    @objc func changeMode(_ sender: UISegmentedControl)
+    {
+        presenter.setMode(mode: sender.selectedSegmentIndex)
     }
     
     
@@ -127,18 +152,39 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        return (tableView == tableTeamA ? (presenter.getCountOfPlayers(teamA: true)) : (presenter.getCountOfPlayers(teamA: false)) )
+        //        return (tableView == tableTeamA ? (presenter.getCountOfPlayers(teamA: true)) : (presenter.getCountOfPlayers(teamA: false)) )
+        return presenter.getCountOfPlayers(teamA: tableView == tableTeamA )
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath)
         cell.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-        cell.textLabel!.text = (tableView == tableTeamA ? (presenter.getNumOfPlayer(teamA: true, id: indexPath.section)) : (presenter.getNumOfPlayer(teamA: false, id: indexPath.section)) )
+        cell.textLabel!.text = presenter.getNumOfPlayer(teamA: tableView == tableTeamA, id: indexPath.section)
         cell.textLabel!.textAlignment = .center
         cell.layer.cornerRadius = 10
         return cell
     }
-  
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        if tableView == tableTeamA
+        {
+            tableTeamB.reloadData()
+        }
+        else
+        {
+            tableTeamA.reloadData()
+        }
+        tableView.cellForRow(at: indexPath)!.selectedBackgroundView?.backgroundColor = .red
+        presenter.setPlayer(teamA: (tableView == tableTeamA), player: tableView.cellForRow(at: indexPath)!.textLabel!.text!)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+    {
+        
+        tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+    }
+    
 }
 
 
