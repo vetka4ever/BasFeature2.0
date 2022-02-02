@@ -152,7 +152,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     @objc func changeTime(_ sender: UISegmentedControl)
     {
-        presenter.setTime(time: sender.selectedSegmentIndex)
+        presenter.setTime(time: sender.selectedSegmentIndex + 1)
     }
     
     @objc func changeMode(_ sender: UISegmentedControl)
@@ -160,6 +160,21 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         presenter.setMode(mode: sender.selectedSegmentIndex)
     }
     
+//    func askResultOfThrow(result: @escaping (Bool) -> ())
+//    {
+//        var status = false
+//        let alert = UIAlertController(title: "Input", message: "Enter result of shot", preferredStyle: .alert)
+//        let win = UIAlertAction(title: "Win", style: .default) { UIAlertAction in
+//            status = true
+//        }
+//        
+//        let no = UIAlertAction(title: "Lose", style: .cancel, handler: nil)
+//        alert.addAction(win)
+//        alert.addAction(no)
+//        present(alert, animated: true, completion: nil)
+//        
+//        result(status)
+//    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -175,7 +190,8 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath)
-        cell.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        cell.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        
         cell.textLabel!.text = presenter.getNumOfPlayer(teamA: tableView == tableTeamA, id: indexPath.section)
         cell.textLabel!.textAlignment = .center
         cell.layer.cornerRadius = 10
@@ -193,14 +209,16 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         {
             tableTeamA.reloadData()
         }
-        tableView.cellForRow(at: indexPath)!.selectedBackgroundView?.backgroundColor = .red
+//        tableView.cellForRow(at: indexPath)!.selectedBackgroundView?.backgroundColor = .red
+//        tableView.cellForRow(at: indexPath)!.backgroundColor = .red
+        tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = .red
         presenter.setPlayer(teamA: (tableView == tableTeamA), player: tableView.cellForRow(at: indexPath)!.textLabel!.text!)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
     {
         
-        tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
     }
     
 }

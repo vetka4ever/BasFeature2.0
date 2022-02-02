@@ -42,8 +42,8 @@ class GamePresenter
         }
         else
         {
-        self.teamA = teamA
-        self.currentPlayer = player
+            self.teamA = teamA
+            self.currentPlayer = player
         }
         doingByMode()
     }
@@ -68,7 +68,7 @@ class GamePresenter
         switch (currentMode)
         {
         case .input:
-            getInputScore()
+            inputScore()
         case .all:
             getAllScore()
         case .scored:
@@ -79,11 +79,29 @@ class GamePresenter
             endGame()
         }
     }
-    
-    private func getInputScore()
+    private func getAlert() -> UIAlertController
+    {
+        
+        let alert = UIAlertController(title: "Input", message: "Enter result of shot", preferredStyle: .alert)
+        let win = UIAlertAction(title: "Win", style: .default) {  [self] UIAlertAction in
+            model.inputAttack(teamA: teamA!, numOfPlayer: currentPlayer, result: true, time: currentTime, zone: currentZone)
+        }
+        
+        let no = UIAlertAction(title: "Lose", style: .destructive) {  [self] UIAlertAction in
+            model.inputAttack(teamA: teamA!, numOfPlayer: currentPlayer, result: false, time: currentTime, zone: currentZone)
+        }
+        alert.addAction(win)
+        alert.addAction(no)
+        
+        return alert
+    }
+    private func inputScore()
     {
         if currentZone != 0 && self.currentPlayer != ""
-        {print("Inputing...")}
+        {
+            view.present(getAlert(), animated: true, completion: nil)
+        }
+        
     }
     
     private func getAllScore()

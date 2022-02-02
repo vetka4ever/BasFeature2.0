@@ -8,9 +8,11 @@
 import RealmSwift
 class GameModel
 {
+    
+    
     private let realm: Realm
     private var game: CurrentGame
-    private var attack = [Attack]()
+    private var attacks = [Attack]()
     
     init()
     {
@@ -31,5 +33,11 @@ class GameModel
     func getNameOfTeam(teamA:Bool) -> String
     {
         return teamA ? (game.accessToTeamA.accessToName) :(game.accessToTeamB.accessToName)
+    }
+    func inputAttack(teamA: Bool, numOfPlayer: String, result: Bool, time: Int, zone: Int)
+    {
+        let shot = Attack(time: time, player: numOfPlayer, zone: zone, status: result)
+        self.attacks.append(shot)
+        
     }
 }

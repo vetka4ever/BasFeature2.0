@@ -8,12 +8,12 @@
 import UIKit
 class Attack: Codable
 {
-    private var time: String
+    private var time: Int
     private var player: String
-    private var zone: String
+    private var zone: Int
     private var status: Bool
     
-    init(time: String, player: String, zone: String, status: Bool)
+    init(time: Int, player: String, zone: Int, status: Bool)
     {
         self.time = time
         self.player = player

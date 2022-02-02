@@ -218,13 +218,13 @@ class Field: UIView
     }
     
     // drawing by left and up to right
-    private func paintArcZone(context: CGContext, startAngle: CGFloat, endAngle: CGFloat, keyForRadius: CGFloat)
-    {
-        context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(endAngle).degreesToRadians, clockwise: true)
-        context.addArc(center: centerPoint, radius: (keyForRadius + 1) * radius, startAngle: CGFloat(endAngle).degreesToRadians, endAngle: CGFloat(endAngle).degreesToRadians, clockwise: false)
-        context.addArc(center: centerPoint, radius: (keyForRadius + 1) * radius, startAngle: CGFloat(endAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: false)
-        context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: true)
-    }
+//    private func paintArcZone(context: CGContext, startAngle: CGFloat, endAngle: CGFloat, keyForRadius: CGFloat)
+//    {
+//        context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(endAngle).degreesToRadians, clockwise: true)
+//        context.addArc(center: centerPoint, radius: (keyForRadius + 1) * radius, startAngle: CGFloat(endAngle).degreesToRadians, endAngle: CGFloat(endAngle).degreesToRadians, clockwise: false)
+//        context.addArc(center: centerPoint, radius: (keyForRadius + 1) * radius, startAngle: CGFloat(endAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: false)
+//        context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: true)
+//    }
     private func drawLabelFields()
     {
         let xInset: CGFloat = 25
