@@ -14,7 +14,7 @@ class GamePresenter
         case input = 0
         case all
         case scored
-        case will
+        case shot
         case end
     }
     private var view = UIViewController()
@@ -31,13 +31,79 @@ class GamePresenter
     
     func setPlayer(teamA: Bool, player: String)
     {
+        if self.teamA == teamA && self.currentPlayer == player
+        {
+            self.teamA = nil
+            self.currentPlayer = ""
+            if let newView = view as? GameView
+            {
+                newView.reloadTableView(teamA: teamA)
+            }
+        }
+        else
+        {
         self.teamA = teamA
         self.currentPlayer = player
+        }
+        doingByMode()
     }
+    
     
     func setMode(mode: Int)
     {
         self.currentMode = Mode.init(rawValue: mode)!
+        if mode != Mode.input.rawValue
+        {
+            self.currentZone = 0
+        }
+        if let newView = view as? GameView
+        {
+            newView.changeVisibleElementsOfField(turnOn: self.currentMode != .input)
+        }
+        doingByMode()
+    }
+    
+    private func doingByMode()
+    {
+        switch (currentMode)
+        {
+        case .input:
+            getInputScore()
+        case .all:
+            getAllScore()
+        case .scored:
+            getScoredScore()
+        case .shot:
+            getShotScore()
+        case .end:
+            endGame()
+        }
+    }
+    
+    private func getInputScore()
+    {
+        if currentZone != 0 && self.currentPlayer != ""
+        {print("Inputing...")}
+    }
+    
+    private func getAllScore()
+    {
+        
+    }
+    
+    private func getScoredScore()
+    {
+        
+    }
+    
+    private func getShotScore()
+    {
+        
+    }
+    
+    private func endGame()
+    {
+        
     }
     
     func setView(view: GameView)
@@ -48,7 +114,8 @@ class GamePresenter
     func setNumOfZone(zone: Int)
     {
         self.currentZone = zone
-        print(currentZone)
+        doingByMode()
+        
     }
     
     func getCountOfPlayers(teamA: Bool) -> Int

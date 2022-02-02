@@ -66,12 +66,24 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         setSegmentedControlls()
     }
     
+    func reloadTableView(teamA: Bool)
+    {
+        (teamA) ? (tableTeamA.reloadData()) : (tableTeamB.reloadData())
+    }
+    /// changeVisibleOfField - func for turn on/off labels of zones and repoint field in default colors
+    func changeVisibleElementsOfField(turnOn: Bool)
+    {
+        field.paintZoneByTap(point: CGPoint(x: -1, y: -1))
+        field.isUserInteractionEnabled = !turnOn
+        field.turnLabels(on: turnOn)
+    }
     
     @objc func paintZone(_ sender: UITapGestureRecognizer)
     {
-        var selectedZone = field.paintZoneByTap(point: sender.location(in: field))
-        //        var selectedZone = field.getNumOfPaintedZone()
-        presenter.setNumOfZone(zone: selectedZone)
+         field.paintZoneByTap(point: sender.location(in: field))
+        presenter.setNumOfZone(zone: field.getNumOfPaintedZone())
+        
+        
     }
     
     private func setTableViews()
@@ -119,6 +131,10 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
+    
+    
+    
+    
     private func setSegmentedControlls()
     {
         time.frame.size = CGSize(width: field.frame.width / 1.8, height: field.frame.minY)
@@ -145,6 +161,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         1
@@ -164,6 +181,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 10
         return cell
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {

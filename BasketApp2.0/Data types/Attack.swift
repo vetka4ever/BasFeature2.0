@@ -11,9 +11,9 @@ class Attack: Codable
     private var time: String
     private var player: String
     private var zone: String
-    private var status: String
+    private var status: Bool
     
-    init(time: String, player: String, zone: String, status: String)
+    init(time: String, player: String, zone: String, status: Bool)
     {
         self.time = time
         self.player = player

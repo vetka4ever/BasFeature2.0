@@ -26,6 +26,8 @@ class Field: UIView
     private var mode =  Doing.drawField
     private var numOfPaintedZone = 0
     private var pointOfTapped = CGPoint()
+    private var radius: CGFloat = 0
+    private var centerPoint = CGPoint(x: 0, y: 0)
     
     enum Doing
     {
@@ -52,47 +54,46 @@ class Field: UIView
         }
     }
     
-    func paintZoneByTap(point: CGPoint) -> Int
+    func paintZoneByTap(point: CGPoint)
     {
         self.pointOfTapped = point
         var numOfSelectedZone = 0
+        if numOfPaintedZone != 0
+        {zones[numOfPaintedZone - 1].tapped = false}
         for i in 0...zones.count-1
         {
             if zones[i].path.contains(point) && i+1 != numOfPaintedZone
             {
+                zones[i].tapped = true
                 numOfSelectedZone = i+1
             }
         }
+        
+        self.numOfPaintedZone = numOfSelectedZone
+        print("SELECTED \(numOfPaintedZone)-th ZONE")
         setNeedsDisplay()
-        return numOfSelectedZone
+        
+    }
+    
+    func turnLabels(on: Bool)
+    {
+        for item in textLabels
+        {
+            item.isHidden = !on
+        }
     }
     
     func getNumOfPaintedZone() -> Int
     {
         return self.numOfPaintedZone
     }
+    
     private func paintZone(context:  CGContext)
     {
         for i in 0...zones.count-1
         {
-            zones[i].tapped = false
+            
             context.addPath(zones[i].path)
-            if zones[i].path.contains(pointOfTapped)
-            {
-                
-                if numOfPaintedZone != i+1
-                {
-                    print("WAS SELECTED \(i+1)-TH ZONE")
-                    numOfPaintedZone = i+1
-                    zones[i].tapped = true
-                    
-                }
-                else
-                {
-                    print("WAS DESELECTED \(i+1)-TH ZONE")
-                    numOfPaintedZone = 0
-                }
-            }
             zones[i].tapped ? (context.setFillColor(UIColor.red.cgColor)) : (context.setFillColor(zones[i].color))
             context.fillPath()
             context.addPath(zones[i].path)
@@ -102,12 +103,10 @@ class Field: UIView
             
         }
         
-        
     }
     
-    private func paintCurrentPath(context: CGContext, color: UIColor)
+    private func fillCurrentPath(context: CGContext, color: UIColor)
     {
-        
         let path = context.path
         if zones.count < 14 {zones.append(Zone(path: path!, color: color.cgColor, tapped: false))}
         
@@ -123,17 +122,17 @@ class Field: UIView
     private func drawField(context: CGContext)
     {
         
-        let centerPoint = CGPoint(x: bounds.width / 2, y: 0)
+        centerPoint = CGPoint(x: bounds.width / 2, y: 0)
         let colors = [UIColor(red: 255/255, green: 168/255, blue: 89/255, alpha: 1), UIColor(red: 255/255, green: 217/255, blue: 179/255, alpha: 1), UIColor(red: 253/255, green: 197/255, blue: 146/255, alpha: 1)]
         
-        let radius = bounds.width / 8
+        radius = bounds.width / 8
         
         // 1 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(150).degreesToRadians, clockwise: true)
         context.addLine(to: CGPoint(x: 0, y: context.currentPointOfPath.y))
         context.addLine(to: CGPoint(x: 0, y: 0))
         context.addLine(to: CGPoint(x: radius, y: 0))
-        paintCurrentPath(context: context, color: colors[0])
+        fillCurrentPath(context: context, color: colors[0])
         
         //2 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(150).degreesToRadians, endAngle: CGFloat(150).degreesToRadians, clockwise: true)
@@ -141,57 +140,58 @@ class Field: UIView
         context.addLine(to: CGPoint(x: 0, y: bounds.height ))
         context.addArc(center: centerPoint, radius: 5 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(150).degreesToRadians, clockwise: false)
-        paintCurrentPath(context: context, color: colors[2])
+        fillCurrentPath(context: context, color: colors[2])
         // 3 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 5 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 5 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: false)
-        paintCurrentPath(context: context, color: colors[0])
+        fillCurrentPath(context: context, color: colors[0])
         // 4 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(30).degreesToRadians, clockwise: true)
         context.addLine(to: CGPoint(x: bounds.width, y: context.currentPointOfPath.y))
         context.addLine(to: CGPoint(x: bounds.width ,y: bounds.height))
         context.addArc(center: centerPoint, radius: 5 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[2])
+        fillCurrentPath(context: context, color: colors[2])
         // 5 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(30).degreesToRadians, endAngle: CGFloat(30).degreesToRadians, clockwise: true)
         context.addLine(to: CGPoint(x: bounds.width, y: context.currentPointOfPath.y))
         context.addLine(to: CGPoint(x: bounds.width, y: 0))
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(30).degreesToRadians, clockwise: false)
-        paintCurrentPath(context: context, color: colors[0])
+        fillCurrentPath(context: context, color: colors[0])
         // 6 zone
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(45).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(45).degreesToRadians, endAngle: CGFloat(45).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(45).degreesToRadians, endAngle: CGFloat(0).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(0).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[1])
+//        paintArcZone(context: context, startAngle: 45, endAngle: 0, keyForRadius: 2)
+        fillCurrentPath(context: context, color: colors[1])
         // 7 zone
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(45).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(45).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(45).degreesToRadians, endAngle: CGFloat(45).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[0])
+        fillCurrentPath(context: context, color: colors[0])
         // 8 zone
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[2])
+        fillCurrentPath(context: context, color: colors[2])
         // 9 zone
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(135).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(135).degreesToRadians, endAngle: CGFloat(135).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(135).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[0])
+        fillCurrentPath(context: context, color: colors[0])
         // 10 zone
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(135).degreesToRadians, endAngle: CGFloat(180).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(180).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(135).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(135).degreesToRadians, endAngle: CGFloat(135).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[1])
+        fillCurrentPath(context: context, color: colors[1])
         
         
         // 11 zone
@@ -199,25 +199,33 @@ class Field: UIView
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(120).degreesToRadians, endAngle: CGFloat(120).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(120).degreesToRadians, endAngle: CGFloat(180).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 1 * radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(180).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[2])
+        fillCurrentPath(context: context, color: colors[2])
         // 12 zone
         context.addArc(center: centerPoint, radius: 1 * radius, startAngle: CGFloat(120).degreesToRadians, endAngle: CGFloat(60).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(60).degreesToRadians, endAngle: CGFloat(60).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(60).degreesToRadians, endAngle: CGFloat(120).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 1 * radius, startAngle: CGFloat(120).degreesToRadians, endAngle: CGFloat(120).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[1])
+        fillCurrentPath(context: context, color: colors[1])
         // 13 zone
         context.addArc(center: centerPoint, radius: 1 * radius, startAngle: CGFloat(60).degreesToRadians, endAngle: CGFloat(0).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(0).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 2 * radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(60).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: 1 * radius, startAngle: CGFloat(60).degreesToRadians, endAngle: CGFloat(60).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[2])
+        fillCurrentPath(context: context, color: colors[2])
         // 14 zone
         context.addArc(center: centerPoint, radius: radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(0).degreesToRadians, clockwise: true)
-        paintCurrentPath(context: context, color: colors[0])
+        fillCurrentPath(context: context, color: colors[0])
     }
     
-   private func drawLabelFields()
+    // drawing by left and up to right
+    private func paintArcZone(context: CGContext, startAngle: CGFloat, endAngle: CGFloat, keyForRadius: CGFloat)
+    {
+        context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(endAngle).degreesToRadians, clockwise: true)
+        context.addArc(center: centerPoint, radius: (keyForRadius + 1) * radius, startAngle: CGFloat(endAngle).degreesToRadians, endAngle: CGFloat(endAngle).degreesToRadians, clockwise: false)
+        context.addArc(center: centerPoint, radius: (keyForRadius + 1) * radius, startAngle: CGFloat(endAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: false)
+        context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: true)
+    }
+    private func drawLabelFields()
     {
         let xInset: CGFloat = 25
         let yInset: CGFloat = 10
