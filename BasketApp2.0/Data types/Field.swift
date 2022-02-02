@@ -123,17 +123,12 @@ class Field: UIView
     {
         
         centerPoint = CGPoint(x: bounds.width / 2, y: 0)
-        let colors = [UIColor(red: 255/255, green: 168/255, blue: 89/255, alpha: 1), UIColor(red: 255/255, green: 217/255, blue: 179/255, alpha: 1), UIColor(red: 253/255, green: 197/255, blue: 146/255, alpha: 1)]
+        let colors = [UIColor(red: 255/255, green: 168/255, blue: 89/255, alpha: 1),
+                      UIColor(red: 255/255, green: 217/255, blue: 179/255, alpha: 1),
+                      UIColor(red: 253/255, green: 197/255, blue: 146/255, alpha: 1)]
         radius = bounds.width / 8
         
         let corners: [[CGFloat]] = [[180, 120, 60, 0], [180, 135, 105, 75, 45, 0], [105, 75]]
-//        for i in 0...corners.count-1
-//        {
-//            for j in 1...corners[i].count-1
-//            {
-//
-//            }
-//        }
         // 1 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(150).degreesToRadians, clockwise: true)
         context.addLine(to: CGPoint(x: 0, y: context.currentPointOfPath.y))
@@ -154,7 +149,7 @@ class Field: UIView
         context.addArc(center: centerPoint, radius: 5 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: false)
-//        paintArcZone(context: context, startAngle: 105, endAngle: 75, keyForRadius: 3)
+
         fillCurrentPath(context: context, color: colors[0])
         // 4 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(30).degreesToRadians, clockwise: true)
@@ -169,40 +164,19 @@ class Field: UIView
         context.addLine(to: CGPoint(x: bounds.width, y: 0))
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(30).degreesToRadians, clockwise: false)
         fillCurrentPath(context: context, color: colors[0])
-        // 6 zone
-//        
-        paintArcZone(context: context, startAngle: 45, endAngle: 0, keyForRadius: 2)
-        fillCurrentPath(context: context, color: colors[1])
-        // 7 zone
-//
-        paintArcZone(context: context, startAngle: 75, endAngle: 45, keyForRadius: 2)
-        fillCurrentPath(context: context, color: colors[0])
-        // 8 zone
-//
-        paintArcZone(context: context, startAngle: 105, endAngle: 75, keyForRadius: 2)
-        fillCurrentPath(context: context, color: colors[2])
-        // 9 zone
-//
-        paintArcZone(context: context, startAngle: 135, endAngle: 105, keyForRadius: 2)
-        fillCurrentPath(context: context, color: colors[0])
-        // 10 zone
-//
-        paintArcZone(context: context, startAngle: 180, endAngle: 135, keyForRadius: 2)
-        fillCurrentPath(context: context, color: colors[1])
         
-        
-        // 11 zone
-//
-        paintArcZone(context: context, startAngle: 180, endAngle: 120, keyForRadius: 1)
-        fillCurrentPath(context: context, color: colors[2])
-        // 12 zone
-//
-        paintArcZone(context: context, startAngle: 120, endAngle: 60, keyForRadius: 1)
-        fillCurrentPath(context: context, color: colors[1])
-        // 13 zone
-//
-        paintArcZone(context: context, startAngle: 60, endAngle: 0, keyForRadius: 1)
-        fillCurrentPath(context: context, color: colors[2])
+
+        // 6-13 zones
+        // [([CGFloat], CGFloat, [Int])] - ([corners for every group of zones], keyForRadius, [numbers of colors of zones in array])
+        let data3: [([CGFloat], CGFloat, [Int])] = [([180, 135, 105, 75, 45, 0], 2, [1,0,2,0,1]), ([180, 120, 60, 0], 1, [2,1,2])]
+        for item in data3
+        {
+            for i in 1...item.0.count-1
+            {
+                paintArcZone(context: context, startAngle: item.0[i-1], endAngle: item.0[i], keyForRadius: item.1)
+                fillCurrentPath(context: context, color: colors[item.2[i-1]])
+            }
+        }
         // 14 zone
         context.addArc(center: centerPoint, radius: radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(0).degreesToRadians, clockwise: true)
         fillCurrentPath(context: context, color: colors[0])
