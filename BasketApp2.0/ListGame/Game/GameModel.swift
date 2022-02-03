@@ -34,10 +34,35 @@ class GameModel
     {
         return teamA ? (game.accessToTeamA.accessToName) :(game.accessToTeamB.accessToName)
     }
+    
     func inputAttack(teamA: Bool, numOfPlayer: String, result: Bool, time: Int, zone: Int)
     {
-        let shot = Attack(time: time, player: numOfPlayer, zone: zone, status: result)
+        let shot = Attack(time: time, player: numOfPlayer, zone: zone, result: result, teamA: teamA)
         self.attacks.append(shot)
+    }
+    
+    func getAllScore(teamA: Bool, player: String) -> [String]
+    {
+        var score: [String] = Array.init(repeating: "", count: 14)
+        //(win,all)
+        var scoreDecimal: [(Decimal,Decimal)] = Array.init(repeating: (0,0), count: 14)
+        for item in attacks where item.accessToTeamA == teamA && item.accessToPlayer == player
+        {
+            scoreDecimal[item.accessToZone - 1].1 += 1
+            if item.accessToResult {scoreDecimal[item.accessToZone - 1].0 += 1}
+        }
         
+        var win: Decimal = 0
+        var all: Decimal = 0
+        var percent: Decimal = 0
+        for i in 0...score.count-1
+        {
+            win = scoreDecimal[i].0
+            all = scoreDecimal[i].1
+            percent = win/all * 100
+            score[i] = "\(win)/\(all)\n\(percent)% "
+        }
+        
+        return score
     }
 }

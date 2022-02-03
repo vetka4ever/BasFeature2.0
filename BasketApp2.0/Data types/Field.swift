@@ -6,14 +6,6 @@
 //
 
 import UIKit
-
-struct Zone
-{
-    var path: CGPath
-    var color: CGColor
-    var tapped: Bool
-}
-
 extension CGFloat
 {
     var degreesToRadians: Self { return self * .pi / 180}
@@ -22,13 +14,15 @@ extension CGFloat
 class Field: UIView
 {
     private var zones: [Zone] = [Zone]()
-    private var textLabels = [UILabel]()
+    private var scoreLabels = [UILabel]()
     private var mode =  Doing.drawField
     private var numOfPaintedZone = 0
     private var pointOfTapped = CGPoint()
     private var radius: CGFloat = 0
     private var centerPoint = CGPoint(x: 0, y: 0)
-    
+    private let colors = [UIColor(red: 255/255, green: 168/255, blue: 89/255, alpha: 1),
+                          UIColor(red: 255/255, green: 217/255, blue: 179/255, alpha: 1),
+                          UIColor(red: 253/255, green: 197/255, blue: 146/255, alpha: 1)]
     enum Doing
     {
         case drawField
@@ -49,11 +43,11 @@ class Field: UIView
             drawLabelFields()
             break
         case .paintZone:
-            paintZone(context: context)
+            paintZones(context: context)
             break
         }
     }
-    
+    // MARK: AVAILABLE METHODS
     func paintZoneByTap(point: CGPoint)
     {
         self.pointOfTapped = point
@@ -77,7 +71,7 @@ class Field: UIView
     
     func turnLabels(on: Bool)
     {
-        for item in textLabels
+        for item in scoreLabels
         {
             item.isHidden = !on
         }
@@ -88,47 +82,21 @@ class Field: UIView
         return self.numOfPaintedZone
     }
     
-    private func paintZone(context:  CGContext)
+    func changeTitleOfLabels(score: [String])
     {
-        for i in 0...zones.count-1
+        for i in 0...scoreLabels.count-1
         {
-            
-            context.addPath(zones[i].path)
-            zones[i].tapped ? (context.setFillColor(UIColor.red.cgColor)) : (context.setFillColor(zones[i].color))
-            context.fillPath()
-            context.addPath(zones[i].path)
-            context.setStrokeColor(UIColor.black.cgColor)
-            context.setLineWidth(5)
-            context.strokePath()
-            
+            scoreLabels[i].text = score[i]
         }
-        
     }
     
-    private func fillCurrentPath(context: CGContext, color: UIColor)
-    {
-        let path = context.path
-        if zones.count < 14 {zones.append(Zone(path: path!, color: color.cgColor, tapped: false))}
-        
-        context.setFillColor(color.cgColor)
-        context.fillPath()
-        
-        context.addPath(path!)
-        context.setStrokeColor(UIColor.black.cgColor)
-        context.setLineWidth(5)
-        context.strokePath()
-        
-    }
+    // MARK: PRIVATE METHODS
+    
     private func drawField(context: CGContext)
     {
-        
         centerPoint = CGPoint(x: bounds.width / 2, y: 0)
-        let colors = [UIColor(red: 255/255, green: 168/255, blue: 89/255, alpha: 1),
-                      UIColor(red: 255/255, green: 217/255, blue: 179/255, alpha: 1),
-                      UIColor(red: 253/255, green: 197/255, blue: 146/255, alpha: 1)]
         radius = bounds.width / 8
         
-        let corners: [[CGFloat]] = [[180, 120, 60, 0], [180, 135, 105, 75, 45, 0], [105, 75]]
         // 1 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(150).degreesToRadians, clockwise: true)
         context.addLine(to: CGPoint(x: 0, y: context.currentPointOfPath.y))
@@ -149,7 +117,7 @@ class Field: UIView
         context.addArc(center: centerPoint, radius: 5 * radius, startAngle: CGFloat(105).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(75).degreesToRadians, clockwise: true)
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(105).degreesToRadians, clockwise: false)
-
+        
         fillCurrentPath(context: context, color: colors[0])
         // 4 zone
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(75).degreesToRadians, endAngle: CGFloat(30).degreesToRadians, clockwise: true)
@@ -165,7 +133,7 @@ class Field: UIView
         context.addArc(center: centerPoint, radius: 3 * radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(30).degreesToRadians, clockwise: false)
         fillCurrentPath(context: context, color: colors[0])
         
-
+        
         // 6-13 zones
         // [([CGFloat], CGFloat, [Int])] - ([corners for every group of zones], keyForRadius, [numbers of colors of zones in array])
         let data3: [([CGFloat], CGFloat, [Int])] = [([180, 135, 105, 75, 45, 0], 2, [1,0,2,0,1]), ([180, 120, 60, 0], 1, [2,1,2])]
@@ -182,7 +150,7 @@ class Field: UIView
         fillCurrentPath(context: context, color: colors[0])
     }
     
-//     drawing by left and up to right
+    //     drawing by left and up to right
     private func paintArcZone(context: CGContext, startAngle: CGFloat, endAngle: CGFloat, keyForRadius: CGFloat)
     {
         context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(endAngle).degreesToRadians, clockwise: true)
@@ -190,6 +158,37 @@ class Field: UIView
         context.addArc(center: centerPoint, radius: (keyForRadius + 1) * radius, startAngle: CGFloat(endAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: false)
         context.addArc(center: centerPoint, radius: keyForRadius * radius, startAngle: CGFloat(startAngle).degreesToRadians, endAngle: CGFloat(startAngle).degreesToRadians, clockwise: true)
     }
+    
+    private func paintZones(context:  CGContext)
+    {
+        for i in 0...zones.count-1
+        {
+            context.addPath(zones[i].path)
+            zones[i].tapped ? (context.setFillColor(UIColor.red.cgColor)) : (context.setFillColor(zones[i].color))
+            context.fillPath()
+            context.addPath(zones[i].path)
+            context.setStrokeColor(UIColor.black.cgColor)
+            context.setLineWidth(5)
+            context.strokePath()
+        }
+        
+    }
+    
+    private func fillCurrentPath(context: CGContext, color: UIColor)
+    {
+        let path = context.path
+        if zones.count < 14 {zones.append(Zone(path: path!, color: color.cgColor, tapped: false))}
+        
+        context.setFillColor(color.cgColor)
+        context.fillPath()
+        
+        context.addPath(path!)
+        context.setStrokeColor(UIColor.black.cgColor)
+        context.setLineWidth(5)
+        context.strokePath()
+        
+    }
+    
     private func drawLabelFields()
     {
         let xInset: CGFloat = 25
@@ -200,13 +199,13 @@ class Field: UIView
             point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: zones[i].path.boundingBoxOfPath.midY)
             let labelView = UILabel()
             labelView.center = point
-            labelView.frame.size = CGSize(width: self.frame.width / 10, height: self.frame.height / 10)
+            labelView.frame.size = CGSize(width: self.frame.width / 10, height: self.frame.height / 1)
             
-            labelView.text = "10/45\n100%"
-            labelView.textAlignment = .center
-            textLabels.append(labelView)
+            labelView.textAlignment = .left
+            scoreLabels.append(labelView)
             labelView.isHidden = true
-            self.addSubview(labelView)
+//        
+            
         }
     }
 }

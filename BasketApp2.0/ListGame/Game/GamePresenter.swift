@@ -19,11 +19,24 @@ class GamePresenter
     }
     private var view = UIViewController()
     private var model = GameModel()
-    private var teamA: Bool? = nil
+    private var currentTeamA: Bool? = nil
     private var currentPlayer: String = ""
     private var currentMode: Mode = .input
     private var currentTime: Int = 1
     private var currentZone: Int = 0
+    
+    //MARK: FUNCS SETTING VALUES
+    func setView(view: GameView)
+    {
+        self.view = view
+    }
+    
+    func setNumOfZone(zone: Int)
+    {
+        self.currentZone = zone
+        doingByMode()
+    }
+    
     func setTime(time: Int)
     {
         self.currentTime = time
@@ -31,9 +44,9 @@ class GamePresenter
     
     func setPlayer(teamA: Bool, player: String)
     {
-        if self.teamA == teamA && self.currentPlayer == player
+        if self.currentTeamA == teamA && self.currentPlayer == player
         {
-            self.teamA = nil
+            self.currentTeamA = nil
             self.currentPlayer = ""
             if let newView = view as? GameView
             {
@@ -42,7 +55,7 @@ class GamePresenter
         }
         else
         {
-            self.teamA = teamA
+            self.currentTeamA = teamA
             self.currentPlayer = player
         }
         doingByMode()
@@ -79,22 +92,8 @@ class GamePresenter
             endGame()
         }
     }
-    private func getAlert() -> UIAlertController
-    {
-        
-        let alert = UIAlertController(title: "Input", message: "Enter result of shot", preferredStyle: .alert)
-        let win = UIAlertAction(title: "Win", style: .default) {  [self] UIAlertAction in
-            model.inputAttack(teamA: teamA!, numOfPlayer: currentPlayer, result: true, time: currentTime, zone: currentZone)
-        }
-        
-        let no = UIAlertAction(title: "Lose", style: .destructive) {  [self] UIAlertAction in
-            model.inputAttack(teamA: teamA!, numOfPlayer: currentPlayer, result: false, time: currentTime, zone: currentZone)
-        }
-        alert.addAction(win)
-        alert.addAction(no)
-        
-        return alert
-    }
+    
+    // MARK: DOING BY MODE
     private func inputScore()
     {
         if currentZone != 0 && self.currentPlayer != ""
@@ -104,9 +103,34 @@ class GamePresenter
         
     }
     
+    private func getAlert() -> UIAlertController
+    {
+        let alert = UIAlertController(title: "Input", message: "Enter result of shot", preferredStyle: .alert)
+        let win = UIAlertAction(title: "Win", style: .default) {  [self] UIAlertAction in
+            model.inputAttack(teamA: currentTeamA!, numOfPlayer: currentPlayer, result: true, time: currentTime, zone: currentZone)
+        }
+        
+        let no = UIAlertAction(title: "Lose", style: .default) {  [self] UIAlertAction in
+            model.inputAttack(teamA: currentTeamA!, numOfPlayer: currentPlayer, result: false, time: currentTime, zone: currentZone)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        alert.addAction(win)
+        alert.addAction(no)
+        alert.addAction(cancel)
+        
+        return alert
+    }
+    
     private func getAllScore()
     {
-        
+        if currentPlayer != ""
+        {
+            if let newView = view as? GameView
+            {
+                var titles = model.getAllScore(teamA: self.currentTeamA!, player: self.currentPlayer)
+                newView.changeTitleOfLabelOfField(titles: titles)
+            }
+        }
     }
     
     private func getScoredScore()
@@ -124,18 +148,7 @@ class GamePresenter
         
     }
     
-    func setView(view: GameView)
-    {
-        self.view = view
-    }
-    
-    func setNumOfZone(zone: Int)
-    {
-        self.currentZone = zone
-        doingByMode()
-        
-    }
-    
+    // MARK: FUNCS RETURNING SOME VALUES FOR VIEW
     func getCountOfPlayers(teamA: Bool) -> Int
     {
         return model.getCountOfPlayers(teamA: teamA)

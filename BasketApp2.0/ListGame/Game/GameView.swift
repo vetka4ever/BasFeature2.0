@@ -15,9 +15,8 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     private var height: CGFloat = 0
     private var width: CGFloat = 0
     
-    //    private let valuesForTime = ["1", "2", "3", "4", "+"]
-    //    private let valuesForModeOfPresenting = ["all", "scored", "will", "end"]
-    
+    private var field = Field()
+    private var idCell = "idForCellInGame"
     private var time = UISegmentedControl.init(items: ["1", "2", "3", "4", "+"])
     private let controlOfModeOfPresenting = UISegmentedControl.init(items: ["input", "all", "scored", "shot", "end"])
     private var labelTeamA = UILabel()
@@ -26,11 +25,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     private var tableTeamB = UITableView(frame: CGRect(), style: .insetGrouped)
     
     
-    
-    private var field = Field()
-    
-    private var idCell = "idForCellInGame"
-    
+    //MARK: SET ORIENTATION
     override var shouldAutorotate: Bool
     {
         return true
@@ -66,11 +61,18 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         setSegmentedControlls()
     }
     
+    //MARK: FUNCS FOR PRESENTER
+    
+    /// reloadTableView - func for changing color of cell to default
+    /// Using when user tap on selected player
+    /// - Parameter teamA: Which team has this player
     func reloadTableView(teamA: Bool)
     {
         (teamA) ? (tableTeamA.reloadData()) : (tableTeamB.reloadData())
     }
+    
     /// changeVisibleOfField - func for turn on/off labels of zones and repoint field in default colors
+    /// - Parameter turnOn: turn on/or visible of field and its labels
     func changeVisibleElementsOfField(turnOn: Bool)
     {
         field.paintZoneByTap(point: CGPoint(x: -1, y: -1))
@@ -78,14 +80,11 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         field.turnLabels(on: turnOn)
     }
     
-    @objc func paintZone(_ sender: UITapGestureRecognizer)
+    func changeTitleOfLabelOfField(titles: [String])
     {
-         field.paintZoneByTap(point: sender.location(in: field))
-        presenter.setNumOfZone(zone: field.getNumOfPaintedZone())
-        
-        
+        field.changeTitleOfLabels(score: titles)
     }
-    
+    //MARK: SETTING VIEWS FUNCS
     private func setTableViews()
     {
         
@@ -131,10 +130,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-    
-    
-    
-    
     private func setSegmentedControlls()
     {
         time.frame.size = CGSize(width: field.frame.width / 1.8, height: field.frame.minY)
@@ -147,7 +142,13 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         controlOfModeOfPresenting.selectedSegmentIndex = 0
         controlOfModeOfPresenting.addTarget(self, action: #selector(changeMode(_:)), for: .valueChanged)
-        
+    }
+    
+    //MARK: OBJC FUNCS
+    @objc func paintZone(_ sender: UITapGestureRecognizer)
+    {
+        field.paintZoneByTap(point: sender.location(in: field))
+        presenter.setNumOfZone(zone: field.getNumOfPaintedZone())
     }
     
     @objc func changeTime(_ sender: UISegmentedControl)
@@ -160,23 +161,8 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         presenter.setMode(mode: sender.selectedSegmentIndex)
     }
     
-//    func askResultOfThrow(result: @escaping (Bool) -> ())
-//    {
-//        var status = false
-//        let alert = UIAlertController(title: "Input", message: "Enter result of shot", preferredStyle: .alert)
-//        let win = UIAlertAction(title: "Win", style: .default) { UIAlertAction in
-//            status = true
-//        }
-//        
-//        let no = UIAlertAction(title: "Lose", style: .cancel, handler: nil)
-//        alert.addAction(win)
-//        alert.addAction(no)
-//        present(alert, animated: true, completion: nil)
-//        
-//        result(status)
-//    }
-    
-    
+
+    //MARK: SETTING TABLE VIEWS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         1
@@ -184,7 +170,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        //        return (tableView == tableTeamA ? (presenter.getCountOfPlayers(teamA: true)) : (presenter.getCountOfPlayers(teamA: false)) )
+        
         return presenter.getCountOfPlayers(teamA: tableView == tableTeamA )
     }
     
@@ -209,8 +195,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         {
             tableTeamA.reloadData()
         }
-//        tableView.cellForRow(at: indexPath)!.selectedBackgroundView?.backgroundColor = .red
-//        tableView.cellForRow(at: indexPath)!.backgroundColor = .red
         tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = .red
         presenter.setPlayer(teamA: (tableView == tableTeamA), player: tableView.cellForRow(at: indexPath)!.textLabel!.text!)
     }
@@ -220,7 +204,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
     }
-    
 }
 
 
