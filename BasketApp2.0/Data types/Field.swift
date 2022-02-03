@@ -87,6 +87,7 @@ class Field: UIView
         for i in 0...scoreLabels.count-1
         {
             scoreLabels[i].text = score[i]
+//            scoreLabels[i].text = "a"
         }
     }
     
@@ -196,15 +197,18 @@ class Field: UIView
         var point = CGPoint()
         for i in 0...zones.count-1
         {
-            point = CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: zones[i].path.boundingBoxOfPath.midY)
             let labelView = UILabel()
+            labelView.frame.size = CGSize(width: self.frame.width / 5, height: self.frame.height / 2)
+            point = ((i == 2) ? (CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: CGFloat(3.5 * radius))) : (CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: zones[i].path.boundingBoxOfPath.midY)))
             labelView.center = point
-            labelView.frame.size = CGSize(width: self.frame.width / 10, height: self.frame.height / 1)
             
-            labelView.textAlignment = .left
+            
+            labelView.textAlignment = .center
+            labelView.numberOfLines = 2
             scoreLabels.append(labelView)
             labelView.isHidden = true
-//        
+            self.addSubview(labelView)
+
             
         }
     }

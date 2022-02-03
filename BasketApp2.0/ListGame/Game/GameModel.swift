@@ -44,25 +44,58 @@ class GameModel
     func getAllScore(teamA: Bool, player: String) -> [String]
     {
         var score: [String] = Array.init(repeating: "", count: 14)
-        //(win,all)
-        var scoreDecimal: [(Decimal,Decimal)] = Array.init(repeating: (0,0), count: 14)
+        //(win,all in current zone)
+        var scoreDecimal: [(Int,Int)] = Array.init(repeating: (0,0), count: 14)
         for item in attacks where item.accessToTeamA == teamA && item.accessToPlayer == player
         {
             scoreDecimal[item.accessToZone - 1].1 += 1
             if item.accessToResult {scoreDecimal[item.accessToZone - 1].0 += 1}
         }
+        var win: Int = 0
+        var all: Int = 0
+        var percent: Double = 0
         
-        var win: Decimal = 0
-        var all: Decimal = 0
-        var percent: Decimal = 0
         for i in 0...score.count-1
         {
             win = scoreDecimal[i].0
             all = scoreDecimal[i].1
-            percent = win/all * 100
-            score[i] = "\(win)/\(all)\n\(percent)% "
+            percent = (all == 0) ? (0) : (Double(win)/Double(all) * 100)
+            score[i] = "\(win)/\(all)\n\(String(format: "%.2f", percent))%"
+        }
+        return score
+    }
+    
+    func getScoredScore(teamA: Bool, player: String) -> [String]
+    {
+        var score: [String] = Array.init(repeating: "", count: 14)
+        //(win,all in all game)
+        var scoreDecimal: [(Int)] = Array.init(repeating: 0, count: 14)
+        
+        var all: Int = 0
+        var percent: Double = 0
+        
+        for item in attacks
+        {
+            if item.accessToResult && item.accessToTeamA == teamA { all += 1 }
+            if item.accessToTeamA == teamA && item.accessToPlayer == player && item.accessToResult { scoreDecimal[item.accessToZone-1] += 1 }
+        }
+        
+        for i in 0...score.count-1
+        {
+            percent = (scoreDecimal[i] == 0) ? (0) : (Double(scoreDecimal[i]) / Double(all) * 100)
+            score[i] = "\(scoreDecimal[i])/\(all)\n\(String(format: "%.2f", percent))%"
         }
         
         return score
+    }
+
+    func getShotScore(teamA: Bool, player: String) -> [String]
+    {
+        return [String]()
+    }
+    
+    func saveGame()
+    {
+        
     }
 }

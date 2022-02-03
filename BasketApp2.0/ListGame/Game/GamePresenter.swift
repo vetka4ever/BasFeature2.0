@@ -123,29 +123,75 @@ class GamePresenter
     
     private func getAllScore()
     {
-        if currentPlayer != ""
+        if let newView = view as? GameView
         {
-            if let newView = view as? GameView
+            if currentPlayer != ""
             {
-                var titles = model.getAllScore(teamA: self.currentTeamA!, player: self.currentPlayer)
+                let titles = model.getAllScore(teamA: self.currentTeamA!, player: self.currentPlayer)
+                newView.changeVisibleElementsOfField(turnOn: true)
                 newView.changeTitleOfLabelOfField(titles: titles)
+                
+            }
+            else
+            {
+                newView.changeVisibleElementsOfField(turnOn: false)
             }
         }
+        
     }
     
     private func getScoredScore()
     {
-        
+        if let newView = view as? GameView
+        {
+            if currentPlayer != ""
+            {
+                let titles = model.getScoredScore(teamA: self.currentTeamA!, player: self.currentPlayer)
+                newView.changeVisibleElementsOfField(turnOn: true)
+                newView.changeTitleOfLabelOfField(titles: titles)
+                
+            }
+            else
+            {
+                newView.changeVisibleElementsOfField(turnOn: false)
+            }
+        }
     }
     
     private func getShotScore()
     {
-        
+//        if let newView = view as? GameView
+//        {
+//            if currentPlayer != ""
+//            {
+//                let titles = model.getShotScore(teamA: self.currentTeamA!, player: self.currentPlayer)
+//                newView.changeVisibleElementsOfField(turnOn: true)
+//                newView.changeTitleOfLabelOfField(titles: titles)
+//
+//            }
+//            else
+//            {
+//                newView.changeVisibleElementsOfField(turnOn: false)
+//            }
+//        }
     }
     
     private func endGame()
     {
-        
+        view.present(exitAlert(), animated: true, completion: nil)
+    }
+    
+    private func exitAlert() -> UIAlertController
+    {
+        let alert = UIAlertController(title: "Warning", message: "Are you sure you wanna leave game?", preferredStyle: .alert)
+        let yes = UIAlertAction(title: "Yes", style: .destructive) { UIAlertAction in
+            self.model.saveGame()
+            self.view.navigationController?.popViewController(animated: true)
+        }
+        let no = UIAlertAction(title: "No", style: .default, handler: nil)
+        alert.addAction(yes)
+        alert.addAction(no)
+        return alert
     }
     
     // MARK: FUNCS RETURNING SOME VALUES FOR VIEW
