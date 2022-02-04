@@ -176,6 +176,7 @@ class GamePresenter
         let yes = UIAlertAction(title: "Yes", style: .destructive) { UIAlertAction in
             self.model.saveGame()
             
+            self.view.navigationController?.viewControllers = [ListGameView()]
             self.view.navigationController?.popToRootViewController(animated: true)
         }
         let no = UIAlertAction(title: "No", style: .default, handler: nil)
