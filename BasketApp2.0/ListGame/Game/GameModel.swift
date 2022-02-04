@@ -9,7 +9,6 @@ import RealmSwift
 class GameModel
 {
     
-    
     private let realm: Realm
     private var game: CurrentGame
     private var attacks = [Attack]()
@@ -41,15 +40,27 @@ class GameModel
         self.attacks.append(shot)
     }
     
-    func getAllScore(teamA: Bool, player: String) -> [String]
+    func getAllScore(teamA: Bool, player: String, time: Int) -> [String]
     {
         var score: [String] = Array.init(repeating: "", count: 14)
-        //(win,all in current zone)
-        var scoreDecimal: [(Int,Int)] = Array.init(repeating: (0,0), count: 14)
-        for item in attacks where item.accessToTeamA == teamA && item.accessToPlayer == player
+        //(win shots,all shots in current zone)
+        var scoreByZones: [(Int,Int)] = Array.init(repeating: (0,0), count: 14)
+        
+        if player != ""
         {
-            scoreDecimal[item.accessToZone - 1].1 += 1
-            if item.accessToResult {scoreDecimal[item.accessToZone - 1].0 += 1}
+            for item in attacks where item.accessToTeamA == teamA && item.accessToTime == time && item.accessToPlayer == player
+            {
+                scoreByZones[item.accessToZone - 1].1 += 1
+                if item.accessToResult {scoreByZones[item.accessToZone - 1].0 += 1}
+            }
+        }
+        else
+        {
+            for item in attacks where item.accessToTeamA == teamA && item.accessToTime == time
+            {
+                scoreByZones[item.accessToZone - 1].1 += 1
+                if item.accessToResult {scoreByZones[item.accessToZone - 1].0 += 1}
+            }
         }
         var win: Int = 0
         var all: Int = 0
@@ -57,45 +68,94 @@ class GameModel
         
         for i in 0...score.count-1
         {
-            win = scoreDecimal[i].0
-            all = scoreDecimal[i].1
+            win = scoreByZones[i].0
+            all = scoreByZones[i].1
             percent = (all == 0) ? (0) : (Double(win)/Double(all) * 100)
             score[i] = "\(win)/\(all)\n\(String(format: "%.2f", percent))%"
         }
         return score
     }
     
-    func getScoredScore(teamA: Bool, player: String) -> [String]
+    func getScoredScore(teamA: Bool, player: String, time: Int) -> [String]
     {
         var score: [String] = Array.init(repeating: "", count: 14)
-        //(win,all in all game)
-        var scoreDecimal: [(Int)] = Array.init(repeating: 0, count: 14)
+        var points = 0
+        // (points in this zones/ points by all time)
+        var scoreByZones: [(Int)] = Array.init(repeating: 0, count: 14)
         
         var all: Int = 0
         var percent: Double = 0
         
-        for item in attacks
+        if player != ""
         {
-            if item.accessToResult && item.accessToTeamA == teamA { all += 1 }
-            if item.accessToTeamA == teamA && item.accessToPlayer == player && item.accessToResult { scoreDecimal[item.accessToZone-1] += 1 }
+            for item in attacks where item.accessToTeamA == teamA && item.accessToTime == time && item.accessToPlayer == player && item.accessToResult
+            {
+                
+                points = (item.accessToZone >= 1 && item.accessToZone <= 5) ? (3) : (2)
+                all += points
+                scoreByZones[item.accessToZone - 1] += points
+            }
         }
-        
+        else
+        {
+            for item in attacks where item.accessToTeamA == teamA && item.accessToTime == time && item.accessToResult
+            {
+                points = (item.accessToZone >= 1 && item.accessToZone <= 5) ? (3) : (2)
+                all += points
+                scoreByZones[item.accessToZone - 1] += points
+            }
+        }
         for i in 0...score.count-1
         {
-            percent = (scoreDecimal[i] == 0) ? (0) : (Double(scoreDecimal[i]) / Double(all) * 100)
-            score[i] = "\(scoreDecimal[i])/\(all)\n\(String(format: "%.2f", percent))%"
+            percent = (scoreByZones[i] == 0) ? (0) : (Double(scoreByZones[i]) / Double(all) * 100)
+            score[i] = "\(scoreByZones[i])/\(all)\n\(String(format: "%.2f", percent))%"
         }
         
         return score
     }
-
-    func getShotScore(teamA: Bool, player: String) -> [String]
+    
+    func getShotScore(teamA: Bool, player: String, time: Int) -> [String]
     {
-        return [String]()
+        var score: [String] = Array.init(repeating: "", count: 14)
+        //(shots in this zones, shots by all time)
+        var scoreByZones: [(Int)] = Array.init(repeating: 0, count: 14)
+        
+        var all = 0
+        var percent: Double = 0
+        if player != ""
+        {
+            for item in attacks where item.accessToPlayer == player && item.accessToTeamA == teamA && item.accessToTime == time
+            {
+                all += 1
+                scoreByZones[item.accessToZone - 1] += 1
+            }
+        }
+        else
+        {
+            for item in attacks where item.accessToTeamA == teamA && item.accessToTime == time
+            {
+                all += 1
+                scoreByZones[item.accessToZone - 1] += 1
+            }
+        }
+        for i in 0...score.count-1
+        {
+            percent = Double(scoreByZones[i]) / Double(all) * 100
+            score[i] = "\(scoreByZones[i])/\(all)\n\(String(format: "%.2f", percent))%"
+        }
+        
+        return score
     }
     
     func saveGame()
     {
-        
+        let doneGame = DoneGame(game: self.game, attacks: self.attacks)
+        try! realm.write
+        {
+            let object = DoneGameRealm()
+            object.accessToGame = doneGame
+            realm.add(object)
+        }
+//        print(realm.objects(DoneGameRealm.self).count)
     }
 }

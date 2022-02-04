@@ -17,6 +17,7 @@ class GamePresenter
         case shot
         case end
     }
+    
     private var view = UIViewController()
     private var model = GameModel()
     private var currentTeamA: Bool? = nil
@@ -40,38 +41,42 @@ class GamePresenter
     func setTime(time: Int)
     {
         self.currentTime = time
+        doingByMode()
     }
     
     func setPlayer(teamA: Bool, player: String)
     {
-        if self.currentTeamA == teamA && self.currentPlayer == player
+        if let newView = view as? GameView
         {
-            self.currentTeamA = nil
-            self.currentPlayer = ""
-            if let newView = view as? GameView
+            if player == "" && currentTeamA != nil
             {
-                newView.reloadTableView(teamA: teamA)
+                newView.reloadTableView(teamA: currentTeamA!)
             }
         }
-        else
-        {
-            self.currentTeamA = teamA
-            self.currentPlayer = player
-        }
+        
+        self.currentTeamA = teamA
+        self.currentPlayer = player
+        print("Current Team - \(currentTeamA)")
+        print("Current Player - \(currentPlayer)")
         doingByMode()
     }
     
-    
     func setMode(mode: Int)
     {
+        if let newView = view as? GameView
+        {
+            newView.changeVisibleElementsOfField(turnOn: mode != Mode.input.rawValue)
+            if mode * currentMode.rawValue == 0
+            {
+                newView.changeEnableForTeamButtons(turnOn: (mode != 0))
+            }
+        }
+        
         self.currentMode = Mode.init(rawValue: mode)!
+        
         if mode != Mode.input.rawValue
         {
             self.currentZone = 0
-        }
-        if let newView = view as? GameView
-        {
-            newView.changeVisibleElementsOfField(turnOn: self.currentMode != .input)
         }
         doingByMode()
     }
@@ -125,17 +130,13 @@ class GamePresenter
     {
         if let newView = view as? GameView
         {
-            if currentPlayer != ""
+            if let team = self.currentTeamA
             {
-                let titles = model.getAllScore(teamA: self.currentTeamA!, player: self.currentPlayer)
-                newView.changeVisibleElementsOfField(turnOn: true)
+                let titles = model.getAllScore(teamA: team, player: self.currentPlayer, time: self.currentTime)
                 newView.changeTitleOfLabelOfField(titles: titles)
-                
             }
-            else
-            {
-                newView.changeVisibleElementsOfField(turnOn: false)
-            }
+            
+            
         }
         
     }
@@ -144,36 +145,24 @@ class GamePresenter
     {
         if let newView = view as? GameView
         {
-            if currentPlayer != ""
+            if let team = self.currentTeamA
             {
-                let titles = model.getScoredScore(teamA: self.currentTeamA!, player: self.currentPlayer)
-                newView.changeVisibleElementsOfField(turnOn: true)
+                let titles = model.getScoredScore(teamA: team, player: self.currentPlayer, time: self.currentTime)
                 newView.changeTitleOfLabelOfField(titles: titles)
-                
-            }
-            else
-            {
-                newView.changeVisibleElementsOfField(turnOn: false)
             }
         }
     }
     
     private func getShotScore()
     {
-//        if let newView = view as? GameView
-//        {
-//            if currentPlayer != ""
-//            {
-//                let titles = model.getShotScore(teamA: self.currentTeamA!, player: self.currentPlayer)
-//                newView.changeVisibleElementsOfField(turnOn: true)
-//                newView.changeTitleOfLabelOfField(titles: titles)
-//
-//            }
-//            else
-//            {
-//                newView.changeVisibleElementsOfField(turnOn: false)
-//            }
-//        }
+        if let newView = view as? GameView
+        {
+            if let team = self.currentTeamA
+            {
+                let titles = model.getShotScore(teamA: team, player: self.currentPlayer, time: self.currentTime)
+                newView.changeTitleOfLabelOfField(titles: titles)
+            }
+        }
     }
     
     private func endGame()
@@ -186,7 +175,8 @@ class GamePresenter
         let alert = UIAlertController(title: "Warning", message: "Are you sure you wanna leave game?", preferredStyle: .alert)
         let yes = UIAlertAction(title: "Yes", style: .destructive) { UIAlertAction in
             self.model.saveGame()
-            self.view.navigationController?.popViewController(animated: true)
+            
+            self.view.navigationController?.popToRootViewController(animated: true)
         }
         let no = UIAlertAction(title: "No", style: .default, handler: nil)
         alert.addAction(yes)
@@ -208,5 +198,15 @@ class GamePresenter
     func getNameOfTeam(teamA:Bool) -> String
     {
         model.getNameOfTeam(teamA: teamA)
+    }
+    
+    func getSelectedTeam() -> Bool?
+    {
+        return currentTeamA
+    }
+    
+    func getCurrentMode() -> Mode
+    {
+        return currentMode
     }
 }

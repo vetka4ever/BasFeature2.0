@@ -27,7 +27,6 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewWillAppear(animated)
         setView()
         tableOfTeams.reloadData()
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     func setView()
@@ -36,7 +35,7 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "plus"), style: .plain, target: self, action: #selector(openViewOfCreatingTeams(_:)))
-        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func setTableOfTeams()

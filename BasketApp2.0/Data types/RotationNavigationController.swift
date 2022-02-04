@@ -22,12 +22,14 @@ class RotationNavigationController: UINavigationController
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask
     {
         return (visibleViewController is GameView) ? (.landscape) :(.portrait)
+//        return .portrait
 //        return visibleViewController!.supportedInterfaceOrientations
     }
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation
     {
         return (visibleViewController is GameView) ? (.landscapeRight) :(.portrait)
+//        return .portrait
 //        return visibleViewController!.preferredInterfaceOrientationForPresentation
     }
 }
