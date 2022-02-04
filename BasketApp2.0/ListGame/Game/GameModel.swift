@@ -149,7 +149,13 @@ class GameModel
     
     func saveGame()
     {
-        let doneGame = DoneGame(game: self.game, attacks: self.attacks)
+        let calendar = Calendar.current
+        let date = Date()
+        let day = calendar.component(.day, from: date)
+        let month = calendar.component(.month, from: date)
+        let year = calendar.component(.year, from: date)
+        
+        let doneGame = DoneGame(game: self.game, attacks: self.attacks, date: "\(day).\(month).\(year)")
         try! realm.write
         {
             let object = DoneGameRealm()

@@ -6,6 +6,7 @@
 //
 
 import RealmSwift
+import Foundation
 class CurrentGame: Codable
 {
     private var name: String
@@ -71,13 +72,19 @@ class CurrentGameRealm: Object
 class DoneGame: CurrentGame
 {
     private var attacks = [Attack]()
+    private var date = ""
     
-    init(game: CurrentGame, attacks: [Attack])
+    init(game: CurrentGame, attacks: [Attack], date: String)
     {
         super.init(teamA: game.accessToTeamA, teamB: game.accessToTeamB, name: game.accessToName)
         self.attacks = attacks
+        self.date = date
     }
     
+    func getDate() -> String
+    {
+        return self.date
+    }
     required init(from decoder: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
