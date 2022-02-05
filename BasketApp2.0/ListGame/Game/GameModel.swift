@@ -6,6 +6,7 @@
 //
 
 import RealmSwift
+import Darwin
 class GameModel
 {
     
@@ -155,13 +156,14 @@ class GameModel
         let month = calendar.component(.month, from: date)
         let year = calendar.component(.year, from: date)
         
+        print(realm.objects(DoneGameRealm.self).count)
         let doneGame = DoneGame(game: self.game, attacks: self.attacks, date: "\(day).\(month).\(year)")
+        let object = DoneGameRealm()
+        object.accessToGame = doneGame
         try! realm.write
         {
-            let object = DoneGameRealm()
-            object.accessToGame = doneGame
+            
             realm.add(object)
         }
-//        print(realm.objects(DoneGameRealm.self).count)
     }
 }

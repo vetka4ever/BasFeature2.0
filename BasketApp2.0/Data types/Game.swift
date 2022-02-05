@@ -69,24 +69,51 @@ class CurrentGameRealm: Object
     }
 }
 
-class DoneGame: CurrentGame
+class DoneGame: Codable
 {
+    private var name: String
+    private let teamA: Team // coach's team
+    private let teamB: Team // enemy's team
     private var attacks = [Attack]()
     private var date = ""
     
     init(game: CurrentGame, attacks: [Attack], date: String)
     {
-        super.init(teamA: game.accessToTeamA, teamB: game.accessToTeamB, name: game.accessToName)
+        self.name = game.accessToName
+        self.teamA = game.accessToTeamA
+        self.teamB = game.accessToTeamB
         self.attacks = attacks
         self.date = date
     }
-    
-    func getDate() -> String
+    var accessToTeamA: Team
     {
-        return self.date
+        get
+        {
+            return teamA
+        }
     }
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+    
+    var accessToTeamB: Team
+    {
+        get
+        {
+            return teamB
+        }
+    }
+    
+    var accessToName: String
+    {
+        get
+        {
+            return name
+        }
+    }
+    var accessToDate: String
+    {
+        get
+        {
+            return self.date
+        }
     }
     
 }

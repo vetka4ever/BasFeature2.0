@@ -245,14 +245,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         return view
     }
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 0
-//    }
 }
 
 

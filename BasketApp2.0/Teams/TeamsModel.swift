@@ -28,6 +28,7 @@ class TeamsModel
             let object = TeamForAddingPlayerRealm()
             object.accessToId = id
             realm.objects(TeamForAddingPlayerRealm.self).count == 0 ?(realm.add(object)) : (realm.objects(TeamForAddingPlayerRealm.self).first?.accessToId = id)
+            
         }
     }
 }

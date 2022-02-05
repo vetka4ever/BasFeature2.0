@@ -23,7 +23,4 @@ class CreateTeamsModel
             realm.add(object)
         }
     }
-    
-    
-    
 }

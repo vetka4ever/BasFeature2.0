@@ -21,8 +21,11 @@ private var realm = try! Realm()
         
 //        try! realm.write
 //        {
+//        realm.delete(realm.objects(DoneGameRealm.self))
 //            realm.deleteAll()
 //        }
+        
+        
         
         let view = SignView()
         let root = RotationNavigationController(rootViewController: view)
