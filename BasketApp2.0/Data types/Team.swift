@@ -66,6 +66,11 @@ class Team: Codable
         self.players.insert(newPlayer, at: 0)
     }
     
+    func removePlayer(id: Int)
+    {
+        self.players.remove(at: id)
+    }
+    
 }
 
 class TeamRealm: Object

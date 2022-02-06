@@ -31,4 +31,13 @@ class TeamsModel
             
         }
     }
+    
+    func deleteTeam(id: Int)
+    {
+        try! realm.write
+        {
+            realm.delete(realm.objects(TeamRealm.self).reversed()[id])
+        }
+        
+    }
 }

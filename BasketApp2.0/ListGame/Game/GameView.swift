@@ -125,7 +125,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
             item.setTitleColor(.black, for: .normal)
             item.backgroundColor = .white
             item.layer.cornerRadius = 10
-            item.frame.size = CGSize(width: time.frame.origin.x * 0.9, height: tableTeamA.frame.origin.y * 0.9)
+            item.frame.size = CGSize(width: time.frame.origin.x * 0.9, height: time.frame.height)
             item.center = item == labelTeamA ? (CGPoint(x: time.frame.origin.x/2, y: tableTeamA.frame.origin.y/2)) : (CGPoint(x: self.width - time.frame.origin.x/2, y: tableTeamA.frame.origin.y/2))
             item.addTarget(self, action: #selector(selectTeam(_:)), for: .touchDown)
             item.isEnabled = false
@@ -144,13 +144,14 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     private func setSegmentedControlls()
     {
-        time.frame.size = CGSize(width: field.frame.width / 1.8, height: field.frame.minY)
-        time.center = CGPoint(x: self.width/2, y: time.frame.height / 2)
+        time.frame.size = CGSize(width: field.frame.width / 1.8, height: field.frame.minY * 0.4)
+        time.center = CGPoint(x: field.center.x, y: field.frame.origin.y / 2)
         time.selectedSegmentIndex = 0
         time.addTarget(self, action: #selector(changeTime(_:)), for: .valueChanged)
         
         controlOfModeOfPresenting.frame.size = time.frame.size
-        controlOfModeOfPresenting.center = CGPoint(x: self.width/2, y: self.height - time.frame.height / 2 )
+//        controlOfModeOfPresenting.center = CGPoint(x: self.width/2, y: self.height - time.frame.height / 2 )
+        controlOfModeOfPresenting.center = CGPoint(x: time.center.x, y: self.height - time.center.y)
         
         controlOfModeOfPresenting.selectedSegmentIndex = 0
         controlOfModeOfPresenting.addTarget(self, action: #selector(changeMode(_:)), for: .valueChanged)
@@ -210,6 +211,8 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath)
         cell.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
         cell.textLabel!.text = presenter.getNumOfPlayer(teamA: tableView == tableTeamA, id: indexPath.section)
+//        cell.textLabel?.frame.size = cell.contentView.frame.size
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel!.textAlignment = .center
         cell.layer.cornerRadius = 10
         
@@ -247,5 +250,12 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
 }
 
-
+//extension UITableViewCell
+//{
+//
+//    open override func layoutSubviews()
+//    {
+//        self.textLabel?.frame.size = self.contentView.frame.size
+//    }
+//}
 
