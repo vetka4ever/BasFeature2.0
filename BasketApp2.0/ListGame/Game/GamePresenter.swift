@@ -25,6 +25,7 @@ class GamePresenter
     private var currentMode: Mode = .input
     private var currentTime: Int = 1
     private var currentZone: Int = 0
+    private var lastSelectedIndexByMode: Mode = .input
     
     //MARK: FUNCS SETTING VALUES
     func setView(view: GameView)
@@ -63,15 +64,16 @@ class GamePresenter
     
     func setMode(mode: Int)
     {
+        
         if let newView = view as? GameView
         {
-            newView.changeVisibleElementsOfField(turnOn: mode != Mode.input.rawValue)
+            newView.changeVisibleElementsOfField(turnOn: mode != Mode.input.rawValue && mode != Mode.end.rawValue)
             if mode * currentMode.rawValue == 0
             {
-                newView.changeEnableForTeamButtons(turnOn: (mode != 0))
+                newView.changeEnableForTeamButtons(turnOn: (mode != Mode.input.rawValue && mode != Mode.end.rawValue))
             }
         }
-        
+        self.lastSelectedIndexByMode = self.currentMode
         self.currentMode = Mode.init(rawValue: mode)!
         
         if mode != Mode.input.rawValue
@@ -179,7 +181,14 @@ class GamePresenter
             self.view.navigationController?.viewControllers = [ListGameView()]
             self.view.navigationController?.popToRootViewController(animated: true)
         }
-        let no = UIAlertAction(title: "No", style: .default, handler: nil)
+        let no = UIAlertAction(title: "No", style: .default) { [self] UIAlertAction in
+            self.setMode(mode: lastSelectedIndexByMode.rawValue)
+            if let newView = view as? GameView
+            {
+                newView.changeMode(id: self.currentMode.rawValue)
+            }
+        }
+        
         alert.addAction(yes)
         alert.addAction(no)
         return alert

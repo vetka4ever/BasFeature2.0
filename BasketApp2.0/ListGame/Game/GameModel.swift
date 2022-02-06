@@ -141,7 +141,7 @@ class GameModel
         }
         for i in 0...score.count-1
         {
-            percent = Double(scoreByZones[i]) / Double(all) * 100
+            percent = (scoreByZones[i] == 0) ? (0) : (Double(scoreByZones[i]) / Double(all) * 100)
             score[i] = "\(scoreByZones[i])/\(all)\n\(String(format: "%.2f", percent))%"
         }
         

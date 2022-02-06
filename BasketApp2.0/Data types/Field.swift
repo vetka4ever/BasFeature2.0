@@ -20,9 +20,9 @@ class Field: UIView
     private var pointOfTapped = CGPoint()
     private var radius: CGFloat = 0
     private var centerPoint = CGPoint(x: 0, y: 0)
-    private let colors = [UIColor(red: 255/255, green: 168/255, blue: 89/255, alpha: 1),
-                          UIColor(red: 255/255, green: 217/255, blue: 179/255, alpha: 1),
-                          UIColor(red: 253/255, green: 197/255, blue: 146/255, alpha: 1)]
+    private let colors = [UIColor(red: 243/255, green: 51/255, blue: 155/255, alpha: 1),
+                          UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1),
+                          UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)]
     enum Doing
     {
         case drawField

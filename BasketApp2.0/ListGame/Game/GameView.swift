@@ -96,7 +96,13 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
             item.isEnabled = turnOn
             item.backgroundColor = (turnOn ? (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)) : (.white))
         }
+    }
+    
+    func changeMode(id: Int)
+    {
+        self.controlOfModeOfPresenting.selectedSegmentIndex = id
         
+//        self.controlOfModeOfPresenting
     }
     //MARK: SETTING VIEWS FUNCS
     private func setTableViews()
@@ -148,13 +154,14 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         time.center = CGPoint(x: field.center.x, y: field.frame.origin.y / 2)
         time.selectedSegmentIndex = 0
         time.addTarget(self, action: #selector(changeTime(_:)), for: .valueChanged)
+        time.selectedSegmentTintColor = UIColor(red: 243/255, green: 51/255, blue: 155/255, alpha: 1)
+        
         
         controlOfModeOfPresenting.frame.size = time.frame.size
-//        controlOfModeOfPresenting.center = CGPoint(x: self.width/2, y: self.height - time.frame.height / 2 )
         controlOfModeOfPresenting.center = CGPoint(x: time.center.x, y: self.height - time.center.y)
-        
         controlOfModeOfPresenting.selectedSegmentIndex = 0
         controlOfModeOfPresenting.addTarget(self, action: #selector(changeMode(_:)), for: .valueChanged)
+        controlOfModeOfPresenting.selectedSegmentTintColor = UIColor(red: 243/255, green: 51/255, blue: 155/255, alpha: 1)
     }
     
     //MARK: OBJC FUNCS
