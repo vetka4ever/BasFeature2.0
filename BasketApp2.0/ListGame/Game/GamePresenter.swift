@@ -47,19 +47,49 @@ class GamePresenter
     
     func setPlayer(teamA: Bool, player: String)
     {
+        
+        if player == self.currentPlayer && teamA == self.currentTeamA
+        {
+            self.currentTeamA = nil
+            self.currentPlayer = ""
+        }
+        else
+        {
+            self.currentTeamA = teamA
+            self.currentPlayer = player
+        }
+        
         if let newView = view as? GameView
         {
-            if player == "" && currentTeamA != nil
+            newView.resetColorOfViewsOfPlayer()
+            if self.currentPlayer != ""
             {
-                newView.reloadTableView(teamA: currentTeamA!)
+                newView.changeColorOfSelectedPlayer(teamA: teamA, player: currentPlayer)
+                newView.resetColorOfViewsOfTeams(color: currentMode == .input ? (.white) : (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)))
             }
         }
         
-        self.currentTeamA = teamA
-        self.currentPlayer = player
-        print("Current Team - \(currentTeamA)")
+        
+        
         print("Current Player - \(currentPlayer)")
+        
         doingByMode()
+    }
+    
+    func setTeam(teamA: Bool)
+    {
+        
+        self.currentPlayer = ""
+        self.currentTeamA = teamA
+        if let newView = view as? GameView
+        {
+            newView.resetColorOfViewsOfPlayer()
+            newView.resetColorOfViewsOfTeams(color: currentMode == .input ? (.white) : (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)))
+            newView.changeColorOfSelectedTeam(teamA: currentTeamA!)
+        }
+        doingByMode()
+        print()
+        print("Current Team - \(currentTeamA)")
     }
     
     func setMode(mode: Int)
@@ -67,10 +97,10 @@ class GamePresenter
         
         if let newView = view as? GameView
         {
-            newView.changeVisibleElementsOfField(turnOn: mode != Mode.input.rawValue && mode != Mode.end.rawValue)
+            newView.changeVisibleElementsOfField(turnOn: mode != Mode.input.rawValue)
             if mode * currentMode.rawValue == 0
             {
-                newView.changeEnableForTeamButtons(turnOn: (mode != Mode.input.rawValue && mode != Mode.end.rawValue))
+                newView.changeEnableForTeamButtons(turnOn: (mode != Mode.input.rawValue))
             }
         }
         self.lastSelectedIndexByMode = self.currentMode
@@ -85,6 +115,10 @@ class GamePresenter
     
     private func doingByMode()
     {
+//        if let newView = self.view as? GameView
+//        {
+//            newView.resetColorOfViewsOfTeams()
+//        }
         switch (currentMode)
         {
         case .input:

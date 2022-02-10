@@ -19,8 +19,8 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     private var idCell = "idForCellInGame"
     private var time = UISegmentedControl.init(items: ["1", "2", "3", "4", "+"])
     private let controlOfModeOfPresenting = UISegmentedControl.init(items: ["input", "all", "scored", "shot", "end"])
-    private var labelTeamA = UIButton(type: .system)
-    private var labelTeamB = UIButton(type: .system)
+    private var buttonTeamA = UIButton(type: .system)
+    private var buttonTeamB = UIButton(type: .system)
     private var tableTeamA = UITableView(frame: CGRect(), style: .insetGrouped)
     private var tableTeamB = UITableView(frame: CGRect(), style: .insetGrouped)
     
@@ -51,7 +51,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.width = max(self.view.frame.height, self.view.frame.width)
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
-        for item in [tableTeamA, tableTeamB, field, labelTeamA, labelTeamB, time, controlOfModeOfPresenting]
+        for item in [tableTeamA, tableTeamB, field, buttonTeamA, buttonTeamB, time, controlOfModeOfPresenting]
         {
             self.view.addSubview(item)
         }
@@ -64,14 +64,39 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     //MARK: FUNCS FOR PRESENTER
     
-    /// reloadTableView - func for changing color of cell to default
-    /// Using when user tap on selected player
-    /// - Parameter teamA: Which team has this player
-    func reloadTableView(teamA: Bool)
+    func changeColorOfSelectedPlayer(teamA: Bool, player: String)
     {
-        for item in (teamA ? (tableTeamA):(tableTeamB)).visibleCells
+        for cell in (teamA ? (tableTeamA) : (tableTeamB)).visibleCells
         {
-            item.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+            if cell.textLabel?.text == player
+            {
+                cell.contentView.backgroundColor = .red
+                break
+            }
+        }
+    }
+    
+    func changeColorOfSelectedTeam(teamA: Bool)
+    {
+        (teamA ? (buttonTeamA) : (buttonTeamB)).backgroundColor = .red
+    }
+    
+    func resetColorOfViewsOfPlayer()
+    {
+        for cells in [tableTeamA.visibleCells, tableTeamB.visibleCells]
+        {
+            for cell in cells
+            {
+                cell.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+            }
+        }
+    }
+    
+    func resetColorOfViewsOfTeams(color: UIColor)
+    {
+        for item in [buttonTeamA, buttonTeamB]
+        {
+            item.backgroundColor = color
         }
     }
     
@@ -91,7 +116,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func changeEnableForTeamButtons(turnOn: Bool)
     {
-        for item in [labelTeamA, labelTeamB]
+        for item in [buttonTeamA, buttonTeamB]
         {
             item.isEnabled = turnOn
             item.backgroundColor = (turnOn ? (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)) : (.white))
@@ -101,8 +126,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     func changeMode(id: Int)
     {
         self.controlOfModeOfPresenting.selectedSegmentIndex = id
-        
-//        self.controlOfModeOfPresenting
     }
     //MARK: SETTING VIEWS FUNCS
     private func setTableViews()
@@ -125,14 +148,14 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
 
         }
         
-        for item in [labelTeamA, labelTeamB]
+        for item in [buttonTeamA, buttonTeamB]
         {
-            item.setTitle(presenter.getNameOfTeam(teamA: item == labelTeamA), for: .normal)
+            item.setTitle(presenter.getNameOfTeam(teamA: item == buttonTeamA), for: .normal)
             item.setTitleColor(.black, for: .normal)
             item.backgroundColor = .white
             item.layer.cornerRadius = 10
             item.frame.size = CGSize(width: time.frame.origin.x * 0.9, height: time.frame.height)
-            item.center = item == labelTeamA ? (CGPoint(x: time.frame.origin.x/2, y: tableTeamA.frame.origin.y/2)) : (CGPoint(x: self.width - time.frame.origin.x/2, y: tableTeamA.frame.origin.y/2))
+            item.center = item == buttonTeamA ? (CGPoint(x: time.frame.origin.x/2, y: tableTeamA.frame.origin.y/2)) : (CGPoint(x: self.width - time.frame.origin.x/2, y: tableTeamA.frame.origin.y/2))
             item.addTarget(self, action: #selector(selectTeam(_:)), for: .touchDown)
             item.isEnabled = false
         }
@@ -143,7 +166,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let tap = UITapGestureRecognizer(target: self, action: #selector(paintZone(_:)))
         field.addGestureRecognizer(tap)
         field.frame.size = CGSize(width: width * 6 / 8, height: width * 6 / 16)
-//        print(field.frame.width / field.frame.height)
         field.center = CGPoint(x: width / 2, y: height / 2)
         
     }
@@ -167,23 +189,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     //MARK: OBJC FUNCS
     @objc func selectTeam(_ sender: UIButton)
     {
-        presenter.setPlayer(teamA: sender == labelTeamA, player: "")
-        if sender == labelTeamA
-        {
-            labelTeamA.backgroundColor = .red
-            labelTeamB.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-        }
-        else
-        {
-            labelTeamB.backgroundColor = .red
-            labelTeamA.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-        }
-        if let team = presenter.getSelectedTeam()
-        {
-            reloadTableView(teamA: team)
-        }
-        
-            
+        presenter.setTeam(teamA: sender == buttonTeamA)
     }
     
     @objc func paintZone(_ sender: UITapGestureRecognizer)
@@ -218,7 +224,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath)
         cell.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
         cell.textLabel!.text = presenter.getNumOfPlayer(teamA: tableView == tableTeamA, id: indexPath.section)
-//        cell.textLabel?.frame.size = cell.contentView.frame.size
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel!.textAlignment = .center
         cell.layer.cornerRadius = 10
@@ -229,12 +234,6 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        reloadTableView(teamA: tableView != tableTeamA)
-        if presenter.getCurrentMode() != .input
-        {
-        labelTeamA.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-        labelTeamB.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-        }
         tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = .red
         presenter.setPlayer(teamA: (tableView == tableTeamA), player: tableView.cellForRow(at: indexPath)!.textLabel!.text!)
     }
@@ -257,12 +256,4 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
 }
 
-//extension UITableViewCell
-//{
-//
-//    open override func layoutSubviews()
-//    {
-//        self.textLabel?.frame.size = self.contentView.frame.size
-//    }
-//}
 
