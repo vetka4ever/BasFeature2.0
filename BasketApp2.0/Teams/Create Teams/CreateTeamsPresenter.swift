@@ -22,7 +22,7 @@ class CreateTeamsPresenter
         self.view = view
     }
 
-    func addTeam(nameOfTeam: String)
+    func addTeam(nameOfTeam: String, players: inout [String])
     {
         
         if let newView = view as? CreateTeamsView
@@ -33,8 +33,7 @@ class CreateTeamsPresenter
             }
             else
             {
-                model.createTeam(nameOfTeam: nameOfTeam)
-                
+                model.createTeam(nameOfTeam: nameOfTeam, players: &players)
                 newView.hideView()
             }
         }

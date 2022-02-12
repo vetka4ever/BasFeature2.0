@@ -12,12 +12,20 @@ class CreateTeamsModel
 {
     private var realm = try! Realm()
     
-    func createTeam(nameOfTeam: String)
+    func createTeam(nameOfTeam: String, players stringPlayers: inout [String])
     {
+        let team = Team()
+        team.accessToName = nameOfTeam
+        
+        
+        while stringPlayers.isEmpty == false
+        {
+            team.addPlayerToTeam(newPlayer: Player(player: (name: "", number: stringPlayers.removeLast(), dateOfBirth: "", height: "", weight: "")))
+        }
+        
+        
         try! realm.write
         {
-            let team = Team()
-            team.accessToName = nameOfTeam
             let object = TeamRealm()
             object.accessToTeam = team
             realm.add(object)
