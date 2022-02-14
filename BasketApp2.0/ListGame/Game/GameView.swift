@@ -19,8 +19,11 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     private var idCell = "idForCellInGame"
     private var time = UISegmentedControl.init(items: ["1", "2", "3", "4", "+"])
     private let controlOfModeOfPresenting = UISegmentedControl.init(items: ["input", "all", "scored", "shot", "end"])
+    
     private var buttonTeamA = UIButton(type: .system)
     private var buttonTeamB = UIButton(type: .system)
+    private var historyButton = UIButton(type: .system)
+    
     private var tableTeamA = UITableView(frame: CGRect(), style: .insetGrouped)
     private var tableTeamB = UITableView(frame: CGRect(), style: .insetGrouped)
     
@@ -51,14 +54,16 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.width = max(self.view.frame.height, self.view.frame.width)
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
-        for item in [tableTeamA, tableTeamB, field, buttonTeamA, buttonTeamB, time, controlOfModeOfPresenting]
+        for item in [tableTeamA, tableTeamB, field, buttonTeamA, buttonTeamB, time, controlOfModeOfPresenting, historyButton]
         {
             self.view.addSubview(item)
         }
         presenter.setView(view: self)
+        
         setField()
         setSegmentedControlls()
         setTableViews()
+        setHistoryButton()
         
     }
     
@@ -186,6 +191,15 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         controlOfModeOfPresenting.selectedSegmentTintColor = UIColor(red: 243/255, green: 51/255, blue: 155/255, alpha: 1)
     }
     
+    private func setHistoryButton()
+    {
+        historyButton.frame.size = CGSize(width: 100, height: 50)
+        historyButton.frame.origin = CGPoint(x: field.frame.maxX, y: controlOfModeOfPresenting.frame.origin.y )
+        historyButton.setTitle("Histore", for: .normal)
+        historyButton.backgroundColor = .systemRed
+        historyButton.addTarget(self, action: #selector(goToHistory(_:)), for: .touchDown)
+    }
+    
     //MARK: OBJC FUNCS
     @objc func selectTeam(_ sender: UIButton)
     {
@@ -208,7 +222,11 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         presenter.setMode(mode: sender.selectedSegmentIndex)
     }
     
-
+    @objc func goToHistory(_ sender: UIButton)
+    {
+        print("HISTORY")
+    }
+    
     //MARK: SETTING TABLE VIEWS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {

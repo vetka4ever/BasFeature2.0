@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 class Attack: Codable
 {
     
@@ -86,3 +87,4 @@ class Attack: Codable
     }
     
 }
+

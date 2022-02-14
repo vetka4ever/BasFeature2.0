@@ -6,7 +6,7 @@
 //
 
 import RealmSwift
-import Darwin
+//import Darwin
 class GameModel
 {
     
@@ -162,8 +162,24 @@ class GameModel
         object.accessToGame = doneGame
         try! realm.write
         {
-            
             realm.add(object)
+        }
+    }
+    
+    func saveAttacksInLocalMemory()
+    {
+        try! realm.write
+        {
+            realm.objects(CurrentGameRealm.self).first?.accessToGame?.accessToAttacks = self.attacks
+        }
+    }
+    
+    func getUpdatedAttacks()
+    {
+        
+        try! realm.write
+        {
+            self.attacks = realm.objects(CurrentGameRealm.self).first!.accessToGame!.accessToAttacks 
         }
     }
 }

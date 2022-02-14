@@ -12,6 +12,7 @@ class CurrentGame: Codable
     private var name: String
     private let teamA: Team // coach's team
     private let teamB: Team // enemy's team
+    private var attacks = [Attack]()
     
     init(teamA: Team, teamB: Team, name: String)
     {
@@ -41,6 +42,18 @@ class CurrentGame: Codable
         get
         {
             return name
+        }
+    }
+    
+    var accessToAttacks: [Attack]
+    {
+        get
+        {
+            return attacks
+        }
+        set
+        {
+            attacks = newValue
         }
     }
 }
