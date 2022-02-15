@@ -10,7 +10,7 @@ class HistoryPresenter
 {
     private var model = HistoryModel()
     
-    func getNamesOfTeam() -> (String, String)
+    func getNamesOfTeam() -> [String]
     {
         return model.getNamesOfTeams()
     }

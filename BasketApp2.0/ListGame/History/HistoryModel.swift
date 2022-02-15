@@ -17,9 +17,9 @@ class HistoryModel
         currentGames = realm.objects(CurrentGameRealm.self).first!.accessToGame!
     }
     
-    func getNamesOfTeams() -> (String, String) // (teamA, teamB)
+    func getNamesOfTeams() -> [String] // [teamA, teamB]
     {
-        return (currentGames.accessToTeamA.accessToName, currentGames.accessToTeamB.accessToName)
+        return [currentGames.accessToTeamA.accessToName, currentGames.accessToTeamB.accessToName]
     }
     
     func getAttacksByTeam(team: String) -> [Attack]

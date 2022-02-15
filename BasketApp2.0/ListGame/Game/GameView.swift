@@ -224,7 +224,9 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     @objc func goToHistory(_ sender: UIButton)
     {
-        print("HISTORY")
+        let historyView = presenter.getHistoryView()
+//        self.present(historyView, animated: true, completion: nil)
+        self.navigationController?.pushViewController(historyView, animated: true)
     }
     
     //MARK: SETTING TABLE VIEWS

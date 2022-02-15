@@ -76,6 +76,12 @@ class GamePresenter
         doingByMode()
     }
     
+    func getHistoryView() -> HistoryView
+    {
+        model.saveAttacksInLocalMemory()
+        return HistoryView()
+    }
+    
     func setTeam(teamA: Bool)
     {
         

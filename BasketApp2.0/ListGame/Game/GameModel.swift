@@ -166,11 +166,16 @@ class GameModel
         }
     }
     
+   
+    
     func saveAttacksInLocalMemory()
     {
         try! realm.write
         {
-            realm.objects(CurrentGameRealm.self).first?.accessToGame?.accessToAttacks = self.attacks
+            let game = realm.objects(CurrentGameRealm.self).first!.accessToGame!
+            game.accessToAttacks = self.attacks
+            realm.objects(CurrentGameRealm.self).first!.accessToGame = game
+            
         }
     }
     

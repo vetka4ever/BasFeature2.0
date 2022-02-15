@@ -31,6 +31,7 @@
 		F35674A0275A705C001E6DB4 /* ListGamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356749F275A705C001E6DB4 /* ListGamePresenter.swift */; };
 		F35674A2275A7065001E6DB4 /* ListGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35674A1275A7065001E6DB4 /* ListGameModel.swift */; };
 		F35674A4275A70C1001E6DB4 /* CellWithTwoTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */; };
+		F3593DC427BC074800FB769A /* CellToHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3593DC327BC074800FB769A /* CellToHistory.swift */; };
 		F35E25D32769C3D7003D3C54 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E25D22769C3D7003D3C54 /* Game.swift */; };
 		F35E25D52769C411003D3C54 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E25D42769C411003D3C54 /* Field.swift */; };
 		F36BE1902769CD780005902B /* ShowTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BE18F2769CD780005902B /* ShowTeamView.swift */; };
@@ -85,6 +86,7 @@
 		F356749F275A705C001E6DB4 /* ListGamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamePresenter.swift; sourceTree = "<group>"; };
 		F35674A1275A7065001E6DB4 /* ListGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameModel.swift; sourceTree = "<group>"; };
 		F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWithTwoTitles.swift; sourceTree = "<group>"; };
+		F3593DC327BC074800FB769A /* CellToHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellToHistory.swift; sourceTree = "<group>"; };
 		F35E25D22769C3D7003D3C54 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		F35E25D42769C411003D3C54 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		F36BE18F2769CD780005902B /* ShowTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTeamView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */,
+				F3593DC327BC074800FB769A /* CellToHistory.swift */,
 				F3B8CE3627A7D9CC00306856 /* RotationNavigationController.swift */,
 				F37AC54F2766434D00022F82 /* Team.swift */,
 				F37AC5512766437500022F82 /* Player.swift */,
@@ -427,6 +430,7 @@
 				F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */,
 				F30AF5772757B859008B84C9 /* SignView.swift in Sources */,
 				F306F9EF27686A160043FFD0 /* Typealiases.swift in Sources */,
+				F3593DC427BC074800FB769A /* CellToHistory.swift in Sources */,
 				F3535AB7276AFC3D003E250F /* Attack.swift in Sources */,
 				F36BE1952769D2050005902B /* CreateGamePresenter.swift in Sources */,
 				F3B9623E276B041D009519EB /* GameModel.swift in Sources */,
