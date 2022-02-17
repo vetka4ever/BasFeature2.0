@@ -53,6 +53,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.height = min(self.view.frame.height, self.view.frame.width)
         self.width = max(self.view.frame.height, self.view.frame.width)
         view.backgroundColor = .white
+        self.title = "Game"
         self.navigationController?.navigationBar.isHidden = true
         for item in [tableTeamA, tableTeamB, field, buttonTeamA, buttonTeamB, time, controlOfModeOfPresenting, historyButton]
         {
@@ -195,7 +196,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         historyButton.frame.size = CGSize(width: 100, height: 50)
         historyButton.frame.origin = CGPoint(x: field.frame.maxX, y: controlOfModeOfPresenting.frame.origin.y )
-        historyButton.setTitle("Histore", for: .normal)
+        historyButton.setTitle("History", for: .normal)
         historyButton.backgroundColor = .systemRed
         historyButton.addTarget(self, action: #selector(goToHistory(_:)), for: .touchDown)
     }

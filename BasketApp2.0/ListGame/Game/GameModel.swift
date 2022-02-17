@@ -38,7 +38,8 @@ class GameModel
     func inputAttack(teamA: Bool, numOfPlayer: String, result: Bool, time: Int, zone: Int)
     {
         let shot = Attack(time: time, player: numOfPlayer, zone: zone, result: result, teamA: teamA)
-        self.attacks.append(shot)
+//        self.attacks.append(shot)
+        self.attacks.insert(shot, at: 0)
     }
     
     func getAllScore(teamA: Bool, player: String, time: Int) -> [String]

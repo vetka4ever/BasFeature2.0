@@ -6,18 +6,18 @@
 //
 
 import UIKit
-
+import SnapKit
 class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     private let presenter = CreateTeamsPresenter()
-    
+    private let offsetForViews = 30
     private var heightForFields: CGFloat = 0
     private var widthForFields: CGFloat = 0
     private var sizeForFields: CGSize = CGSize(width: 0, height: 0)
     
     private let fieldOfName = UITextField()
     private let slider = UISlider()
-    private var tableOfPlayers = UITableView()
+    private var tableOfPlayers = UITableView(frame: CGRect(), style: .insetGrouped)
     private let createTeamButton = UIButton()
     
     private var numsOfPlayers: Array<String> = Array.init(repeating: "", count: 5)
@@ -28,22 +28,24 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
     {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setView()
-        setSizeVariables()
-        setFieldOfName()
-        setSlider()
-        setTableOfPlayer()
-        setButton()
         for item in [fieldOfName, slider, tableOfPlayers, createTeamButton]
         {
             self.view.addSubview(item)
         }
+        setSizeVariables()
+        setView()
+        setFieldOfName()
+        setSlider()
+        setTableOfPlayer()
+        setButton()
+        
         
     }
     
     private func setView()
     {
         presenter.setView(view: self)
+        self.title = "Create team"
         self.tabBarController?.tabBar.isHidden = true
         self.navigationItem.largeTitleDisplayMode = .never
     }
@@ -56,11 +58,18 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func setFieldOfName()
     {
-        fieldOfName.frame.size = sizeForFields
-        fieldOfName.center.x = self.view.center.x
-        fieldOfName.frame.origin.y = self.navigationController!.navigationBar.frame.height
+        fieldOfName.snp.makeConstraints
+        {
+            make in
+            make.width.equalTo(sizeForFields.width)
+            make.height.equalTo(sizeForFields.height)
+            make.centerX.equalToSuperview()
+            make.topMargin.equalTo(offsetForViews)
+            
+           
+        }
         fieldOfName.layer.borderWidth = 1
-        
+        fieldOfName.layer.cornerRadius = 14
         fieldOfName.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         fieldOfName.placeholder = "Team name"
         
@@ -68,11 +77,24 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func setSlider()
     {
-        slider.frame.size = fieldOfName.frame.size
-        slider.center.x = fieldOfName.center.x
-        slider.frame.origin.y = fieldOfName.frame.height + fieldOfName.frame.origin.y + 10
+        slider.snp.makeConstraints
+        {
+            make in
+            make.width.equalTo(sizeForFields.width)
+            make.height.equalTo(sizeForFields.height)
+            make.centerX.equalToSuperview()
+            make.topMargin.equalTo(fieldOfName.snp.bottom).offset(offsetForViews)
+            
+            
+        }
         slider.maximumValue = 15
         slider.minimumValue = 5
+        
+//        var minimumValueImage = UIImage(named: "man")?.withRenderingMode(.alwaysOriginal).withTintColor(UIColor(red: 255/255, green: 121/255, blue: 192/255, alpha: 1))
+        slider.minimumValueImage = UIImage(named: "man")?.withRenderingMode(.alwaysOriginal).withTintColor(UIColor(red: 255/255, green: 121/255, blue: 192/255, alpha: 1))
+        
+        slider.maximumValueImage = UIImage(named: "people")?.withRenderingMode(.alwaysOriginal).withTintColor(UIColor(red: 255/255, green: 121/255, blue: 192/255, alpha: 1))
+        slider.minimumTrackTintColor = UIColor(red: 255/255, green: 121/255, blue: 192/255, alpha: 1)
         slider.value = 5
         slider.addTarget(self, action: #selector(sliderSelector(_:)), for: .valueChanged)
     }
@@ -106,10 +128,19 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func setTableOfPlayer()
     {
-        tableOfPlayers = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .insetGrouped)
-        tableOfPlayers.frame.size = CGSize(width: self.view.frame.width * 0.9, height: self.view.frame.height * 0.6)
-        tableOfPlayers.center.x = self.view.center.x
-        tableOfPlayers.frame.origin.y = slider.frame.height + slider.frame.origin.y + 10
+        tableOfPlayers.snp.makeConstraints
+        {
+            make in
+            make.width.equalTo(sizeForFields.width)
+            make.height.equalTo(sizeForFields.height * 6)
+            make.centerX.equalToSuperview()
+            make.topMargin.equalTo(slider.snp.bottom).offset(offsetForViews)
+        }
+        
+        tableOfPlayers.showsHorizontalScrollIndicator = false
+        tableOfPlayers.showsVerticalScrollIndicator = false
+        tableOfPlayers.layer.cornerRadius = 14
+        tableOfPlayers.backgroundColor = UIColor(red: 255/255, green: 121/255, blue: 192/255, alpha: 1)
         tableOfPlayers.dataSource = self
         tableOfPlayers.delegate = self
         tableOfPlayers.register(UITableViewCell.self, forCellReuseIdentifier: "idCell")
@@ -131,11 +162,18 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func setButton()
     {
+        createTeamButton.snp.makeConstraints
+        {
+            make in
+            make.topMargin.equalTo(tableOfPlayers.snp.bottom).offset(offsetForViews)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(sizeForFields.width)
+            make.height.equalTo(sizeForFields.height)
+        }
         createTeamButton.setTitle("Create team", for: .normal)
-        createTeamButton.backgroundColor = .systemBlue
-        createTeamButton.frame.size = fieldOfName.frame.size
-        createTeamButton.center.x = self.view.center.x
-        createTeamButton.frame.origin.y = tableOfPlayers.frame.height + tableOfPlayers.frame.origin.y + 10
+        createTeamButton.setTitleColor(.black, for: .normal)
+        createTeamButton.layer.cornerRadius = 14
+        createTeamButton.backgroundColor = UIColor(red: 255/255, green: 121/255, blue: 192/255, alpha: 1)
         createTeamButton.addTarget(self, action: #selector(createTeam(_:)), for: .touchDown)
     }
     
@@ -156,19 +194,16 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
         numsOfPlayers.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath)
         
         if cell.contentView.subviews.count == 0
         {
             let textField = UITextField()
             textField.frame.size = cell.frame.size
-            textField.placeholder = "Enter num of player"
-//            textField.text = "\(indexPath.row + 1)"
             textField.keyboardType = .numberPad
             cell.contentView.addSubview(textField)
-            
-            
         }
         
         return cell
@@ -177,6 +212,7 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         let newCell = cell.contentView.subviews[0] as? UITextField
+        newCell!.placeholder = " \(numsOfPlayers.count - indexPath.row)) Enter num of player"
         newCell!.text = numsOfPlayers[indexPath.row]
         
     }
@@ -186,10 +222,8 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
         let newCell = cell.contentView.subviews[0] as? UITextField
         if indexPath.row < numsOfPlayers.count
         {
-        numsOfPlayers[indexPath.row] = newCell!.text!
+            numsOfPlayers[indexPath.row] = newCell!.text!
         }
-        
-        
     }
     
 }

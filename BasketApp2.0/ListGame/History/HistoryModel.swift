@@ -22,15 +22,15 @@ class HistoryModel
         return [currentGames.accessToTeamA.accessToName, currentGames.accessToTeamB.accessToName]
     }
     
-    func getAttacksByTeam(team: String) -> [Attack]
+    func getAttacksByTeam(team: String, id: Int) -> Attack
     {
         var attacks = [Attack]()
         let itIsTeamA = (team == currentGames.accessToTeamA.accessToName)
         for item in self.currentGames.accessToAttacks where item.accessToTeamA == itIsTeamA
         {
-            attacks.insert(item, at: 0)
+            attacks.append(item)
         }
-        return attacks
+        return attacks[id]
     }
     
     func getCountOfAttacksByTeam(team: String) -> Int

@@ -40,5 +40,16 @@ class CellToHistory: UITableViewCell
         insetForLabels = widthForLabels * 0.1
         
     }
+    // info[Attack, Time, Zone, Player, Status]
+    /// setInfo
+    /// - Parameter info: info about shot. NEED line like info[Attack, Time, Zone, Player, Status]
+    func setInfo(info: [String])
+    {
+        let array = [numOfAttack, time, zone, player, status]
+        for i in 0...array.count - 1
+        {
+            titlesForLabels[i] = info[i]
+        }
+    }
 
 }
