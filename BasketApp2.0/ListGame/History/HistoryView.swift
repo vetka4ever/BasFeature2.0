@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 class HistoryView: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
-    private var selectTeamControl = UISegmentedControl()
+    private var selectTeamControl = UISegmentedControl.init(items: ["",""])
     private var tableOfShots = UITableView(frame: CGRect(), style: .insetGrouped)
     private var presenter = HistoryPresenter()
     
@@ -39,20 +39,18 @@ class HistoryView: UIViewController, UITableViewDelegate, UITableViewDataSource
         selectTeamControl.snp.makeConstraints
         {
             make in
-            
             make.width.equalTo(self.view.frame.width * 0.9)
-            
             make.height.equalTo(self.view.frame.height * 0.1)
-
+            make.topMargin.equalTo(15)
             make.centerX.equalToSuperview()
-            make.topMargin.equalTo(10)
         }
         
         let names = presenter.getNamesOfTeam()
-        selectTeamControl = UISegmentedControl(items: names )
-        selectTeamControl.backgroundColor = .green
+        selectTeamControl.setTitle(names[0], forSegmentAt: 0)
+        selectTeamControl.setTitle(names[1], forSegmentAt: 1)
         selectTeamControl.selectedSegmentIndex = 0
         selectTeamControl.addTarget(self, action: #selector(changeSelectedTeam(_:)), for: .valueChanged)
+
     }
     
     @objc func changeSelectedTeam(_ sender: UISegmentedControl)
@@ -74,9 +72,8 @@ class HistoryView: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableOfShots.dataSource = self
         tableOfShots.delegate = self
         
-//        let frameForTable = CGRect(x: 0, y: selectTeamControl.frame.height + (selectTeamControl.frame.origin.y * 2) , width: self.view.frame.width, height: self.view.frame.height)
-//        tableOfShots.frame = frameForTable
         
+
         tableOfShots.backgroundColor = UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1)
         tableOfShots.separatorStyle = .none
     }
@@ -103,7 +100,7 @@ class HistoryView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath) as! CellToHistory
         cell.backgroundColor = .green
         cell.selectionStyle = .none
-
+        
         return cell
     }
     

@@ -65,7 +65,12 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         setSegmentedControlls()
         setTableViews()
         setHistoryButton()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     //MARK: FUNCS FOR PRESENTER
@@ -171,7 +176,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         let tap = UITapGestureRecognizer(target: self, action: #selector(paintZone(_:)))
         field.addGestureRecognizer(tap)
-        field.frame.size = CGSize(width: width * 6 / 8, height: width * 6 / 16)
+        field.frame.size = CGSize(width: width * 5.5 / 8, height: width * 5.5 / 16)
         field.center = CGPoint(x: width / 2, y: height / 2)
         
     }
@@ -194,10 +199,15 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     private func setHistoryButton()
     {
-        historyButton.frame.size = CGSize(width: 100, height: 50)
-        historyButton.frame.origin = CGPoint(x: field.frame.maxX, y: controlOfModeOfPresenting.frame.origin.y )
+        historyButton.frame.size = CGSize(width: tableTeamB.frame.width, height: controlOfModeOfPresenting.frame.size.height * 2)
+        historyButton.center = CGPoint(x: tableTeamB.center.x - historyButton.frame.width / 4, y: controlOfModeOfPresenting.center.y)
+//        historyButton.frame.origin = CGPoint(x: field.frame.maxX, y: controlOfModeOfPresenting.frame.origin.y )
         historyButton.setTitle("History", for: .normal)
-        historyButton.backgroundColor = .systemRed
+        historyButton.backgroundColor = .white
+        historyButton.layer.borderColor = UIColor(red: 0.957, green: 0.247, blue: 0.631, alpha: 1).cgColor
+        historyButton.layer.borderWidth = 1
+        historyButton.layer.cornerRadius = 14
+        historyButton.setTitleColor(UIColor(red: 0.957, green: 0.247, blue: 0.631, alpha: 1), for: .normal)
         historyButton.addTarget(self, action: #selector(goToHistory(_:)), for: .touchDown)
     }
     
