@@ -41,11 +41,12 @@ class HistoryView: UIViewController, UITableViewDelegate, UITableViewDataSource
             make in
             make.width.equalTo(self.view.frame.width * 0.9)
             make.height.equalTo(self.view.frame.height * 0.1)
-            make.topMargin.equalTo(15)
+            make.topMargin.equalTo(10)
             make.centerX.equalToSuperview()
         }
         
         let names = presenter.getNamesOfTeam()
+        selectTeamControl.selectedSegmentTintColor = UIColor(red: 243/255, green: 51/255, blue: 155/255, alpha: 1)
         selectTeamControl.setTitle(names[0], forSegmentAt: 0)
         selectTeamControl.setTitle(names[1], forSegmentAt: 1)
         selectTeamControl.selectedSegmentIndex = 0
@@ -74,7 +75,7 @@ class HistoryView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
 
-        tableOfShots.backgroundColor = UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1)
+        tableOfShots.backgroundColor = .systemGray5
         tableOfShots.separatorStyle = .none
     }
     
@@ -98,7 +99,7 @@ class HistoryView: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath) as! CellToHistory
-        cell.backgroundColor = .green
+        cell.backgroundColor = UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1)
         cell.selectionStyle = .none
         
         return cell

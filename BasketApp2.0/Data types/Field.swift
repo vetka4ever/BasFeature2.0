@@ -87,7 +87,7 @@ class Field: UIView
         for i in 0...scoreLabels.count-1
         {
             scoreLabels[i].text = score[i]
-//            scoreLabels[i].text = "a"
+            scoreLabels[i].font = UIFont.systemFont(ofSize: 10.0)
         }
     }
     

@@ -50,6 +50,7 @@
 		F3B9623E276B041D009519EB /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B9623D276B041D009519EB /* GameModel.swift */; };
 		F3C2BBF427663D4B00243833 /* CreateTeamsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2BBF327663D4B00243833 /* CreateTeamsPresenter.swift */; };
 		F3C2BBF627663D6900243833 /* CreateTeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */; };
+		F3D26F3027D0906500EC9530 /* WatchGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D26F2F27D0906500EC9530 /* WatchGameView.swift */; };
 		F3EAB39C2757BFA000CCCB4E /* SignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB39B2757BFA000CCCB4E /* SignPresenter.swift */; };
 		F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB39D2757BFAA00CCCB4E /* SignModel.swift */; };
 		F3FBAE6C276729DA00133484 /* WatchOneTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FBAE6B276729DA00133484 /* WatchOneTeamView.swift */; };
@@ -105,6 +106,7 @@
 		F3B9623D276B041D009519EB /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		F3C2BBF327663D4B00243833 /* CreateTeamsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamsPresenter.swift; sourceTree = "<group>"; };
 		F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamsModel.swift; sourceTree = "<group>"; };
+		F3D26F2F27D0906500EC9530 /* WatchGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchGameView.swift; sourceTree = "<group>"; };
 		F3EAB39B2757BFA000CCCB4E /* SignPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignPresenter.swift; sourceTree = "<group>"; };
 		F3EAB39D2757BFAA00CCCB4E /* SignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignModel.swift; sourceTree = "<group>"; };
 		F3FBAE6B276729DA00133484 /* WatchOneTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOneTeamView.swift; sourceTree = "<group>"; };
@@ -185,9 +187,9 @@
 				F3535AB8276B01FB003E250F /* ListGameView.swift */,
 				F356749F275A705C001E6DB4 /* ListGamePresenter.swift */,
 				F35674A1275A7065001E6DB4 /* ListGameModel.swift */,
+				F3D26F3127D0906A00EC9530 /* WatchGame */,
 				F36BE1912769D1AA0005902B /* CreateGame */,
 				F3B96238276B03BC009519EB /* Game */,
-				F37F648627BAACA700B8C94E /* History */,
 			);
 			path = ListGame;
 			sourceTree = "<group>";
@@ -278,6 +280,7 @@
 				F3B96239276B03E0009519EB /* GameView.swift */,
 				F3B9623B276B0416009519EB /* GamePresenter.swift */,
 				F3B9623D276B041D009519EB /* GameModel.swift */,
+				F37F648627BAACA700B8C94E /* History */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -290,6 +293,14 @@
 				F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */,
 			);
 			path = "Create Teams";
+			sourceTree = "<group>";
+		};
+		F3D26F3127D0906A00EC9530 /* WatchGame */ = {
+			isa = PBXGroup;
+			children = (
+				F3D26F2F27D0906500EC9530 /* WatchGameView.swift */,
+			);
+			path = WatchGame;
 			sourceTree = "<group>";
 		};
 		F3FBAE6A276729B100133484 /* WatchOneTeam */ = {
@@ -427,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3D26F3027D0906500EC9530 /* WatchGameView.swift in Sources */,
 				F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */,
 				F30AF5772757B859008B84C9 /* SignView.swift in Sources */,
 				F306F9EF27686A160043FFD0 /* Typealiases.swift in Sources */,
