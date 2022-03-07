@@ -48,6 +48,9 @@
 		F3B9623A276B03E0009519EB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B96239276B03E0009519EB /* GameView.swift */; };
 		F3B9623C276B0416009519EB /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B9623B276B0416009519EB /* GamePresenter.swift */; };
 		F3B9623E276B041D009519EB /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B9623D276B041D009519EB /* GameModel.swift */; };
+		F3BB5EE127D64F9200F1969F /* WatchGamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BB5EE027D64F9200F1969F /* WatchGamePresenter.swift */; };
+		F3BB5EE327D64FA900F1969F /* WatchGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BB5EE227D64FA900F1969F /* WatchGameModel.swift */; };
+		F3BB5EE727D657EF00F1969F /* NumOfPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BB5EE627D657EF00F1969F /* NumOfPlayerCell.swift */; };
 		F3C2BBF427663D4B00243833 /* CreateTeamsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2BBF327663D4B00243833 /* CreateTeamsPresenter.swift */; };
 		F3C2BBF627663D6900243833 /* CreateTeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */; };
 		F3D26F3027D0906500EC9530 /* WatchGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D26F2F27D0906500EC9530 /* WatchGameView.swift */; };
@@ -104,6 +107,9 @@
 		F3B96239276B03E0009519EB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		F3B9623B276B0416009519EB /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
 		F3B9623D276B041D009519EB /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		F3BB5EE027D64F9200F1969F /* WatchGamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchGamePresenter.swift; sourceTree = "<group>"; };
+		F3BB5EE227D64FA900F1969F /* WatchGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchGameModel.swift; sourceTree = "<group>"; };
+		F3BB5EE627D657EF00F1969F /* NumOfPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumOfPlayerCell.swift; sourceTree = "<group>"; };
 		F3C2BBF327663D4B00243833 /* CreateTeamsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamsPresenter.swift; sourceTree = "<group>"; };
 		F3C2BBF527663D6900243833 /* CreateTeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamsModel.swift; sourceTree = "<group>"; };
 		F3D26F2F27D0906500EC9530 /* WatchGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchGameView.swift; sourceTree = "<group>"; };
@@ -219,8 +225,8 @@
 		F3567497275A6552001E6DB4 /* Data types */ = {
 			isa = PBXGroup;
 			children = (
-				F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */,
-				F3593DC327BC074800FB769A /* CellToHistory.swift */,
+				F3BB5EE427D657B700F1969F /* TableView */,
+				F3BB5EE527D657C700F1969F /* CollectionView */,
 				F3B8CE3627A7D9CC00306856 /* RotationNavigationController.swift */,
 				F37AC54F2766434D00022F82 /* Team.swift */,
 				F37AC5512766437500022F82 /* Player.swift */,
@@ -285,6 +291,23 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
+		F3BB5EE427D657B700F1969F /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				F35674A3275A70C1001E6DB4 /* CellWithTwoTitles.swift */,
+				F3593DC327BC074800FB769A /* CellToHistory.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		F3BB5EE527D657C700F1969F /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				F3BB5EE627D657EF00F1969F /* NumOfPlayerCell.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
 		F3C2BBF027663D0600243833 /* Create Teams */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +322,8 @@
 			isa = PBXGroup;
 			children = (
 				F3D26F2F27D0906500EC9530 /* WatchGameView.swift */,
+				F3BB5EE027D64F9200F1969F /* WatchGamePresenter.swift */,
+				F3BB5EE227D64FA900F1969F /* WatchGameModel.swift */,
 			);
 			path = WatchGame;
 			sourceTree = "<group>";
@@ -450,6 +475,7 @@
 				F3567494275A63AE001E6DB4 /* TeamsView.swift in Sources */,
 				F3FBAE6E276729E900133484 /* WatchOneTeamPresenter.swift in Sources */,
 				F37AC5522766437500022F82 /* Player.swift in Sources */,
+				F3BB5EE327D64FA900F1969F /* WatchGameModel.swift in Sources */,
 				F3567491275A5F89001E6DB4 /* ProfileModel.swift in Sources */,
 				F37F648C27BAB3EB00B8C94E /* HistoryModel.swift in Sources */,
 				F37F648A27BAB3E200B8C94E /* HistoryPresenter.swift in Sources */,
@@ -466,6 +492,7 @@
 				F3B9623C276B0416009519EB /* GamePresenter.swift in Sources */,
 				F35674A0275A705C001E6DB4 /* ListGamePresenter.swift in Sources */,
 				F38A8AAD27AC19FC006A5BD8 /* Zone.swift in Sources */,
+				F3BB5EE127D64F9200F1969F /* WatchGamePresenter.swift in Sources */,
 				F3B8CE3727A7D9CC00306856 /* RotationNavigationController.swift in Sources */,
 				F3FBAE7327673DD900133484 /* AddPlayerView.swift in Sources */,
 				F30027B9275904150084CE0E /* RegisterModel.swift in Sources */,
@@ -476,6 +503,7 @@
 				F356749B275A6FC8001E6DB4 /* TeamsModel.swift in Sources */,
 				F35E25D32769C3D7003D3C54 /* Game.swift in Sources */,
 				F36BE1972769D2090005902B /* CreateGameModel.swift in Sources */,
+				F3BB5EE727D657EF00F1969F /* NumOfPlayerCell.swift in Sources */,
 				F3C2BBF627663D6900243833 /* CreateTeamsModel.swift in Sources */,
 				F37AC5502766434D00022F82 /* Team.swift in Sources */,
 				F3567499275A6FAF001E6DB4 /* TeamsPresenter.swift in Sources */,

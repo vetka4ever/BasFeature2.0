@@ -36,5 +36,25 @@ class ListGameModel
             realm.delete(games[id])
         }
     }
+    
+    func addNameOfWatchedGame(name: String)
+    {
+        let object = NameOfGameForWatchingRealm()
+        object.accessToName = name
+        
+        try! realm.write
+        {
+            if realm.objects(NameOfGameForWatchingRealm.self).count < 1
+            {
+                realm.add(object)
+            }
+            else
+            {
+                let pastName = realm.objects(NameOfGameForWatchingRealm.self).first
+                pastName?.accessToName = object.accessToName
+            }
+            
+        }
+    }
 }
 

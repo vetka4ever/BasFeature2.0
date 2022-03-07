@@ -19,6 +19,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     private var teamACollection = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private var teamBButton = UIButton(type: .system)
     private var teamBCollection = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private var presenter = WatchGamePresenter()
     
     override func viewDidLoad()
     {
@@ -89,10 +90,12 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     func setTeamsButton()
     {
+        var title = ""
         for item in [teamAButton,teamBButton]
         {
-            item.setTitle("TeamA", for: .normal)
-            item == teamAButton ? (item.setTitle("TeamA", for: .normal)) : (item.setTitle("TeamB", for: .normal))
+            title = presenter.getNameOfTeam(teamA: item == teamAButton)
+//            item == teamAButton ? (item.setTitle("TeamA", for: .normal)) : (item.setTitle("TeamB", for: .normal))
+            item.setTitle(title, for: .normal)
             item.backgroundColor = UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1)
             item.layer.cornerRadius = 14
             item.tintColor = .black
@@ -124,7 +127,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
             item.showsHorizontalScrollIndicator = false
             item.delegate = self
             item.dataSource = self
-            item.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "idCell")
+            item.register(NumOfPlayerCell.self, forCellWithReuseIdentifier: "idCell")
             
             
             
@@ -133,7 +136,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
                 make in
                 make.width.equalToSuperview()
                 make.left.equalTo(10)
-                make.height.equalTo(self.view.frame.height / 12)
+                make.height.equalTo(self.view.frame.height / 11)
             }
         }
     }
@@ -191,16 +194,24 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        14
+        presenter.getCountOfPlayersInTeam(teamA: collectionView == teamACollection)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "idCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "idCell", for: indexPath) as! NumOfPlayerCell
         cell.backgroundColor = UIColor(red: 243/255, green: 63/255, blue: 162/255, alpha: 1)
         cell.layer.cornerRadius = cell.frame.height / 2
+        cell.setLabelView(name: presenter.getNumOfPlayer(teamA: collectionView == teamACollection, id: indexPath.row))
+        
         return cell
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
+//    {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "idCell", for: indexPath) as! NumOfPlayerCell
+//        cell.accessToNumOfPlayer = presenter.getNumOfPlayer(teamA: collectionView == teamACollection, id: indexPath.row)
+//    }
     
     
 }

@@ -19,8 +19,16 @@ class ListGamePresenter
     {
         return model.getNameAndDateOfGameById(id: id)
     }
+    
     func deleteGame(id: Int)
     {
         model.deleteGame(id: id)
     }
+    
+    func addNameOfWatchedGame(name: String)
+    {
+        model.addNameOfWatchedGame(name: name)
+    }
+    
+    
 }

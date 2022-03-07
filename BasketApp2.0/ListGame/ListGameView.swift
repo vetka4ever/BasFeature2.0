@@ -102,6 +102,8 @@ class ListGameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! CellWithTwoTitles
+        presenter.addNameOfWatchedGame(name: cell.accessToLeftTitle )
         self.navigationController?.pushViewController(WatchGameView(), animated: true)
     }
 

@@ -90,6 +90,13 @@ class DoneGame: Codable
     private var attacks = [Attack]()
     private var date = ""
     
+    init()
+    {
+        self.name = ""
+        self.teamA = Team()
+        self.teamB = Team()
+    }
+    
     init(game: CurrentGame, attacks: [Attack], date: String)
     {
         self.name = game.accessToName
@@ -98,6 +105,7 @@ class DoneGame: Codable
         self.attacks = attacks
         self.date = date
     }
+    
     var accessToTeamA: Team
     {
         get
@@ -154,3 +162,21 @@ class DoneGameRealm: Object
         }
     }
 }
+
+class NameOfGameForWatchingRealm: Object
+{
+    @objc private dynamic var nameOfTeam: String  = ""
+    
+    var accessToName: String
+    {
+        get
+        {
+            return nameOfTeam
+        }
+        set
+        {
+            nameOfTeam = newValue
+        }
+    }
+}
+
