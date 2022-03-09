@@ -137,6 +137,14 @@ class DoneGame: Codable
         }
     }
     
+    var accessToAttacks: [Attack]
+    {
+        get
+        {
+            return attacks
+        }
+    }
+    
 }
 
 class DoneGameRealm: Object

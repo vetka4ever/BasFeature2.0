@@ -26,7 +26,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         super.viewDidLoad()
         setView()
         setRightBarButtonItem()
-        
+        presenter.setView(view: self)
         for item in [modeControl, field, timeControl, teamAButton, teamACollection, teamBButton, teamBCollection]
         {
             self.view.addSubview(item)
@@ -42,7 +42,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         
     }
     
-    func setTimeControll()
+    private func setTimeControll()
     {
         timeControl.snp.makeConstraints
         {
@@ -54,11 +54,16 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
             make.centerX.equalToSuperview()
             
         }
+        
+        timeControl.addTarget(self, action: #selector(changeTime(_:)), for: .valueChanged)
     }
     
+    @objc func changeTime(_ sender: UISegmentedControl)
+    {
+        presenter.setTime(time: sender.selectedSegmentIndex + 1)
+    }
     
-    
-    func setField()
+    private func setField()
     {
         
         field.snp.makeConstraints
@@ -69,10 +74,9 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
             make.centerX.equalToSuperview()
             make.topMargin.equalTo(timeControl.snp.bottom).offset(15)
         }
-        
     }
     
-    func setModeControll()
+    private func setModeControll()
     {
         
         
@@ -85,10 +89,18 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
             make.centerX.equalToSuperview()
             
         }
+        modeControl.addTarget(self, action: #selector(changeMode(_:)), for: .valueChanged)
+    }
+    
+    @objc func changeMode(_ sender: UISegmentedControl)
+    {
+        let index = sender.selectedSegmentIndex
+        let title = sender.titleForSegment(at: index)
+        presenter.setMode(mode: title!)
     }
     
     
-    func setTeamsButton()
+    private func setTeamsButton()
     {
         var title = ""
         for item in [teamAButton,teamBButton]
@@ -108,12 +120,17 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
                 make.left.equalToSuperview().offset(20)
                 
             }
+            item.addTarget(self, action: #selector(setPlayer(_:)), for: .touchDown)
         }
     }
     
+    @objc func setPlayer(_ sender: UIButton)
+    {
+        presenter.setPlayer(teamA: sender == teamAButton, player: "")
+    }
     
     
-    func setCollectionsOfTeams()
+    private func setCollectionsOfTeams()
     {
         
         for item in [teamACollection, teamBCollection]
@@ -141,7 +158,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         }
     }
     
-    func setLayoutsOfViewOfTeams()
+    private func setLayoutsOfViewOfTeams()
     {
         
         let arr = [modeControl, teamAButton, teamACollection, teamBButton, teamBCollection]
@@ -156,29 +173,19 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         }
     }
     
-    
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-    }
-    
-    
-    
-    func setView()
+    private func setView()
     {
         self.view.backgroundColor = .white
         self.tabBarController?.tabBar.isHidden = true
         self.navigationItem.largeTitleDisplayMode = .never
     }
     
-    func setRightBarButtonItem()
+    private func setRightBarButtonItem()
     {
         let item = UIBarButtonItem(title: "History", style: .plain, target: self, action: #selector(setTitles(_:)))
         item.tintColor = UIColor(red: 243/255, green: 63/255, blue: 162/255, alpha: 1)
         self.navigationItem.rightBarButtonItem = item
         self.navigationController?.navigationBar.tintColor = UIColor(red: 243/255, green: 63/255, blue: 162/255, alpha: 1)
-        
         
     }
     
@@ -190,6 +197,12 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     }
     
     
+    
+     func setTitlesOfScores(titles: [String])
+    {
+        field.turnLabels(on: true)
+        field.changeTitleOfLabels(score: titles)
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -207,11 +220,12 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
-//    {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "idCell", for: indexPath) as! NumOfPlayerCell
-//        cell.accessToNumOfPlayer = presenter.getNumOfPlayer(teamA: collectionView == teamACollection, id: indexPath.row)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        let cell = collectionView.cellForItem(at: indexPath) as! NumOfPlayerCell
+        let player = cell.accessToNumOfPlayer
+        presenter.setPlayer(teamA: collectionView == teamACollection, player: player)
+    }
     
     
 }
