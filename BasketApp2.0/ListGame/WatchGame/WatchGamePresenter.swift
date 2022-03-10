@@ -35,8 +35,31 @@ class WatchGamePresenter
     }
     func setPlayer(teamA: Bool, player: String)
     {
-        self.teamA = teamA
-        self.player = player
+        
+        if self.player == player && self.teamA == teamA
+        {
+            self.player = ""
+            self.teamA = nil
+        }
+        else
+        {
+            self.teamA = teamA
+            self.player = player
+        }
+        doingByMode()
+    }
+    
+    func setTeam(teamA: Bool)
+    {
+        if self.teamA == teamA
+        {
+            self.teamA = nil
+        }
+        else
+        {
+            self.teamA = teamA
+        }
+        self.player = ""
         doingByMode()
     }
     
@@ -91,4 +114,5 @@ class WatchGamePresenter
         
         return model.getNumOfPlayer(teamA: teamA, id: id)
     }
+    
 }

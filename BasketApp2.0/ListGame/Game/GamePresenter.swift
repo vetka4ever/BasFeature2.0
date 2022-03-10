@@ -45,6 +45,8 @@ class GamePresenter
         doingByMode()
     }
     
+    
+    
     func setPlayer(teamA: Bool, player: String)
     {
         
@@ -255,8 +257,15 @@ class GamePresenter
         return currentTeamA
     }
     
+    func getSelectedPlayer() -> String
+    {
+        return currentPlayer
+    }
+    
     func getCurrentMode() -> Mode
     {
         return currentMode
     }
+
+    
 }

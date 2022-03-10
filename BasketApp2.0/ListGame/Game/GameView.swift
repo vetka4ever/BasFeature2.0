@@ -27,6 +27,9 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     private var tableTeamA = UITableView(frame: CGRect(), style: .insetGrouped)
     private var tableTeamB = UITableView(frame: CGRect(), style: .insetGrouped)
     
+    private var colorsOfPlayersTeamA = [String:UIColor]()
+    private var colorsOfPlayersTeamB = [String:UIColor]()
+    
     
     //MARK: SET ORIENTATION
     override var shouldAutorotate: Bool
@@ -65,6 +68,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         setSegmentedControlls()
         setTableViews()
         setHistoryButton()
+        setColorsOfPlayers()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -100,6 +104,16 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
             {
                 cell.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
             }
+        }
+        
+        for item in colorsOfPlayersTeamA.keys
+        {
+           colorsOfPlayersTeamA[item] = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        }
+        
+        for item in colorsOfPlayersTeamB.keys
+        {
+            colorsOfPlayersTeamB[item] = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
         }
     }
     
@@ -138,6 +152,26 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         self.controlOfModeOfPresenting.selectedSegmentIndex = id
     }
+    
+    
+    func setColorsOfPlayers()
+    {
+        let countOfTeamA = presenter.getCountOfPlayers(teamA: true)
+        let countOfTeamB = presenter.getCountOfPlayers(teamA: false)
+        var numOfPlayer = "0"
+        
+        for i in 0...countOfTeamA-1
+        {
+            numOfPlayer = presenter.getNumOfPlayer(teamA: true, id: i)
+            colorsOfPlayersTeamA[numOfPlayer] = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        }
+        
+        for i in 0...countOfTeamB-1
+        {
+            numOfPlayer = presenter.getNumOfPlayer(teamA: false, id: i)
+            colorsOfPlayersTeamB[numOfPlayer] = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        }
+    }
     //MARK: SETTING VIEWS FUNCS
     private func setTableViews()
     {
@@ -156,7 +190,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
             item.frame.size = CGSize(width: field.frame.origin.x, height: field.frame.height)
             
             item.center = (item == tableTeamA) ? (CGPoint(x: field.frame.origin.x / 2, y: field.center.y)) : (CGPoint(x: self.width - (field.frame.origin.x / 2), y: field.center.y))
-
+            
         }
         
         for item in [buttonTeamA, buttonTeamB]
@@ -201,7 +235,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         historyButton.frame.size = CGSize(width: tableTeamB.frame.width, height: controlOfModeOfPresenting.frame.size.height * 2)
         historyButton.center = CGPoint(x: tableTeamB.center.x - historyButton.frame.width / 4, y: controlOfModeOfPresenting.center.y)
-//        historyButton.frame.origin = CGPoint(x: field.frame.maxX, y: controlOfModeOfPresenting.frame.origin.y )
+        //        historyButton.frame.origin = CGPoint(x: field.frame.maxX, y: controlOfModeOfPresenting.frame.origin.y )
         historyButton.setTitle("History", for: .normal)
         historyButton.backgroundColor = .white
         historyButton.layer.borderColor = UIColor(red: 0.957, green: 0.247, blue: 0.631, alpha: 1).cgColor
@@ -236,7 +270,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     @objc func goToHistory(_ sender: UIButton)
     {
         let historyView = presenter.getHistoryView()
-//        self.present(historyView, animated: true, completion: nil)
+        //        self.present(historyView, animated: true, completion: nil)
         self.navigationController?.pushViewController(historyView, animated: true)
     }
     
@@ -253,8 +287,16 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath)
-        cell.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-        cell.textLabel!.text = presenter.getNumOfPlayer(teamA: tableView == tableTeamA, id: indexPath.section)
+        let numOfPlayer = presenter.getNumOfPlayer(teamA: tableView == tableTeamA, id: indexPath.section)
+        cell.textLabel!.text = numOfPlayer
+        //        if tableView == tableTeamA && colorsOfPlayersTeamA.count < tableTeamA.numberOfSections
+        //        {
+        //            colorsOfPlayersTeamA[numOfPlayer] = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        //        }
+        //        if tableView == tableTeamB && colorsOfPlayersTeamB.count < tableTeamB.numberOfSections
+        //        {
+        //            colorsOfPlayersTeamB[numOfPlayer] = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+        //        }
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel!.textAlignment = .center
         cell.layer.cornerRadius = 10
@@ -265,14 +307,33 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = .red
-        presenter.setPlayer(teamA: (tableView == tableTeamA), player: tableView.cellForRow(at: indexPath)!.textLabel!.text!)
+        let cell = tableView.cellForRow(at: indexPath)
+        let numOfPlayer = cell!.textLabel!.text
+        presenter.setPlayer(teamA: (tableView == tableTeamA), player: numOfPlayer!)
+        let selectedTeam = presenter.getSelectedTeam()
+        let selectedPlayer = presenter.getSelectedPlayer()
+        
+        if selectedTeam != nil
+        {
+            selectedTeam == true ? (colorsOfPlayersTeamA[selectedPlayer] = .red) : (colorsOfPlayersTeamB[selectedPlayer] = .red)
+            cell?.contentView.backgroundColor = (selectedTeam == true ? (colorsOfPlayersTeamA[selectedPlayer]) : (colorsOfPlayersTeamB[selectedPlayer]))
+        }
+       
+        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
     {
         
         tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        let numOfPlayer = cell.textLabel!.text
+        
+//        tableView == tableTeamA ? (colorsOfPlayersTeamA[numOfPlayer!] = .red) : (colorsOfPlayersTeamB[numOfPlayer!] = .red)
+        cell.contentView.backgroundColor = (tableView == tableTeamA ? (colorsOfPlayersTeamA[numOfPlayer!]) : (colorsOfPlayersTeamB[numOfPlayer!]))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat

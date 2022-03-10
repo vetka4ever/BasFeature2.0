@@ -36,7 +36,7 @@ class ListGameModel
         {
             try! realm.write
             {
-                            realm.delete(item)
+                realm.delete(item)
             }
         }
     }
