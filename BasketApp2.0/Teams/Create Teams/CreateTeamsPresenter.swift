@@ -31,6 +31,10 @@ class CreateTeamsPresenter
             {
                 newView.alertAboutEmptyNameOfTeam()
             }
+            else if model.areThisTeamInMemory(name: nameOfTeam)
+            {
+                newView.alertAboutExistingTeam()
+            }
             else
             {
                 model.createTeam(nameOfTeam: nameOfTeam, players: &players)

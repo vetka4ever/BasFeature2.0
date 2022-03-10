@@ -18,7 +18,7 @@ class ListGameModel
     }
     func getCountOfGames() -> Int
     {
-//        return games.count
+        //        return games.count
         return realm.objects(DoneGameRealm.self).reversed().count
     }
     
@@ -29,11 +29,15 @@ class ListGameModel
         
         return (name,date)
     }
-    func deleteGame(id: Int)
+    func deleteGame(name: String)
     {
-        try! realm.write
+        
+        for item in realm.objects(DoneGameRealm.self) where item.accessToGame!.accessToName == name
         {
-            realm.delete(games[id])
+            try! realm.write
+            {
+                            realm.delete(item)
+            }
         }
     }
     

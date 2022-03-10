@@ -31,4 +31,13 @@ class CreateTeamsModel
             realm.add(object)
         }
     }
+    
+    func areThisTeamInMemory(name: String) -> Bool
+    {
+        for item in realm.objects(TeamRealm.self) where item.accessToTeam!.accessToName == name
+        {
+            return true
+        }
+        return false
+    }
 }

@@ -110,7 +110,9 @@ class ListGameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
-            self.presenter.deleteGame(id: indexPath.section)
+            let cell = tableView.cellForRow(at: indexPath) as! CellWithTwoTitles
+            let nameOfSelectedTeam = cell.accessToLeftTitle
+            self.presenter.deleteGame(name: nameOfSelectedTeam)
             self.tableOfGames.reloadData()
         }
         

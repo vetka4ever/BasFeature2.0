@@ -90,7 +90,9 @@ class TeamsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
-            self.presenter.deleteTeam(id: indexPath.section)
+            let cell = tableView.cellForRow(at: indexPath)
+            let name = cell?.textLabel!.text
+            self.presenter.deleteTeam(name: name!)
             self.tableOfTeams.reloadData()
         }
         

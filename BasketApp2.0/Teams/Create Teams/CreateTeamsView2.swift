@@ -155,6 +155,15 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.present(alert, animated: true, completion: nil)
     }
     
+    func alertAboutExistingTeam()
+    {
+        fieldOfName.text = ""
+        let alert = UIAlertController(title: "Attention", message: "Teams with this name are in your teams", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func hideView()
     {
         self.navigationController?.popViewController(animated: true)

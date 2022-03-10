@@ -32,11 +32,14 @@ class TeamsModel
         }
     }
     
-    func deleteTeam(id: Int)
+    func deleteTeam(name: String)
     {
         try! realm.write
         {
-            realm.delete(realm.objects(TeamRealm.self).reversed()[id])
+            for item in realm.objects(TeamRealm.self) where item.accessToTeam!.accessToName == name
+            {
+                realm.delete(item)
+            }
         }
         
     }
