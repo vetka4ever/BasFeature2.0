@@ -22,6 +22,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     private var colorsOfTeamA = [String:UIColor]()
     private var colorsOfTeamB = [String:UIColor]()
     
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -48,7 +49,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         timeControl.snp.makeConstraints
         {
             make in
-
+            
             make.width.equalTo(self.view.frame.width / 1.5)
             make.height.equalTo(self.view.frame.height / 18)
             make.topMargin.equalTo(10)
@@ -107,7 +108,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         for item in [teamAButton,teamBButton]
         {
             title = presenter.getNameOfTeam(teamA: item == teamAButton)
-//            item == teamAButton ? (item.setTitle("TeamA", for: .normal)) : (item.setTitle("TeamB", for: .normal))
+            //            item == teamAButton ? (item.setTitle("TeamA", for: .normal)) : (item.setTitle("TeamB", for: .normal))
             item.setTitle(title, for: .normal)
             item.backgroundColor = UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1)
             item.layer.cornerRadius = 14
@@ -125,15 +126,12 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         }
     }
     
-    @objc func setPlayer(_ sender: UIButton)
-    {
-        presenter.setPlayer(teamA: sender == teamAButton, player: "")
-    }
+  
     
     @objc func setTeam(_ sender: UIButton)
     {
-        presenter.setTeam(teamA: sender == teamAButton)
-        
+        presenter.setPlayer(teamA:  sender == teamAButton, player: "")
+        resetLastSelectedView(teamA: presenter.getSelectedTeam(), player: presenter.getSelectedPlayer())
     }
     
     
@@ -180,6 +178,68 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         }
     }
     
+    private func resetLastSelectedView(teamA: Bool?, player: String)
+    {
+        
+        for item in colorsOfTeamA.keys
+        {
+            colorsOfTeamA[item] = UIColor(red: 243/255, green: 63/255, blue: 162/255, alpha: 1)
+        }
+        
+        for item in colorsOfTeamB.keys
+        {
+            colorsOfTeamB[item] = UIColor(red: 243/255, green: 63/255, blue: 162/255, alpha: 1)
+        }
+        
+        for item in [teamAButton, teamBButton]
+        {
+            item.backgroundColor = UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1)
+        }
+        
+        // player
+        if player != ""
+        {
+            var color = (teamA! ? colorsOfTeamA[player] : (colorsOfTeamB[player]))
+            color == .red ? (color = color) : (color = .red)
+            teamA! ? (colorsOfTeamA[player] = color) : (colorsOfTeamB[player] = color)
+        }
+        else
+        {
+            if teamA != nil
+            {
+                var color = teamA! ? (teamAButton.backgroundColor) :  (teamBButton.backgroundColor)
+                color == .red ? (color = UIColor(red: 255/255, green: 197/255, blue: 242/255, alpha: 1)) : (color = .red)
+                
+                teamA! ? (teamAButton.backgroundColor = color) : (teamBButton.backgroundColor = color)
+            }
+        }
+        // team
+        
+        
+//        if teamA != nil && player == ""
+//        {
+//            teamA! ? (teamAButton.backgroundColor = .red) : (teamBButton.backgroundColor = .red)
+//        }
+        
+        for item in [teamACollection, teamBCollection]
+        {
+            var team = (item == teamACollection)
+            var localPlayer = ""
+            for cell in item.visibleCells
+            {
+                if let currentCell = cell as? NumOfPlayerCell
+                {
+                    localPlayer = currentCell.accessToNumOfPlayer
+                    currentCell.contentView.backgroundColor = (team ? (colorsOfTeamA[localPlayer]) : (colorsOfTeamB[localPlayer]))
+                }
+            }
+        }
+        
+    }
+    
+        
+    
+    
     private func setView()
     {
         self.view.backgroundColor = .white
@@ -205,7 +265,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     
     
-     func setTitlesOfScores(titles: [String])
+    func setTitlesOfScores(titles: [String])
     {
         field.turnLabels(on: true)
         field.changeTitleOfLabels(score: titles)
@@ -239,6 +299,7 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "idCell", for: indexPath) as! NumOfPlayerCell
         cell.layer.cornerRadius = cell.frame.height / 2
+        cell.layer.masksToBounds = true
         cell.setLabelView(name: presenter.getNumOfPlayer(teamA: collectionView == teamACollection, id: indexPath.row))
         
         return cell
@@ -249,15 +310,21 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         let cell = collectionView.cellForItem(at: indexPath) as! NumOfPlayerCell
         let player = cell.accessToNumOfPlayer
         presenter.setPlayer(teamA: collectionView == teamACollection, player: player)
+        resetLastSelectedView(teamA: presenter.getSelectedTeam(), player: presenter.getSelectedPlayer())
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
     {
+        
         let newCell = cell as! NumOfPlayerCell
+        
         let player = newCell.accessToNumOfPlayer
         newCell.contentView.backgroundColor = (collectionView == teamACollection ? (colorsOfTeamA[player]) : (colorsOfTeamB[player]))
+        
+       
     }
-    
     
     
     

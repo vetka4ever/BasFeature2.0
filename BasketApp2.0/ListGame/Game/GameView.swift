@@ -91,9 +91,13 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func changeColorOfSelectedTeam(teamA: Bool)
+    func changeColorOfSelectedTeam(teamA: Bool?)
     {
-        (teamA ? (buttonTeamA) : (buttonTeamB)).backgroundColor = .red
+        if teamA != nil
+        {
+            (teamA! ? (buttonTeamA) : (buttonTeamB)).backgroundColor = .red
+        }
+        
     }
     
     func resetColorOfViewsOfPlayer()
@@ -248,7 +252,20 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     //MARK: OBJC FUNCS
     @objc func selectTeam(_ sender: UIButton)
     {
-        presenter.setTeam(teamA: sender == buttonTeamA)
+//        presenter.setTeam(teamA: sender == buttonTeamA)
+        presenter.setPlayer(teamA: sender == buttonTeamA, player: "")
+       if presenter.getSelectedTeam() != nil
+        {
+           presenter.getSelectedTeam()! ? (buttonTeamA.backgroundColor = .red) : (buttonTeamB.backgroundColor = .red)
+       }
+        else
+        {
+            for item in [buttonTeamA, buttonTeamB]
+            {
+                item.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
+            }
+                    
+        }
     }
     
     @objc func paintZone(_ sender: UITapGestureRecognizer)

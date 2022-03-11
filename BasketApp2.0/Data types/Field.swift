@@ -13,6 +13,7 @@ extension CGFloat
 
 class Field: UIView
 {
+    private var borderWidth: CGFloat = 2
     private var zones: [Zone] = [Zone]()
     private var scoreLabels = [UILabel]()
     private var mode =  Doing.drawField
@@ -37,8 +38,8 @@ class Field: UIView
         {
         case .drawField:
             mode = .paintZone
-            self.layer.borderWidth = 5
-            self.layer.borderColor = UIColor.black.cgColor
+            self.layer.borderWidth = self.borderWidth
+            self.layer.borderColor = UIColor.white.cgColor
             drawField(context: context)
             drawLabelFields()
             break
@@ -87,7 +88,7 @@ class Field: UIView
         for i in 0...scoreLabels.count-1
         {
             scoreLabels[i].text = score[i]
-            scoreLabels[i].font = UIFont.systemFont(ofSize: 10.0)
+            scoreLabels[i].font = UIFont.systemFont(ofSize: 13.0)
         }
     }
     
@@ -168,8 +169,8 @@ class Field: UIView
             zones[i].tapped ? (context.setFillColor(UIColor.red.cgColor)) : (context.setFillColor(zones[i].color))
             context.fillPath()
             context.addPath(zones[i].path)
-            context.setStrokeColor(UIColor.black.cgColor)
-            context.setLineWidth(5)
+            context.setStrokeColor(UIColor.white.cgColor)
+            context.setLineWidth(borderWidth)
             context.strokePath()
         }
         
@@ -184,8 +185,8 @@ class Field: UIView
         context.fillPath()
         
         context.addPath(path!)
-        context.setStrokeColor(UIColor.black.cgColor)
-        context.setLineWidth(5)
+        context.setStrokeColor(UIColor.white.cgColor)
+        context.setLineWidth(self.borderWidth)
         context.strokePath()
         
     }
@@ -199,7 +200,14 @@ class Field: UIView
         {
             let labelView = UILabel()
             labelView.frame.size = CGSize(width: self.frame.width / 5, height: self.frame.height / 2)
-            point = ((i == 2) ? (CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: CGFloat(3.5 * radius))) : (CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: zones[i].path.boundingBoxOfPath.midY)))
+            
+            
+            point = ((i == 2) ? (CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: CGFloat(3.5 * radius)))
+                                : (CGPoint(x: zones[i].path.boundingBoxOfPath.midX, y: zones[i].path.boundingBoxOfPath.midY)))
+            
+            
+            
+            
             labelView.center = point
             
             

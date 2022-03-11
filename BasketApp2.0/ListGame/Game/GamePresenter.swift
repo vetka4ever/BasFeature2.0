@@ -69,6 +69,11 @@ class GamePresenter
                 newView.changeColorOfSelectedPlayer(teamA: teamA, player: currentPlayer)
                 newView.resetColorOfViewsOfTeams(color: currentMode == .input ? (.white) : (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)))
             }
+            else
+            {
+            newView.resetColorOfViewsOfTeams(color: currentMode == .input ? (.white) : (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)))
+            newView.changeColorOfSelectedTeam(teamA: currentTeamA)
+            }
         }
         
         
@@ -84,21 +89,27 @@ class GamePresenter
         return HistoryView()
     }
     
-    func setTeam(teamA: Bool)
-    {
-        
-        self.currentPlayer = ""
-        self.currentTeamA = teamA
-        if let newView = view as? GameView
-        {
-            newView.resetColorOfViewsOfPlayer()
-            newView.resetColorOfViewsOfTeams(color: currentMode == .input ? (.white) : (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)))
-            newView.changeColorOfSelectedTeam(teamA: currentTeamA!)
-        }
-        doingByMode()
-        print()
-        print("Current Team - \(currentTeamA)")
-    }
+//    func setTeam(teamA: Bool)
+//    {
+//        if teamA == self.currentTeamA
+//        {
+//            self.currentTeamA = nil
+//        }
+//        else
+//        {
+//            self.currentTeamA = teamA
+//        }
+//        
+//        if let newView = view as? GameView
+//        {
+//            newView.resetColorOfViewsOfPlayer()
+//            newView.resetColorOfViewsOfTeams(color: currentMode == .input ? (.white) : (UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)))
+//            newView.changeColorOfSelectedTeam(teamA: currentTeamA)
+//        }
+//        doingByMode()
+//        print()
+//        print("Current Team - \(currentTeamA)")
+//    }
     
     func setMode(mode: Int)
     {

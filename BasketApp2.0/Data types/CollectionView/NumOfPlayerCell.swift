@@ -11,11 +11,11 @@ class NumOfPlayerCell: UICollectionViewCell
 {
     private let label = UILabel()
     
-//    override func layoutSubviews()
-//    {
-//        super.layoutSubviews()
-//
-//    }
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+
+    }
     
     override func didAddSubview(_ subview: UIView)
     {
@@ -29,6 +29,8 @@ class NumOfPlayerCell: UICollectionViewCell
         {
             label.frame = self.contentView.frame
             label.textAlignment = .center
+            label.layer.cornerRadius = label.frame.height / 2
+            
             self.contentView.addSubview(label)
         }
         

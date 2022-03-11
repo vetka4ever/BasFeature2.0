@@ -49,20 +49,6 @@ class WatchGamePresenter
         doingByMode()
     }
     
-    func setTeam(teamA: Bool)
-    {
-        if self.teamA == teamA
-        {
-            self.teamA = nil
-        }
-        else
-        {
-            self.teamA = teamA
-        }
-        self.player = ""
-        doingByMode()
-    }
-    
     func setTime(time: Int)
     {
         self.time = time
@@ -115,4 +101,13 @@ class WatchGamePresenter
         return model.getNumOfPlayer(teamA: teamA, id: id)
     }
     
+    func getSelectedPlayer() -> String
+    {
+        return self.player
+    }
+    
+    func getSelectedTeam() -> Bool?
+    {
+        return self.teamA
+    }
 }
