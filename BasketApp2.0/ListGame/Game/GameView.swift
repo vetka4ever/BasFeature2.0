@@ -129,6 +129,11 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    func resetField()
+    {
+        field.paintZoneByTap(point: CGPoint(x: -1, y: -1))
+    }
+    
     /// changeVisibleOfField - func for turn on/off labels of zones and repoint field in default colors
     /// - Parameter turnOn: turn on/or visible of field and its labels
     func changeVisibleElementsOfField(turnOn: Bool)

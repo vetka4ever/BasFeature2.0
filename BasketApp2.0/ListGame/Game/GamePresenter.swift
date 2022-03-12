@@ -142,6 +142,7 @@ class GamePresenter
         {
         case .input:
             inputScore()
+            
         case .all:
             getAllScore()
         case .scored:
@@ -159,6 +160,7 @@ class GamePresenter
         if currentZone != 0 && self.currentPlayer != ""
         {
             view.present(getAlert(), animated: true, completion: nil)
+            
         }
         
     }
@@ -167,18 +169,33 @@ class GamePresenter
     {
         let alert = UIAlertController(title: "Input", message: "Enter result of shot", preferredStyle: .alert)
         let win = UIAlertAction(title: "Win", style: .default) {  [self] UIAlertAction in
+            
             model.inputAttack(teamA: currentTeamA!, numOfPlayer: currentPlayer, result: true, time: currentTime, zone: currentZone)
+            self.setPlayer(teamA: self.currentTeamA!, player: self.currentPlayer)
+            getView().resetField()
+            self.currentZone = 0
         }
         
         let no = UIAlertAction(title: "Lose", style: .default) {  [self] UIAlertAction in
+            
             model.inputAttack(teamA: currentTeamA!, numOfPlayer: currentPlayer, result: false, time: currentTime, zone: currentZone)
+            self.setPlayer(teamA: self.currentTeamA!, player: self.currentPlayer)
+            getView().resetField()
+            self.currentZone = 0
         }
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        
         alert.addAction(win)
         alert.addAction(no)
         alert.addAction(cancel)
         
         return alert
+    }
+    
+    private func getView() -> GameView
+    {
+        guard let newView = view as? GameView else {return GameView()}
+        return newView
     }
     
     private func getAllScore()
