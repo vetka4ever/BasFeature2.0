@@ -44,6 +44,10 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
         
     }
     
+    func turnTitleOfField(on: Bool)
+    {
+        field.turnLabels(on: on)
+    }
     private func setTimeControll()
     {
         timeControl.snp.makeConstraints
@@ -258,9 +262,9 @@ class WatchGameView: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     @objc func setTitles(_ sender: UIBarButtonItem)
     {
-        let arr = Array.init(repeating: "25/50\n100%", count: 14)
-        self.field.turnLabels(on: true)
-        self.field.changeTitleOfLabels(score: arr)
+//        let arr = Array.init(repeating: "25/50\n100%", count: 14)
+//        self.field.turnLabels(on: true)
+//        self.field.changeTitleOfLabels(score: arr)
     }
     
     

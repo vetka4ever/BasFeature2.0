@@ -40,11 +40,13 @@ class WatchGamePresenter
         {
             self.player = ""
             self.teamA = nil
+            getWatchGameView().turnTitleOfField(on: false)
         }
         else
         {
             self.teamA = teamA
             self.player = player
+            getWatchGameView().turnTitleOfField(on: true)
         }
         doingByMode()
     }
