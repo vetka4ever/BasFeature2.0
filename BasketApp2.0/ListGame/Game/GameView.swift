@@ -74,6 +74,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -344,11 +345,7 @@ class GameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
-    {
-        
-        tableView.cellForRow(at: indexPath)!.contentView.backgroundColor = UIColor(red: 255/255, green: 147/255, blue: 218/255, alpha: 1)
-    }
+    
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {

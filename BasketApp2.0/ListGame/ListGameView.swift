@@ -25,6 +25,7 @@ class ListGameView: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         setView()
         setTableOfGames()
         tableOfGames.reloadData()

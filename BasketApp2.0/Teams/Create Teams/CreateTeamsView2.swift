@@ -155,6 +155,14 @@ class CreateTeamsView: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.present(alert, animated: true, completion: nil)
     }
     
+    func alertAboutWrongPlayer()
+    {
+        let alert = UIAlertController(title: "Attention", message: "You've written uncorrect number of player", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func alertAboutExistingTeam()
     {
         fieldOfName.text = ""

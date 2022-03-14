@@ -259,8 +259,11 @@ class GamePresenter
             }
         }
         
+
+        
         alert.addAction(yes)
         alert.addAction(no)
+        
         return alert
     }
     
