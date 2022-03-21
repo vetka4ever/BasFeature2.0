@@ -244,7 +244,7 @@ class GamePresenter
     
     private func exitAlert() -> UIAlertController
     {
-        let alert = UIAlertController(title: "Warning", message: "Are you sure you wanna leave game?", preferredStyle: .alert)
+        let alert = RotationAlertController(title: "Warning", message: "Are you sure you wanna leave game?", preferredStyle: .alert)
         let yes = UIAlertAction(title: "Yes", style: .destructive) { UIAlertAction in
             self.model.saveGame()
             

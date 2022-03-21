@@ -64,3 +64,31 @@ class RotationTabBarController: UITabBarController
     }
     
 }
+
+class RotationAlertController: UIAlertController
+{
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+    }
+    
+    override var shouldAutorotate: Bool
+    {
+        
+        return true
+        
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask
+    {
+        return .landscapeRight
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation
+    {
+        return .landscapeRight
+    }
+    
+}
+
+
