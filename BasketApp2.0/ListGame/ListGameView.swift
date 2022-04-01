@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
-class ListGameView: UIViewController, UITableViewDelegate, UITableViewDataSource
+import UniformTypeIdentifiers
+class ListGameView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIDocumentPickerDelegate
 {
     private var idCell = "gameCell"
     private var tableOfGames = UITableView()
@@ -108,12 +108,30 @@ class ListGameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.navigationController?.pushViewController(WatchGameView(), animated: true)
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
         
+        let delete = UIContextualAction(style: .destructive, title: "Get CSV") { (action, view, success) in
+            let cell = tableView.cellForRow(at: indexPath) as! CellWithTwoTitles
+            let nameOfSelectedGame = cell.accessToLeftTitle
+            let dateOfSelectedGame = cell.accessToRightTitle
+            self.presenter.generateCSVFile(nameOfGame: nameOfSelectedGame, date: dateOfSelectedGame, idOfCell: indexPath.section)
+            self.importCSV()
+        }
+
+
+        let swipe = UISwipeActionsConfiguration(actions: [delete])
+        swipe.performsFirstActionWithFullSwipe = false
+        return swipe
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
             let cell = tableView.cellForRow(at: indexPath) as! CellWithTwoTitles
-            let nameOfSelectedTeam = cell.accessToLeftTitle
-            self.presenter.deleteGame(name: nameOfSelectedTeam)
+            let nameOfSelectedGame = cell.accessToLeftTitle
+            
+            self.presenter.deleteGame(name: nameOfSelectedGame)
             self.tableOfGames.reloadData()
         }
         
@@ -122,5 +140,22 @@ class ListGameView: UIViewController, UITableViewDelegate, UITableViewDataSource
         swipe.performsFirstActionWithFullSwipe = false
         return swipe
     }
+    
+    func importCSV()
+    {
+        let supportedFiles: [UTType] = [UTType.data]
+        
+        let controller = UIDocumentPickerViewController(forOpeningContentTypes: supportedFiles, asCopy: true)
+        controller.delegate = self
+        controller.allowsMultipleSelection = false
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL])
+//    {
+//
+//    }
+    
 }
 

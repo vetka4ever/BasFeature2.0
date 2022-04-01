@@ -29,6 +29,13 @@ class ListGameModel
         
         return (name,date)
     }
+    
+    func getNamesOfTeamsOfGameById(id: Int) -> [String]
+    {
+        let myTeam = realm.objects(DoneGameRealm.self).reversed()[id].accessToGame!.accessToTeamA.accessToName
+        let enemyTeam = realm.objects(DoneGameRealm.self).reversed()[id].accessToGame!.accessToTeamB.accessToName
+        return [myTeam, enemyTeam]
+    }
     func deleteGame(name: String)
     {
         
@@ -59,6 +66,62 @@ class ListGameModel
             }
             
         }
+    }
+    
+    func getStat(nameOfGame: String) -> [[String]]
+    {
+        var game = DoneGame()
+        var currentZone = 0
+        var points = 0
+        // [Total, 1,2,3,4...14]
+        var stats = Array(repeating: StatisticsByZone(), count: 15)
+        var statString = [[String]]()
+        
+        
+        
+        for item in games where item.accessToGame!.accessToName == nameOfGame
+        {
+            game = item.accessToGame!
+        }
+        
+        for attack in game.accessToAttacks where attack.accessToTeamA == true
+        {
+            currentZone = attack.accessToZone
+            stats[currentZone].total += 1
+            stats[0].total += 1
+            if attack.accessToResult
+            {
+                stats[currentZone].made += 1
+                stats[0].made += 1
+                
+                points = (currentZone < 6 ? (3) : (2))
+                stats[currentZone].score += points
+                stats[0].score += points
+            }
+        }
+        
+        for i in 0...14
+        {
+            
+            if stats[i].total == 0
+            {
+                // "Sector","Made","Total","%","Score","% score","% all shots"
+                statString.append(["\(i)", "\(stats[i].made)", "\(stats[i].total)", "\(stats[i].percent)", "\(stats[i].score)", "\(stats[i].percentScore)", "\(stats[i].percentShots)"])
+                continue
+            }
+            stats[i].percent = Float(stats[i].made) / Float(stats[i].total) * 100
+            stats[i].percentScore = Float (stats[i].score) / Float(stats[0].score) * 100
+            stats[i].percentShots = Float(stats[i].total) / Float(stats[0].total) * 100
+            // "Sector","Made","Total","%","Score","% score","% all shots"
+            statString.append(["\(i)", "\(stats[i].made)", "\(stats[i].total)", "\(stats[i].percent)", "\(stats[i].score)", "\(stats[i].percentScore)", "\(stats[i].percentShots)"])
+        }
+        
+        statString[0][0] = "Total"
+        let total = statString.removeFirst()
+        statString.append(total)
+        
+        
+                return statString
     }
 }
 

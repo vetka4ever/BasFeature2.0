@@ -20,6 +20,8 @@
 		F30AF5772757B859008B84C9 /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF5762757B859008B84C9 /* SignView.swift */; };
 		F30AF57C2757B85B008B84C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F30AF57B2757B85B008B84C9 /* Assets.xcassets */; };
 		F30AF57F2757B85B008B84C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F30AF57D2757B85B008B84C9 /* LaunchScreen.storyboard */; };
+		F31C9E7B27F6FC9B0068AB51 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F31C9E7A27F6FC9B0068AB51 /* CHCSVParser.m */; };
+		F31C9E7D27F702890068AB51 /* StatisticsByZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C9E7C27F702890068AB51 /* StatisticsByZone.swift */; };
 		F3535AB7276AFC3D003E250F /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3535AB6276AFC3D003E250F /* Attack.swift */; };
 		F3535AB9276B01FB003E250F /* ListGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3535AB8276B01FB003E250F /* ListGameView.swift */; };
 		F356748D275A5F6D001E6DB4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356748C275A5F6D001E6DB4 /* ProfileView.swift */; };
@@ -79,6 +81,10 @@
 		F30AF57B2757B85B008B84C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F30AF57E2757B85B008B84C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F30AF5802757B85B008B84C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F31C9E7827F6FC980068AB51 /* BasketApp2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasketApp2.0-Bridging-Header.h"; sourceTree = "<group>"; };
+		F31C9E7927F6FC9A0068AB51 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		F31C9E7A27F6FC9B0068AB51 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
+		F31C9E7C27F702890068AB51 /* StatisticsByZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsByZone.swift; sourceTree = "<group>"; };
 		F3535AB6276AFC3D003E250F /* Attack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
 		F3535AB8276B01FB003E250F /* ListGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGameView.swift; sourceTree = "<group>"; };
 		F356748C275A5F6D001E6DB4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -154,10 +160,13 @@
 		F30AF5662757B859008B84C9 = {
 			isa = PBXGroup;
 			children = (
+				F31C9E7927F6FC9A0068AB51 /* CHCSVParser.h */,
+				F31C9E7A27F6FC9B0068AB51 /* CHCSVParser.m */,
 				F30AF5712757B859008B84C9 /* BasketApp2.0 */,
 				F30AF5702757B859008B84C9 /* Products */,
 				426B730DF484F33E7FB6A966 /* Pods */,
 				21976FF5F98DDA5DDA207216 /* Frameworks */,
+				F31C9E7827F6FC980068AB51 /* BasketApp2.0-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -232,6 +241,7 @@
 				F37AC5512766437500022F82 /* Player.swift */,
 				F306F9EE27686A160043FFD0 /* Typealiases.swift */,
 				F35E25D22769C3D7003D3C54 /* Game.swift */,
+				F31C9E7C27F702890068AB51 /* StatisticsByZone.swift */,
 				F35E25D42769C411003D3C54 /* Field.swift */,
 				F38A8AAC27AC19FC006A5BD8 /* Zone.swift */,
 				F3535AB6276AFC3D003E250F /* Attack.swift */,
@@ -383,6 +393,7 @@
 				TargetAttributes = {
 					F30AF56E2757B859008B84C9 = {
 						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -467,6 +478,7 @@
 				F3EAB39E2757BFAA00CCCB4E /* SignModel.swift in Sources */,
 				F30AF5772757B859008B84C9 /* SignView.swift in Sources */,
 				F306F9EF27686A160043FFD0 /* Typealiases.swift in Sources */,
+				F31C9E7D27F702890068AB51 /* StatisticsByZone.swift in Sources */,
 				F3593DC427BC074800FB769A /* CellToHistory.swift in Sources */,
 				F3535AB7276AFC3D003E250F /* Attack.swift in Sources */,
 				F36BE1952769D2050005902B /* CreateGamePresenter.swift in Sources */,
@@ -504,6 +516,7 @@
 				F35E25D32769C3D7003D3C54 /* Game.swift in Sources */,
 				F36BE1972769D2090005902B /* CreateGameModel.swift in Sources */,
 				F3BB5EE727D657EF00F1969F /* NumOfPlayerCell.swift in Sources */,
+				F31C9E7B27F6FC9B0068AB51 /* CHCSVParser.m in Sources */,
 				F3C2BBF627663D6900243833 /* CreateTeamsModel.swift in Sources */,
 				F37AC5502766434D00022F82 /* Team.swift in Sources */,
 				F3567499275A6FAF001E6DB4 /* TeamsPresenter.swift in Sources */,
@@ -652,12 +665,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RBRFGT8CHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BasketApp2.0/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BasFeature;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -673,6 +688,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Daniil.BasketApp2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "BasketApp2.0-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -684,12 +701,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RBRFGT8CHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BasketApp2.0/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BasFeature;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -705,6 +724,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Daniil.BasketApp2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "BasketApp2.0-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
