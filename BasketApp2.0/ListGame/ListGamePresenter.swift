@@ -54,7 +54,7 @@ class ListGamePresenter
         csvWriter?.writeField("\(teamsNames[0]) - \(teamsNames[1])")
         csvWriter?.finishLine()
         
-        let headers = ["Sector","Made","Total","%","Score","% score","% all shots"]
+        let headers = ["Attack","Result","Player","Zone"]
         
         for item in headers
         {

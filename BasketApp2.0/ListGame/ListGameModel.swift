@@ -71,10 +71,10 @@ class ListGameModel
     func getStat(nameOfGame: String) -> [[String]]
     {
         var game = DoneGame()
-        var currentZone = 0
-        var points = 0
-        // [Total, 1,2,3,4...14]
-        var stats = Array(repeating: StatisticsByZone(), count: 15)
+//        var currentZone = 0
+//        var points = 0
+//        // [Total, 1,2,3,4...14]
+//        var stats = Array(repeating: StatisticsByZone(), count: 15)
         var statString = [[String]]()
         
         
@@ -83,42 +83,70 @@ class ListGameModel
         {
             game = item.accessToGame!
         }
+//
+//        for attack in game.accessToAttacks where attack.accessToTeamA == true
+//        {
+//            currentZone = attack.accessToZone
+//            stats[currentZone].total += 1
+//            stats[0].total += 1
+//            if attack.accessToResult
+//            {
+//                stats[currentZone].made += 1
+//                stats[0].made += 1
+//
+//                points = (currentZone < 6 ? (3) : (2))
+//                stats[currentZone].score += points
+//                stats[0].score += points
+//            }
+//        }
+//
+//        for i in 0...14
+//        {
+//
+//            if stats[i].total == 0
+//            {
+//                // "Sector","Made","Total","%","Score","% score","% all shots"
+//                statString.append(["\(i)", "\(stats[i].made)", "\(stats[i].total)", "\(stats[i].percent)", "\(stats[i].score)", "\(stats[i].percentScore)", "\(stats[i].percentShots)"])
+//                continue
+//            }
+//            stats[i].percent = Float(stats[i].made) / Float(stats[i].total) * 100
+//            stats[i].percentScore = Float (stats[i].score) / Float(stats[0].score) * 100
+//            stats[i].percentShots = Float(stats[i].total) / Float(stats[0].total) * 100
+//            // "Sector","Made","Total","%","Score","% score","% all shots"
+//            statString.append(["\(i)", "\(stats[i].made)", "\(stats[i].total)", "\(stats[i].percent)", "\(stats[i].score)", "\(stats[i].percentScore)", "\(stats[i].percentShots)"])
+//        }
+//
+//        statString[0][0] = "Total"
+//        let total = statString.removeFirst()
+//        statString.append(total)
+        /*
+         получается для обеих команд по табличке в одном файле.
+         В каждой таблице по 4 колонки в таком порядке:
+         номер атаки, действие, игрок, зона
+         */
+        // my team
         
-        for attack in game.accessToAttacks where attack.accessToTeamA == true
+        var i = 1;
+        statString.append([game.accessToTeamA.accessToName])
+        for item in game.accessToAttacks where item.accessToTeamA == true
         {
-            currentZone = attack.accessToZone
-            stats[currentZone].total += 1
-            stats[0].total += 1
-            if attack.accessToResult
-            {
-                stats[currentZone].made += 1
-                stats[0].made += 1
-                
-                points = (currentZone < 6 ? (3) : (2))
-                stats[currentZone].score += points
-                stats[0].score += points
-            }
+            statString.append(["\(i)", "\(item.accessToResult ? "Win" : "Lose")", "\(item.accessToPlayer)", "\(item.accessToZone)"])
+            i += 1;
         }
         
-        for i in 0...14
+        // enemy team
+        i = 1;
+        for item in game.accessToAttacks where item.accessToTeamA == false
         {
-            
-            if stats[i].total == 0
-            {
-                // "Sector","Made","Total","%","Score","% score","% all shots"
-                statString.append(["\(i)", "\(stats[i].made)", "\(stats[i].total)", "\(stats[i].percent)", "\(stats[i].score)", "\(stats[i].percentScore)", "\(stats[i].percentShots)"])
-                continue
-            }
-            stats[i].percent = Float(stats[i].made) / Float(stats[i].total) * 100
-            stats[i].percentScore = Float (stats[i].score) / Float(stats[0].score) * 100
-            stats[i].percentShots = Float(stats[i].total) / Float(stats[0].total) * 100
-            // "Sector","Made","Total","%","Score","% score","% all shots"
-            statString.append(["\(i)", "\(stats[i].made)", "\(stats[i].total)", "\(stats[i].percent)", "\(stats[i].score)", "\(stats[i].percentScore)", "\(stats[i].percentShots)"])
+            statString.append([" "])
+            statString.append([game.accessToTeamB.accessToName])
+            break
         }
-        
-        statString[0][0] = "Total"
-        let total = statString.removeFirst()
-        statString.append(total)
+        for item in game.accessToAttacks where item.accessToTeamA == false
+        {
+            statString.append(["\(i)", "\(item.accessToResult ? "Win" : "Lose")", "\(item.accessToPlayer)", "\(item.accessToZone)"])
+            i += 1;
+        }
         
         
                 return statString
